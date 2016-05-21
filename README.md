@@ -1,2 +1,2 @@
 # Tum-Boon
-![status](https://travis-ci.org/wit543/Tum-Boon.svg)
+![status](https://circleci.com/gh/wit543/Tum-Boon.svg?style=shield&circle-token=:circle-token)
