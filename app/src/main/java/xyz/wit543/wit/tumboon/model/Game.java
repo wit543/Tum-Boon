@@ -9,7 +9,7 @@ import java.util.Observable;
 
 public class Game extends Observable {
     private List<Layer> layers;
-    private int money;
+    private double money;
     private boolean running;
     private long startTime;
     private BoonCalculator mc;
@@ -31,7 +31,7 @@ public class Game extends Observable {
                 super.run();
                 while(running) {
                     delay();
-                    money+=mc.calculateMoney(getGameTime(),layers);
+                    money+=mc.calculateBoon(getGameTime(),layers);
                     setChanged();
                     notifyObservers();
                 }
@@ -52,7 +52,7 @@ public class Game extends Observable {
         this.layers = layers;
     }
 
-    public int getMoney() {
+    public double getMoney() {
         return money;
     }
 

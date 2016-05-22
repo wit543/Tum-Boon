@@ -13,12 +13,12 @@ public class BoonCalculator {
      * @param layers
      * @return
      */
-    public int calculateMoney(int gameTime,List<Layer> layers){
-        int outcome=0;
+    public double calculateBoon(int gameTime, List<Layer> layers){
+        double outcome=0;
         for(Layer l : layers){
-            if(gameTime%l.getProduceTime()<=100){ // STILL BUG WHEN TIME GROW BIGGER.
+            if(gameTime%l.getProductionTime()<=100){ // STILL BUG WHEN TIME GROW BIGGER.
                 outcome+=l.getOutcome();
-                System.out.printf("GET %d FROM %s AT %d\n",l.getOutcome(),l.getName() , gameTime);
+                System.out.printf("GET %f FROM %s AT %d\n",l.getOutcome(),l.getName() , gameTime);
             }
         }
 
