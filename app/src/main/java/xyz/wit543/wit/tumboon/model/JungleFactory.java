@@ -27,7 +27,7 @@ public class JungleFactory extends LayerAbstractFactory {
             return standardLayerCreator(jungle.DONATE_CAR_LAYER);
         }
         else if("donateAirplane".equalsIgnoreCase(type)){
-            return standardLayerCreator(jungle.DONATE_AIRPLANE_LAYER)
+            return standardLayerCreator(jungle.DONATE_AIRPLANE_LAYER);
         }
         else if("parade".equalsIgnoreCase(type)){
             return standardLayerCreator(jungle.PARADE_LAYER);

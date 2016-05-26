@@ -27,7 +27,7 @@ public class CityFactory extends LayerAbstractFactory {
             return standardLayerCreator(city.DONATE_CAR_LAYER);
         }
         else if("donateAirplane".equalsIgnoreCase(type)){
-            return standardLayerCreator(city.DONATE_AIRPLANE_LAYER)
+            return standardLayerCreator(city.DONATE_AIRPLANE_LAYER);
         }
         else if("parade".equalsIgnoreCase(type)){
             return standardLayerCreator(city.PARADE_LAYER);
