@@ -50,6 +50,10 @@ public class Layer implements Producible{
         return level *baseOutcome;
     }
 
+    public void increaseLevel(){
+        this.level++;
+    }
+
     public class Memento {
         private String name;
         private int level;
@@ -70,6 +74,7 @@ public class Layer implements Producible{
             Layer.this.baseOutcome = this.baseOutcome;
             Layer.this.productionTime = this.productionTime;
         }
+
     }
 
     public static class Builder{

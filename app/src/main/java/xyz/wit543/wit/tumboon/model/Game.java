@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Observable;
 
 public class Game {
+    private static Game game;
     private List<Layer> layers;
     private double money;
     private boolean running;
@@ -17,13 +18,19 @@ public class Game {
 
     private final int DELAY = 100;
 
-    public Game(){
+    private Game(){
         mc = new BoonCalculator();
         layers = new ArrayList<Layer>();
         layers.add(new Layer("Car" , 1 , 100 , 1000));
-        layers.add(new Layer("Helicopter" , 10 , 200 , 3000));
+        layers.add(new Layer("Helicopter" , 1 , 200 , 3000));
         multiplier = new Multiplier(5000,10000,4);
         money = 0;
+    }
+
+    public static Game getInstance(){
+        if(game==null)
+            game = new Game();
+        return game;
     }
 
     public void startGame(){
