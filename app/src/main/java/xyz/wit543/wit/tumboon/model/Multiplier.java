@@ -13,4 +13,28 @@ public class Multiplier {
         this.duration = duration;
         this.multiply = multiply;
     }
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
+
+    public long getDuration() {
+        return duration;
+    }
+
+    public void setDuration(long duration) {
+        this.duration = duration;
+    }
+
+    public double getMultiply() {
+        return multiply;
+    }
+
+    public void setMultiply(double multiply) {
+        this.multiply = multiply;
+    }
 }
