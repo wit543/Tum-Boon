@@ -46,7 +46,7 @@ public class HomeActivity extends AppCompatActivity {
         boonLabel = (TextView)findViewById(R.id.boon);
         layerList = (ListView)findViewById(R.id.layerLists);
 
-        game = new Game();
+        game = Game.getInstance();
         layerList.setAdapter(new LayerAdapter(this,R.layout.layer_cell,game.getLayers()));
         game.startGame();
 
