@@ -9,7 +9,7 @@ import xyz.wit543.wit.tumboon.model.Layer;
  */
 public class DefaultStrategy implements CalculateStrategy{
 
-    private final double speedIncreasePerSec = 50;
+    private final double speedIncreasePerSec = 5;
 
     private static DefaultStrategy ds = null;
     int[] nextProduceTimes;
