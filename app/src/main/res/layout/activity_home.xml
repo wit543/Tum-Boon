@@ -11,9 +11,25 @@
     tools:context=".activity.HomeActivity">
 
     <TextView
+        android:id="@+id/boon"
         android:text="Hello World!"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
+    
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        
+        android:textSize="50dp"
+        android:textAlignment="center"
+        android:background="#ffff0000"/>
+
+
+
+    <ListView
+        android:id="@+id/layerLists"
+        android:layout_below="@id/boon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
+
 
 
     <android.support.v7.widget.RecyclerView

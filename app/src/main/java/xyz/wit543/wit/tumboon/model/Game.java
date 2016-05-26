@@ -7,19 +7,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-public class Game extends Observable {
+public class Game {
     private List<Layer> layers;
     private double money;
     private boolean running;
     private long startTime;
     private BoonCalculator mc;
+    private Multiplier multiplier;
+
     private final int DELAY = 100;
 
     public Game(){
         mc = new BoonCalculator();
         layers = new ArrayList<Layer>();
         layers.add(new Layer("Car" , 1 , 100 , 1000));
-        layers.add(new Layer("Helicopter" , 1 , 200 , 3000));
+        layers.add(new Layer("Helicopter" , 10 , 200 , 3000));
+        multiplier = new Multiplier(5000,10000,4);
         money = 0;
     }
 
@@ -31,13 +34,30 @@ public class Game extends Observable {
                 super.run();
                 while(running) {
                     delay();
-                    money+=mc.calculateBoon(getGameTime(),layers);
-                    setChanged();
-                    notifyObservers();
+                    money+=calculateNetBoon();
                 }
             }
         };
         thread.start();
+    }
+
+    public double calculateNetBoon(){
+        double netBoon = mc.calculateBoon(getGameTime(),layers) * getMultiplierValue();
+        return netBoon;
+    }
+
+    public double getMultiplierValue(){
+        this.updateMultiplier();
+        if(multiplier == null)
+            return 1;
+        return multiplier.getMultiply();
+    }
+
+    public void updateMultiplier(){
+        if(multiplier == null)
+            return;
+        if(multiplier.startTime+multiplier.duration < getGameTime())
+            multiplier = null;
     }
 
     public int getGameTime(){
