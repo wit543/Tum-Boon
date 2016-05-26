@@ -3,12 +3,12 @@ package xyz.wit543.wit.tumboon.model;
 /**
  * Created by WIT on 22-May-16.
  */
-public interface LayerAbstractFacotory {
-    Layer createDonateMoneyLayer();
-    Layer createDonateLandLayer();
-    Layer createDonateCarLayer();
-    Layer createDonateAirplaneLayer();
-    Layer createparadeLayer();
-    Layer createSouvenirShopLayer();
-    Layer createPRLayer();
+public abstract class LayerAbstractFacotory {
+    public abstract Layer createDonateMoneyLayer();
+    public abstract Layer createDonateLandLayer();
+    public abstract Layer createDonateCarLayer();
+    public abstract Layer createDonateAirplaneLayer();
+    public abstract Layer createParadeLayer();
+    public abstract Layer createSouvenirShopLayer();
+    public abstract Layer createPRLayer();
 }
