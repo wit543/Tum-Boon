@@ -25,6 +25,7 @@
 
     <ListView
         android:id="@+id/layerLists"
+        android:layout_below="@id/boon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></ListView>
 
