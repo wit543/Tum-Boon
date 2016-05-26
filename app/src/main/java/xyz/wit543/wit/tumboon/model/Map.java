@@ -47,6 +47,7 @@ public class Map {
     public void restore(Memento memento){
         memento.restore();
     }
+    public List<Layer> getLayers(){return layers;}
     public Iterator getLayer(){
         return new MapIterator();
     }

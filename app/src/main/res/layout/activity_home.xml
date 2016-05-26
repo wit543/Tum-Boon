@@ -32,14 +32,19 @@
 
 
 
-    <android.support.v7.widget.RecyclerView
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:layout_below="@+id/boon"
+        android:layout_alignParentStart="true">
 
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"/>
+    </android.support.v4.view.ViewPager>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:id="@+id/linearLayout">
         <ImageButton
             android:id="@+id/upgrade_menu_button"
             android:layout_width="wrap_content"
