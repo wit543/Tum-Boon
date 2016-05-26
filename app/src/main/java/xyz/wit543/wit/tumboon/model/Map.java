@@ -8,39 +8,24 @@ import java.util.List;
  */
 public class Map {
     private List<Layer> layers;
-    private double productionRate;
     private double productionBonus;
     private double layerBuyRate;
     private String name;
 
-    public Map(List<Layer> layers,double productionRate,double productionBonus,double layerBuyRate,String name){
+    public Map(List<Layer> layers ,double productionBonus,double layerBuyRate,String name){
         this.layers = layers;
-        this.productionRate = productionRate;
         this.productionBonus = productionBonus;
         this.layerBuyRate = layerBuyRate;
         this.name = name;
     }
 
-    public Map(Builder builder){
+    private Map(Builder builder){
         this.layers = builder.layers;
-        this.productionRate = builder.productionRate;
         this.productionBonus = builder.productionBonus;
         this.layerBuyRate = builder.layerBuyRate;
         this.name = builder.name;
     }
 
-    public List<Layer> getLayers() {
-        return layers;
-    }
-    public void setLayers(List<Layer> layers) {
-        this.layers = layers;
-    }
-    public double getProductionRate() {
-        return productionRate;
-    }
-    public void setProductionRate(double productionRate) {
-        this.productionRate = productionRate;
-    }
     public double getProductionBonus() {
         return productionBonus;
     }
@@ -49,9 +34,6 @@ public class Map {
     }
     public double getLayerBuyRate() {
         return layerBuyRate;
-    }
-    public void setLayerBuyRate(double layerBuyRate) {
-        this.layerBuyRate = layerBuyRate;
     }
     public String getName() {
         return name;
@@ -94,7 +76,6 @@ public class Map {
 
     public static class Builder{
         private List<Layer> layers;
-        private double productionRate;
         private double productionBonus;
         private double layerBuyRate;
         private String name;
@@ -105,10 +86,6 @@ public class Map {
         }
         public Builder layers(List<Layer> layers){
             this.layers = layers;
-            return this;
-        }
-        public Builder productionRate(double productionRate){
-            this.productionRate = productionRate;
             return this;
         }
         public Builder productionBonus(double productionBonus){
@@ -134,14 +111,12 @@ public class Map {
         public Memento(){
             this.name = Map.this.name;
             this.layers = Map.this.layers;
-            this.productionRate = Map.this.productionRate;
             this.productionBonus = Map.this.productionBonus;
             this.layerBuyRate = Map.this.layerBuyRate;
         }
         public void restore(){
             Map.this.name = this.name;
             Map.this.layers = this.layers;
-            Map.this.productionRate = this.productionRate;
             Map.this.productionBonus = this.productionBonus;
             Map.this.layerBuyRate = this.layerBuyRate;
         }
