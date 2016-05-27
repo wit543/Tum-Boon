@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -34,11 +35,11 @@ public class HomeActivity extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
-    private Button layerFragmentButtom;
-    private Button topUpFragmentButton;
-    private Button upgradeFragmentButton;
-    private Button mutiplierFragmentButton;
-    private Button convertFragmenButton;
+    private ImageButton layerFragmentButtom;
+    private ImageButton topUpFragmentButton;
+    private ImageButton upgradeFragmentButton;
+    private ImageButton mutiplierFragmentButton;
+    private ImageButton convertFragmenButton;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,12 +88,14 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             }
         });
+        layerFragmentButtom = (ImageButton)findViewById(R.id.layer_menu_button);
         layerFragmentButtom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 viewPager.setCurrentItem(0);
             }
         });
+        convertFragmenButton= (ImageButton) findViewById(R.id.convert_menu_button);
         convertFragmenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
