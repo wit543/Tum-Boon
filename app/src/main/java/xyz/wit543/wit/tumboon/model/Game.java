@@ -10,6 +10,7 @@ import java.util.Observable;
 public class Game {
     private static Game game;
     private List<Layer> layers;
+    private List<Map> maps;
     private double money;
     private boolean running;
     private long startTime;
@@ -79,9 +80,7 @@ public class Game {
         return layers;
     }
 
-    public void setLayers(List<Layer> layers) {
-        this.layers = layers;
-    }
+    public List<Map> getMaps(){return maps;}
 
     public double getMoney() {
         return money;

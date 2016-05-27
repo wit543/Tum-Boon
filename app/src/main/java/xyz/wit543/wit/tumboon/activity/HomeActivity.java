@@ -1,21 +1,46 @@
 package xyz.wit543.wit.tumboon.activity;
 
+import android.net.Uri;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+
 import xyz.wit543.wit.tumboon.R;
+import xyz.wit543.wit.tumboon.adapter.ViewPagerAdapter;
+import xyz.wit543.wit.tumboon.fragment.LayerFragment;
+import xyz.wit543.wit.tumboon.fragment.TopUpFragment;
 import xyz.wit543.wit.tumboon.model.Game;
+import xyz.wit543.wit.tumboon.model.Layer;
 import xyz.wit543.wit.tumboon.view.LayerAdapter;
 
 public class HomeActivity extends AppCompatActivity {
 
-    TextView boonLabel;
-    ListView layerList;
-    Game game;
-
+    private TextView boonLabel;
+    private ListView layerList;
+    private Game game;
+    private ViewPager viewPager;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
+    private Button layerFragmentButtom;
+    private Button topUpFragmentButton;
+    private Button upgradeFragmentButton;
+    private Button mutiplierFragmentButton;
+    private Button convertFragmenButton;
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
@@ -29,7 +54,7 @@ public class HomeActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                boonLabel.setText(""+game.getMoney());
+                                boonLabel.setText("" + game.getMoney());
                             }
                         });
                     }
@@ -40,16 +65,82 @@ public class HomeActivity extends AppCompatActivity {
 
         t.start();
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    private void initialize(){
-        boonLabel = (TextView)findViewById(R.id.boon);
-        layerList = (ListView)findViewById(R.id.layerLists);
-
+    private void initialize() {
+        boonLabel = (TextView) findViewById(R.id.boon);
+        layerList = (ListView) findViewById(R.id.layerLists);
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
         game = Game.getInstance();
-        layerList.setAdapter(new LayerAdapter(this,R.layout.layer_cell,game.getLayers()));
+        layerList.setAdapter(new LayerAdapter(this, R.layout.layer_cell, game.getLayers()));
+        final ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter.addFragment(new LayerFragment());
+        viewPagerAdapter.addFragment(new TopUpFragment());
+        //TODO add all fragment
+        viewPager.setAdapter(viewPagerAdapter);
+        viewPager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
+        layerFragmentButtom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewPager.setCurrentItem(0);
+            }
+        });
+        convertFragmenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewPager.setCurrentItem(1);
+            }
+        });
+        //TODO set all button
         game.startGame();
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Home Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://xyz.wit543.wit.tumboon.activity/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Home Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://xyz.wit543.wit.tumboon.activity/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
 }
