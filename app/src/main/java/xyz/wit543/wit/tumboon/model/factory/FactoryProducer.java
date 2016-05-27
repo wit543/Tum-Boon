@@ -1,4 +1,6 @@
-package xyz.wit543.wit.tumboon.model;
+package xyz.wit543.wit.tumboon.model.factory;
+
+import xyz.wit543.wit.tumboon.model.MapConstant;
 
 /**
  * Created by WIT on 26-May-16.

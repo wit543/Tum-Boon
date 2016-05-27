@@ -1,8 +1,12 @@
-package xyz.wit543.wit.tumboon.model;
+package xyz.wit543.wit.tumboon.model.factory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import xyz.wit543.wit.tumboon.model.Layer;
+import xyz.wit543.wit.tumboon.model.Map;
+import xyz.wit543.wit.tumboon.model.MapConstant;
 
 /**
  * Created by WIT on 26-May-16.

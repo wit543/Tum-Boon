@@ -5,7 +5,8 @@ package xyz.wit543.wit.tumboon.model;
  */
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
+
+import xyz.wit543.wit.tumboon.model.util.BoonCalculator;
 
 public class Game {
     private static Game game;

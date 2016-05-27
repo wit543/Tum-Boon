@@ -1,9 +1,10 @@
-package xyz.wit543.wit.tumboon.model;
+package xyz.wit543.wit.tumboon.model.util;
 
 import java.util.List;
 
 import xyz.wit543.wit.tumboon.model.BoonCalculatorStrategy.CalculateStrategy;
 import xyz.wit543.wit.tumboon.model.BoonCalculatorStrategy.DefaultStrategy;
+import xyz.wit543.wit.tumboon.model.Layer;
 
 /**
  * Created by WIT on 21-May-16.
