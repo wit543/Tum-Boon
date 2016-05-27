@@ -7,11 +7,13 @@ public class Layer implements Producible{
     private String name;
     private int level;
     private double baseOutcome;
+    private double basePrice;
     private int productionTime;
 
-    public Layer(String name, int level, double baseOutcome, int productionTime) {
+    public Layer(String name, int level,double basePrice, double baseOutcome, int productionTime) {
         this.name = name;
         this.level = level;
+        this.basePrice = basePrice;
         this.baseOutcome = baseOutcome;
         this.productionTime = productionTime;
     }
@@ -21,6 +23,10 @@ public class Layer implements Producible{
         this.level = builder.level;
         this.baseOutcome = builder.baseOutcome;
         this.productionTime = builder.productionTime;
+    }
+
+    public double getBasePrice(){
+        return basePrice;
     }
 
     public int getProductionTime() {

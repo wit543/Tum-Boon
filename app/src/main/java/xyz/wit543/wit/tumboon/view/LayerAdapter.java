@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.wit543.wit.tumboon.R;
+import xyz.wit543.wit.tumboon.model.Game;
 import xyz.wit543.wit.tumboon.model.Layer;
 
 /**
@@ -39,10 +40,16 @@ public class LayerAdapter extends ArrayAdapter<Layer> {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                layer.increaseLevel();
-                notifyDataSetChanged();
+                Game game = Game.getInstance();
+                double layerPrice = Math.floor(layer.getBasePrice()*Math.pow(1.15f,layer.getLevel()-1));
+                if(game.getMoney()>=layerPrice){
+                    game.decreaseMoney(layerPrice);
+                    layer.increaseLevel();
+                    notifyDataSetChanged();
+                }
             }
         });
+        button.setText("UPGRADE: "+Math.floor(layer.getBasePrice()*Math.pow(1.15f,layer.getLevel()-1)));
         return v;
     }
 }
