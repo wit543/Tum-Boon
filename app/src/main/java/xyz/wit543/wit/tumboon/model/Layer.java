@@ -11,7 +11,6 @@ public class Layer implements Producible{
     private double baseOutcome;
     private double basePrice;
     private int productionTime;
-    private double basePrice;
     private double price;
     private double outcome;
 
@@ -34,7 +33,7 @@ public class Layer implements Producible{
         this.outcome = baseOutcome;
     }
 
-    public double getBasePrice() {
+    public double getPrice() {
         return basePrice;
     }
 
