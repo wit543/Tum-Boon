@@ -18,7 +18,7 @@ import xyz.wit543.wit.tumboon.model.Game;
 public class LayerFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
-    private RecyclerView layerRecycleVuew;
+    private RecyclerView layerRecycleView;
 
     public LayerFragment() {
         // Required empty public constructor
@@ -33,12 +33,12 @@ public class LayerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        layerRecycleVuew = (RecyclerView) getActivity().findViewById(R.id.layer_recycle_view);
+        layerRecycleView = (RecyclerView) getActivity().findViewById(R.id.layer_recycle_view);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        layerRecycleVuew.setLayoutManager(mLayoutManager);
-        layerRecycleVuew.setAdapter(new LayerAdapter(Game.getInstance().getLayers()));
-        layerRecycleVuew.setNestedScrollingEnabled(false);
+        layerRecycleView.setLayoutManager(mLayoutManager);
+        layerRecycleView.setAdapter(new LayerAdapter(Game.getInstance().getLayers()));
+        layerRecycleView.setNestedScrollingEnabled(false);
     }
 
     @Override

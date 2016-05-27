@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,7 +19,6 @@ import xyz.wit543.wit.tumboon.adapter.ViewPagerAdapter;
 import xyz.wit543.wit.tumboon.fragment.LayerFragment;
 import xyz.wit543.wit.tumboon.fragment.TopUpFragment;
 import xyz.wit543.wit.tumboon.model.Game;
-import xyz.wit543.wit.tumboon.model.Layer;
 import xyz.wit543.wit.tumboon.view.LayerAdapter;
 
 public class HomeActivity extends AppCompatActivity {
@@ -35,11 +32,11 @@ public class HomeActivity extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
-    private ImageButton layerFragmentButtom;
+    private ImageButton layerFragmentButton;
     private ImageButton topUpFragmentButton;
     private ImageButton upgradeFragmentButton;
     private ImageButton mutiplierFragmentButton;
-    private ImageButton convertFragmenButton;
+    private ImageButton convertFragmentButton;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +65,7 @@ public class HomeActivity extends AppCompatActivity {
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private void initialize() {
@@ -88,15 +85,15 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             }
         });
-        layerFragmentButtom = (ImageButton)findViewById(R.id.layer_menu_button);
-        layerFragmentButtom.setOnClickListener(new View.OnClickListener() {
+        layerFragmentButton = (ImageButton)findViewById(R.id.layer_menu_button);
+        layerFragmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 viewPager.setCurrentItem(0);
             }
         });
-        convertFragmenButton= (ImageButton) findViewById(R.id.convert_menu_button);
-        convertFragmenButton.setOnClickListener(new View.OnClickListener() {
+        convertFragmentButton = (ImageButton) findViewById(R.id.convert_menu_button);
+        convertFragmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 viewPager.setCurrentItem(1);
@@ -113,18 +110,18 @@ public class HomeActivity extends AppCompatActivity {
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Home Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://xyz.wit543.wit.tumboon.activity/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
+//        client.connect();
+//        Action viewAction = Action.newAction(
+//                Action.TYPE_VIEW, // TODO: choose an action type.
+//                "Home Page", // TODO: Define a title for the content shown.
+//                // TODO: If you have web page content that matches this app activity's content,
+//                // make sure this auto-generated web page URL is correct.
+//                // Otherwise, set the URL to null.
+//                Uri.parse("http://host/path"),
+//                // TODO: Make sure this auto-generated app URL is correct.
+//                Uri.parse("android-app://xyz.wit543.wit.tumboon.activity/http/host/path")
+//        );
+////        AppIndex.AppIndexApi.start(client, viewAction);
     }
 
     @Override
