@@ -1,5 +1,7 @@
 package xyz.wit543.wit.tumboon.model;
 
+import android.widget.Button;
+
 /**
  * Created by WIT on 21-May-16.
  */
@@ -8,6 +10,10 @@ public class Layer implements Producible{
     private int level;
     private double baseOutcome;
     private int productionTime;
+    private double basePrice;
+    private double price;
+    private double outcome;
+
 
     public Layer(String name, int level, double baseOutcome, int productionTime) {
         this.name = name;
@@ -21,6 +27,13 @@ public class Layer implements Producible{
         this.level = builder.level;
         this.baseOutcome = builder.baseOutcome;
         this.productionTime = builder.productionTime;
+        this.basePrice = builder.basePrice;
+        this.price = basePrice;
+        this.outcome = baseOutcome;
+    }
+
+    public double getBasePrice() {
+        return basePrice;
     }
 
     public int getProductionTime() {
@@ -59,12 +72,19 @@ public class Layer implements Producible{
         private int level;
         private double baseOutcome;
         private int productionTime;
+        private double basePrice;
+        private double price;
+        private double outcome;
         private long savedTime;
         private Memento(){
             this.name = Layer.this.name;
             this.level = Layer.this.level;
             this.baseOutcome = Layer.this.baseOutcome;
             this.productionTime = Layer.this.productionTime;
+            this.baseOutcome = Layer.this.basePrice;
+            this.basePrice = Layer.this.basePrice;
+            this.price = Layer.this.price;
+            this.outcome = Layer.this.outcome;
             this.savedTime = System.currentTimeMillis();
         }
 
@@ -73,6 +93,10 @@ public class Layer implements Producible{
             Layer.this.level = this.level;
             Layer.this.baseOutcome = this.baseOutcome;
             Layer.this.productionTime = this.productionTime;
+            Layer.this.baseOutcome = this.baseOutcome;
+            Layer.this.basePrice = this.basePrice;
+            Layer.this.price = this.price;
+            Layer.this.outcome = this.outcome;
         }
 
     }
@@ -82,6 +106,7 @@ public class Layer implements Producible{
         private int level=0;
         private double baseOutcome=1;
         private int productionTime=3600;
+        private double basePrice=100;
         public Builder name(String name){
             this.name = name;
             return this;
@@ -96,6 +121,10 @@ public class Layer implements Producible{
         }
         public Builder productionTime(int productionTime){
             this.productionTime = productionTime;
+            return this;
+        }
+        public Builder basePrice(double basePrice){
+            this.basePrice=basePrice;
             return this;
         }
         public Layer build(){

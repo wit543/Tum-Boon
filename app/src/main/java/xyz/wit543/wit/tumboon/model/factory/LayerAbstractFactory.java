@@ -1,4 +1,6 @@
-package xyz.wit543.wit.tumboon.model;
+package xyz.wit543.wit.tumboon.model.factory;
+
+import xyz.wit543.wit.tumboon.model.Layer;
 
 /**
  * Created by WIT on 22-May-16.

@@ -11,44 +11,46 @@ public enum MapConstant {
 
 
     public enum Layer{
-        WAT_DONATE_MONEY_LAYER(10,20,""),
-        WAT_DONATE_LAND_LAYER(10,25,""),
-        WAT_DONATE_CAR_LAYER(10,10,""),
-        WAT_DONATE_AIRPLANE_LAYER(10,10,""),
-        WAT_PARADE_LAYER(10,10,""),
-        WAT_SOUVENIR_SHOP_LAYER(10,10,""),
-        WAT_PR_LAYER(10,10,""),
+        WAT_DONATE_MONEY_LAYER(10,20, 10, ""),
+        WAT_DONATE_LAND_LAYER(10,25, 10, ""),
+        WAT_DONATE_CAR_LAYER(10,10, 10, ""),
+        WAT_DONATE_AIRPLANE_LAYER(10,10, 10, ""),
+        WAT_PARADE_LAYER(10,10, 10, ""),
+        WAT_SOUVENIR_SHOP_LAYER(10,10, 10, ""),
+        WAT_PR_LAYER(10,10, 10, ""),
 
-        CITY_DONATE_MONEY_LAYER(10,20,""),
-        CITY_DONATE_LAND_LAYER(10,25,""),
-        CITY_DONATE_CAR_LAYER(10,10,""),
-        CITY_DONATE_AIRPLANE_LAYER(10,10,""),
-        CITY_PARADE_LAYER(10,10,""),
-        CITY_SOUVENIR_SHOP_LAYER(10,10,""),
-        CITY_PR_LAYER(10,10,""),
+        CITY_DONATE_MONEY_LAYER(10,20, 10, ""),
+        CITY_DONATE_LAND_LAYER(10,25, 10, ""),
+        CITY_DONATE_CAR_LAYER(10,10, 10, ""),
+        CITY_DONATE_AIRPLANE_LAYER(10,10, 10, ""),
+        CITY_PARADE_LAYER(10,10, 10, ""),
+        CITY_SOUVENIR_SHOP_LAYER(10,10, 10, ""),
+        CITY_PR_LAYER(10,10, 10, ""),
 
-        JUNGLE_DONATE_MONEY_LAYER(10,20,""),
-        JUNGLE_DONATE_LAND_LAYER(10,25,""),
-        JUNGLE_DONATE_CAR_LAYER(10,10,""),
-        JUNGLE_DONATE_AIRPLANE_LAYER(10,10,""),
-        JUNGLE_PARADE_LAYER(10,10,""),
-        JUNGLE_SOUVENIR_SHOP_LAYER(10,10,""),
-        JUNGLE_PR_LAYER(10,10,""),
+        JUNGLE_DONATE_MONEY_LAYER(10,20, 10, ""),
+        JUNGLE_DONATE_LAND_LAYER(10,25, 10, ""),
+        JUNGLE_DONATE_CAR_LAYER(10,10, 10, ""),
+        JUNGLE_DONATE_AIRPLANE_LAYER(10,10, 10, ""),
+        JUNGLE_PARADE_LAYER(10,10, 10, ""),
+        JUNGLE_SOUVENIR_SHOP_LAYER(10,10, 10, ""),
+        JUNGLE_PR_LAYER(10,10, 10, ""),
 
-        HEAVEN_DONATE_MONEY_LAYER(10,20,""),
-        HEAVEN_DONATE_LAND_LAYER(10,25,""),
-        HEAVEN_DONATE_CAR_LAYER(10,10,""),
-        HEAVEN_DONATE_AIRPLANE_LAYER(10,10,""),
-        HEAVEN_PARADE_LAYER(10,10,""),
-        HEAVEN_SOUVENIR_SHOP_LAYER(10,10,""),
-        HEAVEN_PR_LAYER(10,10,"");
+        HEAVEN_DONATE_MONEY_LAYER(10,20, 10, ""),
+        HEAVEN_DONATE_LAND_LAYER(10,25, 10, ""),
+        HEAVEN_DONATE_CAR_LAYER(10,10, 10, ""),
+        HEAVEN_DONATE_AIRPLANE_LAYER(10,10, 10, ""),
+        HEAVEN_PARADE_LAYER(10,10, 10, ""),
+        HEAVEN_SOUVENIR_SHOP_LAYER(10,10, 10, ""),
+        HEAVEN_PR_LAYER(10,10, 10, "");
 
         public final double BASE_OUTCOME;
+        public final double BASE_PRICE;
         public final int PRODUCTION_TIME;
         public final String NAME;
-        Layer(double baseOutcome, int productionTIme, String name){
+        Layer(double baseOutcome, int productionTIme, double base_price, String name){
             this.BASE_OUTCOME=baseOutcome;
             this.PRODUCTION_TIME=productionTIme;
+            BASE_PRICE = base_price;
             this.NAME=name;
         }
     }

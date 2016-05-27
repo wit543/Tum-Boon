@@ -1,4 +1,7 @@
-package xyz.wit543.wit.tumboon.model;
+package xyz.wit543.wit.tumboon.model.factory;
+
+import xyz.wit543.wit.tumboon.model.Layer;
+import xyz.wit543.wit.tumboon.model.MapConstant;
 
 /**
  * Created by WIT on 26-May-16.
@@ -39,7 +42,7 @@ public class WatFactory extends LayerAbstractFactory {
 
         layerBuilder.baseOutcome(layer.BASE_OUTCOME).
                 productionTime(layer.PRODUCTION_TIME).
-                name(layer.NAME);
+                name(layer.NAME).basePrice(layer.BASE_PRICE);
         return layerBuilder.build();
     }
     @Override
