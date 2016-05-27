@@ -37,36 +37,33 @@ public class WatFactory extends LayerAbstractFactory {
 
     private MapConstant wat = MapConstant.WAT;
 
-    private Layer standardLayerCreator(MapConstant.Layer layer){
-        Layer.Builder layerBuilder = new  Layer.Builder();
+    private Layer standardLayerCreator(MapConstant.Layer layer) {
+        Layer.Builder layerBuilder = new Layer.Builder();
 
         layerBuilder.baseOutcome(layer.BASE_OUTCOME).
                 productionTime(layer.PRODUCTION_TIME).
                 name(layer.NAME).basePrice(layer.BASE_PRICE);
         return layerBuilder.build();
     }
+
     @Override
     public Layer getLayer(String type) {
-        if("donateMoney".equalsIgnoreCase(type)){
+        if ("donateMoney".equalsIgnoreCase(type)) {
             return standardLayerCreator(wat.DONATE_MONEY_LAYER);
-        }
-        else if("donateLand".equalsIgnoreCase(type)){
+        } else if ("donateLand".equalsIgnoreCase(type)) {
             return standardLayerCreator(wat.DONATE_LAND_LAYER);
-        }
-        else if("donateCar".equalsIgnoreCase(type)){
+        } else if ("donateCar".equalsIgnoreCase(type)) {
             return standardLayerCreator(wat.DONATE_CAR_LAYER);
-        }
-        else if("donateAirplane".equalsIgnoreCase(type)){
+        } else if ("donateAirplane".equalsIgnoreCase(type)) {
             return standardLayerCreator(wat.DONATE_AIRPLANE_LAYER);
-        }
-        else if("parade".equalsIgnoreCase(type)){
+        } else if ("parade".equalsIgnoreCase(type)) {
             return standardLayerCreator(wat.PARADE_LAYER);
-        }
-        else if("souvenirShop".equalsIgnoreCase(type)){
+        } else if ("souvenirShop".equalsIgnoreCase(type)) {
             return standardLayerCreator(wat.SOUVENIR_SHOP_LAYER);
         }
         return null;
     }
+}
 //    @Override
 //    public Layer createDonateMoneyLayer() {
 //        return standardLayerCreator(wat.DONATE_MONEY_LAYER);
@@ -101,10 +98,10 @@ public class WatFactory extends LayerAbstractFactory {
 //    @Override
 //    public Layer createPRLayer() {
 //        return standardLayerCreator(wat.PR_LAYER);
-<<<<<<< HEAD:app/src/main/java/xyz/wit543/wit/tumboon/model/factory/WatFactory.java
+//<<<<<<< HEAD:app/src/main/java/xyz/wit543/wit/tumboon/model/factory/WatFactory.java
+////    }
+//}
+//=======
 //    }
-}
-=======
-    }
-
->>>>>>> origin/Momo:app/src/main/java/xyz/wit543/wit/tumboon/model/WatFactory.java
+//
+//>>>>>>> origin/Momo:app/src/main/java/xyz/wit543/wit/tumboon/model/WatFactory.java
