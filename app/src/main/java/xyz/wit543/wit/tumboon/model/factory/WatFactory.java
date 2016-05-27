@@ -101,5 +101,10 @@ public class WatFactory extends LayerAbstractFactory {
 //    @Override
 //    public Layer createPRLayer() {
 //        return standardLayerCreator(wat.PR_LAYER);
+<<<<<<< HEAD:app/src/main/java/xyz/wit543/wit/tumboon/model/factory/WatFactory.java
 //    }
 }
+=======
+    }
+
+>>>>>>> origin/Momo:app/src/main/java/xyz/wit543/wit/tumboon/model/WatFactory.java
