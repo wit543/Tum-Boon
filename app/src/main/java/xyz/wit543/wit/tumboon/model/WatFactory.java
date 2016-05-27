@@ -54,7 +54,7 @@ public class WatFactory extends LayerAbstractFactory {
             return standardLayerCreator(wat.DONATE_CAR_LAYER);
         }
         else if("donateAirplane".equalsIgnoreCase(type)){
-            return standardLayerCreator(wat.DONATE_AIRPLANE_LAYER)
+            return standardLayerCreator(wat.DONATE_AIRPLANE_LAYER);
         }
         else if("parade".equalsIgnoreCase(type)){
             return standardLayerCreator(wat.PARADE_LAYER);
@@ -99,4 +99,4 @@ public class WatFactory extends LayerAbstractFactory {
 //    public Layer createPRLayer() {
 //        return standardLayerCreator(wat.PR_LAYER);
     }
-}
+
