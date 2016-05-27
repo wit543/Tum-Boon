@@ -10,9 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import xyz.wit543.wit.tumboon.R;
 import xyz.wit543.wit.tumboon.adapter.LayerAdapter;
 import xyz.wit543.wit.tumboon.model.Game;
+import xyz.wit543.wit.tumboon.model.Layer;
 
 
 public class LayerFragment extends Fragment {
@@ -46,7 +50,9 @@ public class LayerFragment extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layerRecycleView.setLayoutManager(mLayoutManager);
-        layerRecycleView.setAdapter(new LayerAdapter(Game.getInstance().getLayers()));
+        Game game = Game.getInstance();
+        System.out.printf("\n"+game.getLayers().size());
+        layerRecycleView.setAdapter(new LayerAdapter(game.getLayers()));
         layerRecycleView.setNestedScrollingEnabled(false);
 
         return view;

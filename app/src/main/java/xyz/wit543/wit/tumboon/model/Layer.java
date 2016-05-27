@@ -1,7 +1,5 @@
 package xyz.wit543.wit.tumboon.model;
 
-import android.widget.Button;
-
 /**
  * Created by WIT on 21-May-16.
  */
@@ -10,24 +8,26 @@ public class Layer implements Producible{
     private int level;
     private double baseOutcome;
     private double basePrice;
-    private int productionTime;
+    private int baseProductionTime;
     private double price;
     private double outcome;
 
+    private final double speedIncreasePerSec = 5;
 
-    public Layer(String name, int level,double basePrice, double baseOutcome, int productionTime) {
+
+    public Layer(String name, int level,double basePrice, double baseOutcome, int baseProductionTime) {
         this.name = name;
         this.level = level;
         this.basePrice = basePrice;
         this.baseOutcome = baseOutcome;
-        this.productionTime = productionTime;
+        this.baseProductionTime = baseProductionTime;
     }
 
     private Layer(Builder builder){
         this.name = builder.name;
         this.level = builder.level;
         this.baseOutcome = builder.baseOutcome;
-        this.productionTime = builder.productionTime;
+        this.baseProductionTime = builder.productionTime;
         this.basePrice = builder.basePrice;
         this.price = basePrice;
         this.outcome = baseOutcome;
@@ -41,8 +41,8 @@ public class Layer implements Producible{
         return basePrice;
     }
 
-    public int getProductionTime() {
-        return productionTime;
+    public int getBaseProductionTime() {
+        return baseProductionTime;
     }
 
     public String getName() {
@@ -72,6 +72,14 @@ public class Layer implements Producible{
         this.level++;
     }
 
+    public double getProductionTime(){
+        double netTime = this.getBaseProductionTime() - (this.getLevel()-1)*speedIncreasePerSec;
+        if(netTime < 100){
+            netTime = 100;
+        }
+        return netTime;
+    }
+
     public class Memento {
         private String name;
         private int level;
@@ -85,7 +93,7 @@ public class Layer implements Producible{
             this.name = Layer.this.name;
             this.level = Layer.this.level;
             this.baseOutcome = Layer.this.baseOutcome;
-            this.productionTime = Layer.this.productionTime;
+            this.productionTime = Layer.this.baseProductionTime;
             this.baseOutcome = Layer.this.basePrice;
             this.basePrice = Layer.this.basePrice;
             this.price = Layer.this.price;
@@ -97,7 +105,7 @@ public class Layer implements Producible{
             Layer.this.name = this.name;
             Layer.this.level = this.level;
             Layer.this.baseOutcome = this.baseOutcome;
-            Layer.this.productionTime = this.productionTime;
+            Layer.this.baseProductionTime = this.productionTime;
             Layer.this.baseOutcome = this.baseOutcome;
             Layer.this.basePrice = this.basePrice;
             Layer.this.price = this.price;
@@ -135,5 +143,7 @@ public class Layer implements Producible{
         public Layer build(){
             return new Layer(this);
         }
+
+
     }
 }
