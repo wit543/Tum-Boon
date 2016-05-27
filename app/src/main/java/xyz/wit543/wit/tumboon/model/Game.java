@@ -23,8 +23,8 @@ public class Game {
     private Game(){
         mc = new BoonCalculator();
         layers = new ArrayList<Layer>();
-        layers.add(new Layer("Car" , 1 , 100 , 1000));
-        layers.add(new Layer("Helicopter" , 1 , 200 , 3000));
+        layers.add(new Layer("Car" , 1 ,1000,100 , 1000));
+        layers.add(new Layer("Helicopter" , 1 ,3000, 200 , 3000));
         multiplier = new Multiplier(5000,10000,4);
         money = 0;
     }
@@ -33,6 +33,10 @@ public class Game {
         if(game==null)
             game = new Game();
         return game;
+    }
+
+    public void decreaseMoney(double price){
+        this.money-=price;
     }
 
     public void startGame(){
