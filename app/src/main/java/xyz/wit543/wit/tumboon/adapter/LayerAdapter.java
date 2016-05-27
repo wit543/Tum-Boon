@@ -55,11 +55,10 @@ public class LayerAdapter extends RecyclerView.Adapter<LayerAdapter.LayerRecycle
 
     @Override
     public void onBindViewHolder(LayerRecycleViewHolder holder, int position) {
-        Layer l = layers.get(position);
         holder.name.setText(layers.get(position).getName());
         holder.level.setText(layers.get(position).getLevel());
         holder.rate.setText(String.valueOf(layers.get(position).getOutcome()));
-        holder.buyButton.setText(String.valueOf(layers.get(position).ge));
+        holder.buyButton.setText(String.valueOf(layers.get(position).getPrice()));
     }
 
     @Override
