@@ -1,5 +1,6 @@
 package xyz.wit543.wit.tumboon.activity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -71,10 +72,10 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
 
     private void initialize() {
         boonLabel = (TextView) findViewById(R.id.boon);
-        layerList = (ListView) findViewById(R.id.layerLists);
+        //layerList = (ListView) findViewById(R.id.layerLists);
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         game = Game.getInstance();
-        layerList.setAdapter(new LayerAdapter(this, R.layout.layer_cell, game.getLayers()));
+        //layerList.setAdapter(new LayerAdapter(this, R.layout.layer_cell, game.getLayers()));
         final ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(new LayerFragment());
         viewPagerAdapter.addFragment(new TopUpFragment());
