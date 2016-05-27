@@ -21,7 +21,8 @@ import xyz.wit543.wit.tumboon.fragment.TopUpFragment;
 import xyz.wit543.wit.tumboon.model.Game;
 import xyz.wit543.wit.tumboon.view.LayerAdapter;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements  LayerFragment.OnFragmentInteractionListener
+,TopUpFragment.OnFragmentInteractionListener{
 
     private TextView boonLabel;
     private ListView layerList;
@@ -142,5 +143,10 @@ public class HomeActivity extends AppCompatActivity {
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

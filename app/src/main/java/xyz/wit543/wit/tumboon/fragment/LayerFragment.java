@@ -33,19 +33,23 @@ public class LayerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        layerRecycleView = (RecyclerView) getActivity().findViewById(R.id.layer_recycle_view);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        layerRecycleView.setLayoutManager(mLayoutManager);
-        layerRecycleView.setAdapter(new LayerAdapter(Game.getInstance().getLayers()));
-        layerRecycleView.setNestedScrollingEnabled(false);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_layer, container, false);
+        View view = inflater.inflate(R.layout.fragment_layer, container, false);
+
+        layerRecycleView = (RecyclerView) view.findViewById(R.id.layer_recycle_view);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        layerRecycleView.setLayoutManager(mLayoutManager);
+        layerRecycleView.setAdapter(new LayerAdapter(Game.getInstance().getLayers()));
+        layerRecycleView.setNestedScrollingEnabled(false);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
