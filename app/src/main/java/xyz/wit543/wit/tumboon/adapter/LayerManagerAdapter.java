@@ -81,14 +81,12 @@ public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapte
                 while (layer.getProductionTime()>100){
                     try{
                         Thread.sleep(10);
-                        System.out.println("FUCK");
                         progressBar.setProgress(calculateProcess(layer));}
                     catch (Exception e){
 
                     }
                 }
                 progressBar.setProgress(100);
-                System.out.println("MAXIMUM");
             }
         });
         t.start();

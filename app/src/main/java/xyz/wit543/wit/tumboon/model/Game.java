@@ -27,10 +27,10 @@ public class Game {
         layers.add(new Layer("Car" , 1 ,1000,100 , 1000));
         layers.add(new Layer("Helicopter" , 1 ,3000, 200 , 3000));
         layerManagers = new ArrayList<LayerManager>();
-        layerManagers.add(new LayerManager(new Layer("Car" , 1 ,1000,100 , 1000) , 1000));
-        layerManagers.add(new LayerManager(new Layer("Helicopter" , 1 ,3000, 200 , 3000),1000));
+        layerManagers.add(new LayerManager(new Layer("Car" , 1 ,1000,100 , 1000) , 1));
+        layerManagers.add(new LayerManager(new Layer("Helicopter" , 1 ,3000, 200 , 3000),1));
         multiplier = new Multiplier(5000,10000,4);
-        money = 0;
+        money = 10000;
     }
 
     public static Game getInstance(){
