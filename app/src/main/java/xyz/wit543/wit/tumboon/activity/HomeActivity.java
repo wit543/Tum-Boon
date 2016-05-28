@@ -29,10 +29,13 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
     private ListView layerList;
     private Game game;
     private ViewPager viewPager;
+    private ViewPagerAdapter viewPagerAdapter;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
+    private LayerFragment layerFragment;
+
     private GoogleApiClient client;
     private ImageButton layerFragmentButton;
     private ImageButton topUpFragmentButton;
@@ -55,9 +58,11 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
                             @Override
                             public void run() {
                                 boonLabel.setText("" + game.getMoney());
+//                                layerFragment.update();
                             }
                         });
                     }
+
                 } catch (InterruptedException e) {
                 }
             }
@@ -76,8 +81,11 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         game = Game.getInstance();
         //layerList.setAdapter(new LayerAdapter(this, R.layout.layer_cell, game.getLayers()));
-        final ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new LayerFragment());
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+
+        layerFragment = new LayerFragment();
+
+        viewPagerAdapter.addFragment(layerFragment);
         viewPagerAdapter.addFragment(new TopUpFragment());
         //TODO add all fragment
         viewPager.setAdapter(viewPagerAdapter);

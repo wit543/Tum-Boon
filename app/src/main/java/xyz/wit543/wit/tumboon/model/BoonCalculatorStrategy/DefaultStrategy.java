@@ -23,14 +23,14 @@ public class DefaultStrategy implements CalculateStrategy{
     }
 
     @Override
-    public double calculateBoon(int gameTime , List<LayerManager> layers) {
+    public double calculateBoon(long currentTime , List<LayerManager> layers) {
         if(nextProduceTimes == null)
             nextProduceTimes = new int[layers.size()];
 
         int outcome=0;
         for(int i=0 ; i<layers.size(); i++){
             LayerManager l = layers.get(i);
-            if(gameTime>=l.getNextProduceTime()){
+            if(currentTime>=l.getNextProduceTime()){
                 outcome+=l.produce();
 //                //System.out.printf("GET %d FROM %s AT %d NEXT PRODUCE TIME IS %d \n",l.getOutcome(),l.getName() , gameTime , nextProduceTimes[i]);
             }

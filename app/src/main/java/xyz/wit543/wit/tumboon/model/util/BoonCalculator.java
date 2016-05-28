@@ -22,8 +22,8 @@ public class BoonCalculator {
         this.calculateStrategy = calculateStrategy;
     }
 
-    public double calculateBoon(int gameTime, List<LayerManager> layers){
-        return calculateStrategy.calculateBoon(gameTime,layers);
+    public double calculateBoon(Long currentTime, List<LayerManager> layers){
+        return calculateStrategy.calculateBoon(currentTime,layers);
     }
 
 

@@ -9,9 +9,9 @@ public class LayerManager {
     private long nextProduceTime;
     private static final int speedIncreasePerSec = 10;
 
-    public LayerManager(Layer layer){
+    public LayerManager(Layer layer , int level){
         this.layer = layer;
-        level = 1;
+        this.level = level;
         nextProduceTime = System.currentTimeMillis()+ this.getProductionTime().longValue();
     }
 
@@ -60,7 +60,7 @@ public class LayerManager {
     }
 
     public double getProductOutcome(){
-        return layer.getLevel() * layer.getBaseOutcome();
+        return this.getLevel() * layer.getBaseOutcome();
     }
 
     public void increaseLevel(){

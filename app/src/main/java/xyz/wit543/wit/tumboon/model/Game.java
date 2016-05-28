@@ -27,8 +27,8 @@ public class Game {
         layers.add(new Layer("Car" , 1 ,1000,100 , 1000));
         layers.add(new Layer("Helicopter" , 1 ,3000, 200 , 3000));
         layerManagers = new ArrayList<LayerManager>();
-        layerManagers.add(new LayerManager(new Layer("Car" , 1 ,1000,100 , 1000)));
-        layerManagers.add(new LayerManager(new Layer("Helicopter" , 1 ,3000, 200 , 3000)));
+        layerManagers.add(new LayerManager(new Layer("Car" , 1 ,1000,100 , 1000) , 1000));
+        layerManagers.add(new LayerManager(new Layer("Helicopter" , 1 ,3000, 200 , 3000),1000));
         multiplier = new Multiplier(5000,10000,4);
         money = 0;
     }
@@ -53,11 +53,15 @@ public class Game {
                 super.run();
                 while(running) {
                     delay();
-                    money+=calculateNetBoon();
+                    update();
                 }
             }
         };
         thread.start();
+    }
+
+    public void update(){
+        money+=calculateNetBoon();
     }
 
     public void resetGame(){
@@ -70,7 +74,7 @@ public class Game {
 //    }
 
     public double calculateNetBoon(){
-        double netBoon = mc.calculateBoon(getGameTime(),layerManagers) * getMultiplierValue();
+        double netBoon = mc.calculateBoon(System.currentTimeMillis(),layerManagers) * getMultiplierValue();
         return netBoon;
     }
 

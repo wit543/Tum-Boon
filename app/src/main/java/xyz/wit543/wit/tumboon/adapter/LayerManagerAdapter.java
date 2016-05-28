@@ -56,6 +56,7 @@ public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapte
     @Override
     public void onBindViewHolder(LayerManagerRecycleViewHolder holder, int position) {
         final LayerManager layer = layers.get(position);
+
         holder.name.setText(""+layer.getLayer().getName());
         holder.level.setText(""+layer.getLevel());
         holder.rate.setText(String.valueOf(layer.getProductOutcome()));
@@ -65,7 +66,6 @@ public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapte
             public void onClick(View v) {
                 Game game = Game.getInstance();
                 if(game.getMoney()>=layer.getPrice()){
-                    //game.spend(layerPrice);
                     game.spend(layer.getPrice());
                     layer.increaseLevel();
                     notifyDataSetChanged();
@@ -73,12 +73,37 @@ public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapte
             }
         });
         holder.buyButton.setText("UPGRADE: "+layer.getPrice());
-        holder.progressBar.setMax(layer.getProductionTime().intValue());
-        holder.progressBar.setProgress(1000);
+
+        final ProgressBar progressBar = holder.progressBar;
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (layer.getProductionTime()>100){
+                    try{
+                        Thread.sleep(10);
+                        System.out.println("FUCK");
+                        progressBar.setProgress(calculateProcess(layer));}
+                    catch (Exception e){
+
+                    }
+                }
+                progressBar.setProgress(100);
+                System.out.println("MAXIMUM");
+            }
+        });
+        t.start();
     }
 
     @Override
     public int getItemCount() {
         return layers.size();
     }
+
+    public int calculateProcess(LayerManager layer){
+        int remaining = (int)(layer.getNextProduceTime() - System.currentTimeMillis());
+        double duration = (int)layer.getProductionTime().intValue();
+        return (int)((duration-remaining)/duration * 100);
+    }
+
+
 }

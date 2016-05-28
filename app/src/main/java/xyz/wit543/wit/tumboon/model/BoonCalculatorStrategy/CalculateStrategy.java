@@ -9,5 +9,5 @@ import xyz.wit543.wit.tumboon.model.LayerManager;
  * Created by Asus on 5/26/2016.
  */
 public interface CalculateStrategy {
-    public double calculateBoon(int gameTime,List<LayerManager> layers);
+    public double calculateBoon(long cuurentTime,List<LayerManager> layers);
 }
