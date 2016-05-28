@@ -11,6 +11,7 @@ import xyz.wit543.wit.tumboon.model.util.BoonCalculator;
 public class Game {
     private static Game game;
     private List<Layer> layers;
+    private List<LayerManager> layerManagers;
     private List<Map> maps;
     private double money;
     private boolean running;
@@ -25,6 +26,9 @@ public class Game {
         layers = new ArrayList<Layer>();
         layers.add(new Layer("Car" , 1 ,1000,100 , 1000));
         layers.add(new Layer("Helicopter" , 1 ,3000, 200 , 3000));
+        layerManagers = new ArrayList<LayerManager>();
+        layerManagers.add(new LayerManager(new Layer("Car" , 1 ,1000,100 , 1000)));
+        layerManagers.add(new LayerManager(new Layer("Helicopter" , 1 ,3000, 200 , 3000)));
         multiplier = new Multiplier(5000,10000,4);
         money = 0;
     }
@@ -35,9 +39,11 @@ public class Game {
         return game;
     }
 
-    public void decreaseMoney(double price){
+    public void spend(double price){
         this.money-=price;
     }
+
+    public void earn(double price){ this.money+=price; }
 
     public void startGame(){
         running = true;
@@ -54,8 +60,17 @@ public class Game {
         thread.start();
     }
 
+    public void resetGame(){
+
+    }
+
+//    public double calculateNetBoon(){
+//        double netBoon = mc.calculateBoon(getGameTime(),layers) * getMultiplierValue();
+//        return netBoon;
+//    }
+
     public double calculateNetBoon(){
-        double netBoon = mc.calculateBoon(getGameTime(),layers) * getMultiplierValue();
+        double netBoon = mc.calculateBoon(getGameTime(),layerManagers) * getMultiplierValue();
         return netBoon;
     }
 
@@ -79,6 +94,10 @@ public class Game {
 
     public List<Layer> getLayers() {
         return layers;
+    }
+
+    public List<LayerManager> getLayerManagers(){
+        return layerManagers;
     }
 
     public List<Map> getMaps(){return maps;}

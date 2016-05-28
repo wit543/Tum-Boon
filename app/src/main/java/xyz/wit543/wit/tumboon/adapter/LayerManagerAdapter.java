@@ -14,20 +14,21 @@ import java.util.List;
 import xyz.wit543.wit.tumboon.R;
 import xyz.wit543.wit.tumboon.model.Game;
 import xyz.wit543.wit.tumboon.model.Layer;
+import xyz.wit543.wit.tumboon.model.LayerManager;
 
 /**
- * Created by Momo on 26/5/2559.
+ * Created by Asus on 5/28/2016.
  */
-public class LayerAdapter extends RecyclerView.Adapter<LayerAdapter.LayerRecycleViewHolder> {
-    private List<Layer> layers;
-    public static class LayerRecycleViewHolder extends RecyclerView.ViewHolder{
+public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapter.LayerManagerRecycleViewHolder> {
+    private List<LayerManager> layers;
+    public static class LayerManagerRecycleViewHolder extends RecyclerView.ViewHolder{
         TextView name;
         TextView level;
         TextView rate;
         ProgressBar progressBar;
         Button buyButton;
         SurfaceView animationView;
-        public LayerRecycleViewHolder(View itemView) {
+        public LayerManagerRecycleViewHolder(View itemView) {
             super(itemView);
             name=(TextView)itemView.findViewById(R.id.layer_name);
             level=(TextView)itemView.findViewById(R.id.layer_lv);
@@ -39,41 +40,40 @@ public class LayerAdapter extends RecyclerView.Adapter<LayerAdapter.LayerRecycle
         }
     }
 
-    public LayerAdapter(List<Layer> layers) {
+    public LayerManagerAdapter(List<LayerManager> layers) {
         this.layers = layers;
     }
 
     @Override
-    public LayerRecycleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public LayerManagerRecycleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.layer_cell, parent, false);
         // set the view's size, margins, paddings and layout parameters
 
-        return new LayerRecycleViewHolder(v);
+        return new LayerManagerRecycleViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(LayerRecycleViewHolder holder, int position) {
-        final Layer layer = layers.get(position);
-        holder.name.setText(""+layer.getName());
+    public void onBindViewHolder(LayerManagerRecycleViewHolder holder, int position) {
+        final LayerManager layer = layers.get(position);
+        holder.name.setText(""+layer.getLayer().getName());
         holder.level.setText(""+layer.getLevel());
-        holder.rate.setText(String.valueOf(layer.getOutcome()));
+        holder.rate.setText(String.valueOf(layer.getProductOutcome()));
         holder.buyButton.setText(String.valueOf(layer.getPrice()));
         holder.buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Game game = Game.getInstance();
-                double layerPrice = Math.floor(layer.getBasePrice()*Math.pow(1.15f,layer.getLevel()-1));
-                if(game.getMoney()>=layerPrice){
+                if(game.getMoney()>=layer.getPrice()){
                     //game.spend(layerPrice);
-                    game.spend(layerPrice);
+                    game.spend(layer.getPrice());
                     layer.increaseLevel();
                     notifyDataSetChanged();
                 }
             }
         });
-        holder.buyButton.setText("UPGRADE: "+Math.floor(layer.getBasePrice()*Math.pow(1.15f,layer.getLevel()-1)));
-        holder.progressBar.setMax((int)layer.getProductionTime());
+        holder.buyButton.setText("UPGRADE: "+layer.getPrice());
+        holder.progressBar.setMax(layer.getProductionTime().intValue());
         holder.progressBar.setProgress(1000);
     }
 

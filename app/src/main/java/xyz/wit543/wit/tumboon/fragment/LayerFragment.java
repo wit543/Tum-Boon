@@ -15,6 +15,7 @@ import java.util.List;
 
 import xyz.wit543.wit.tumboon.R;
 import xyz.wit543.wit.tumboon.adapter.LayerAdapter;
+import xyz.wit543.wit.tumboon.adapter.LayerManagerAdapter;
 import xyz.wit543.wit.tumboon.model.Game;
 import xyz.wit543.wit.tumboon.model.Layer;
 
@@ -51,8 +52,8 @@ public class LayerFragment extends Fragment {
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layerRecycleView.setLayoutManager(mLayoutManager);
         Game game = Game.getInstance();
-        System.out.printf("\n"+game.getLayers().size());
-        layerRecycleView.setAdapter(new LayerAdapter(game.getLayers()));
+//        layerRecycleView.setAdapter(new LayerAdapter(game.getLayers()));
+        layerRecycleView.setAdapter(new LayerManagerAdapter(game.getLayerManagers()));
         layerRecycleView.setNestedScrollingEnabled(false);
 
         return view;

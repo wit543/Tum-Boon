@@ -3,6 +3,7 @@ package xyz.wit543.wit.tumboon.model.BoonCalculatorStrategy;
 import java.util.List;
 
 import xyz.wit543.wit.tumboon.model.Layer;
+import xyz.wit543.wit.tumboon.model.LayerManager;
 
 /**
  * Created by Asus on 5/26/2016.
@@ -22,18 +23,16 @@ public class DefaultStrategy implements CalculateStrategy{
     }
 
     @Override
-    public double calculateBoon(int gameTime , List<Layer> layers) {
+    public double calculateBoon(int gameTime , List<LayerManager> layers) {
         if(nextProduceTimes == null)
             nextProduceTimes = new int[layers.size()];
 
         int outcome=0;
         for(int i=0 ; i<layers.size(); i++){
-            Layer l = layers.get(i);
-            if(gameTime>=nextProduceTimes[i]){
-                nextProduceTimes[i] += getProductionTime(l);
-                getProductionTime(l);
-                outcome+=getProductOutcome(l);
-                //System.out.printf("GET %d FROM %s AT %d NEXT PRODUCE TIME IS %d \n",l.getOutcome(),l.getName() , gameTime , nextProduceTimes[i]);
+            LayerManager l = layers.get(i);
+            if(gameTime>=l.getNextProduceTime()){
+                outcome+=l.produce();
+//                //System.out.printf("GET %d FROM %s AT %d NEXT PRODUCE TIME IS %d \n",l.getOutcome(),l.getName() , gameTime , nextProduceTimes[i]);
             }
         }
         return outcome;
