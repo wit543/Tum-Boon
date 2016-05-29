@@ -10,9 +10,9 @@ import xyz.wit543.wit.tumboon.model.util.BoonCalculator;
 
 public class Game {
     private static Game game;
-    private List<Layer> layers;
     private List<LayerManager> layerManagers;
     private List<Map> maps;
+    private List<Upgrade> upgrades;
     private double money;
     private boolean running;
     private long startTime;
@@ -23,9 +23,7 @@ public class Game {
 
     private Game(){
         mc = new BoonCalculator();
-        layers = new ArrayList<Layer>();
-        layers.add(new Layer("Car" , 1 ,1000,100 , 1000));
-        layers.add(new Layer("Helicopter" , 1 ,3000, 200 , 3000));
+        upgrades = new ArrayList<Upgrade>();
         layerManagers = new ArrayList<LayerManager>();
         layerManagers.add(new LayerManager(new Layer("Car" , 1 ,1000,100 , 1000) , 0));
         layerManagers.add(new LayerManager(new Layer("Helicopter" , 1 ,3000, 200 , 3000),0));
@@ -94,10 +92,6 @@ public class Game {
 
     public int getGameTime(){
         return (int) (System.currentTimeMillis() - startTime);
-    }
-
-    public List<Layer> getLayers() {
-        return layers;
     }
 
     public List<LayerManager> getLayerManagers(){
