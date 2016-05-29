@@ -19,11 +19,12 @@ import xyz.wit543.wit.tumboon.R;
 import xyz.wit543.wit.tumboon.adapter.ViewPagerAdapter;
 import xyz.wit543.wit.tumboon.fragment.LayerFragment;
 import xyz.wit543.wit.tumboon.fragment.TopUpFragment;
+import xyz.wit543.wit.tumboon.fragment.UpgradeFragment;
 import xyz.wit543.wit.tumboon.model.Game;
 import xyz.wit543.wit.tumboon.view.LayerAdapter;
 
 public class HomeActivity extends AppCompatActivity implements  LayerFragment.OnFragmentInteractionListener
-,TopUpFragment.OnFragmentInteractionListener{
+,TopUpFragment.OnFragmentInteractionListener , UpgradeFragment.OnFragmentInteractionListener{
 
     private TextView boonLabel;
     private ListView layerList;
@@ -35,6 +36,7 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private LayerFragment layerFragment;
+    private UpgradeFragment upgradeFragment;
 
     private GoogleApiClient client;
     private ImageButton layerFragmentButton;
@@ -84,8 +86,10 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         layerFragment = new LayerFragment();
+        upgradeFragment = new UpgradeFragment();
 
         viewPagerAdapter.addFragment(layerFragment);
+        viewPagerAdapter.addFragment(upgradeFragment);
         viewPagerAdapter.addFragment(new TopUpFragment());
         //TODO add all fragment
         viewPager.setAdapter(viewPagerAdapter);
@@ -95,6 +99,7 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
                 return true;
             }
         });
+
         layerFragmentButton = (ImageButton)findViewById(R.id.layer_menu_button);
         layerFragmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,13 +107,25 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
                 viewPager.setCurrentItem(0);
             }
         });
-        convertFragmentButton = (ImageButton) findViewById(R.id.convert_menu_button);
-        convertFragmentButton.setOnClickListener(new View.OnClickListener() {
+
+        upgradeFragmentButton = (ImageButton) findViewById(R.id.upgrade_menu_button);
+        upgradeFragmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 viewPager.setCurrentItem(1);
             }
         });
+
+        convertFragmentButton = (ImageButton) findViewById(R.id.convert_menu_button);
+        convertFragmentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewPager.setCurrentItem(2);
+            }
+        });
+
+
+
         //TODO set all button
         game.startGame();
 

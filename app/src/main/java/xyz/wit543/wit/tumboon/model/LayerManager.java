@@ -7,12 +7,14 @@ public class LayerManager {
     private Layer layer;
     private int level;
     private long nextProduceTime;
+    private long startTime;
     private static final int speedIncreasePerSec = 10;
 
     public LayerManager(Layer layer , int level){
         this.layer = layer;
         this.level = level;
         nextProduceTime = System.currentTimeMillis()+ this.getProductionTime().longValue();
+        startTime = System.currentTimeMillis();
     }
 
     public Double getProductionTime(){
@@ -25,6 +27,10 @@ public class LayerManager {
 
     public double getPrice(){
         return Math.floor(layer.getBasePrice()*Math.pow(1.15f,layer.getLevel()-1));
+    }
+
+    public boolean canProduce(){
+        return !(level==0);
     }
 
     public void updateNextProductTime(){
@@ -64,9 +70,9 @@ public class LayerManager {
     }
 
     public void increaseLevel(){
-        if(level==0)
-
-
+        if(level==0){
+            nextProduceTime = System.currentTimeMillis() + this.getProductionTime().longValue();
+        }
         level++;
     }
 
