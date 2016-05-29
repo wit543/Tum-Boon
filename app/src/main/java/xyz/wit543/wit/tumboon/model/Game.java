@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.wit543.wit.tumboon.model.util.BoonCalculator;
+import xyz.wit543.wit.tumboon.model.util.MultiplierRandomizer;
 
 public class Game {
     private static Game game;
@@ -16,18 +17,27 @@ public class Game {
     private double money;
     private boolean running;
     private long startTime;
-    private BoonCalculator mc;
     private Multiplier multiplier;
+
+    private BoonCalculator mc;
+    private MultiplierRandomizer mr;
 
     private final int DELAY = 100;
 
     private Game(){
+
+        List<Multiplier> multipliers = new ArrayList<Multiplier>();
+        multipliers.add(new Multiplier("แสดงอภินิหาร",0,100000,4));
+        multipliers.add(new Multiplier("ใบ้หวย",0,100000,2));
+
         mc = new BoonCalculator();
+        mr = new MultiplierRandomizer(multipliers);
+
         upgrades = new ArrayList<Upgrade>();
         layerManagers = new ArrayList<LayerManager>();
         layerManagers.add(new LayerManager(new Layer("Car" , 1 ,1000,100 , 1000) , 0));
         layerManagers.add(new LayerManager(new Layer("Helicopter" , 1 ,3000, 200 , 3000),0));
-        multiplier = new Multiplier(5000,10000,4);
+        multiplier = new Multiplier("FUCK",System.currentTimeMillis(),100000,4);
         money = 1000;
     }
 
@@ -35,6 +45,10 @@ public class Game {
         if(game==null)
             game = new Game();
         return game;
+    }
+
+    public void setNewMultiplier(){
+        multiplier = mr.randomMultiplier();
     }
 
     public void spend(double price){
@@ -58,12 +72,26 @@ public class Game {
         thread.start();
     }
 
+    public Multiplier getMultiplier() {
+        return multiplier;
+    }
+
+    public void setMultiplier(Multiplier multiplier) {
+        this.multiplier = multiplier;
+    }
+
     public void update(){
         money+=calculateNetBoon();
     }
 
     public void resetGame(){
 
+    }
+
+    public boolean hasMultiplier(){
+        if(multiplier!=null)
+            return true;
+        return false;
     }
 
 //    public double calculateNetBoon(){
@@ -86,7 +114,7 @@ public class Game {
     public void updateMultiplier(){
         if(multiplier == null)
             return;
-        if(multiplier.startTime+multiplier.duration < getGameTime())
+        if(multiplier.startTime+multiplier.duration < System.currentTimeMillis())
             multiplier = null;
     }
 

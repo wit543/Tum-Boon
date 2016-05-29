@@ -12,12 +12,8 @@
 
     <TextView
         android:id="@+id/boon"
-        android:text="Hello World!"
-
-    
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        
         android:textSize="50dp"
         android:textAlignment="center"
         android:background="#ffff0000"/>

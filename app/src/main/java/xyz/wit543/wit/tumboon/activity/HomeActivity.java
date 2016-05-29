@@ -37,6 +37,7 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
      */
     private LayerFragment layerFragment;
     private UpgradeFragment upgradeFragment;
+    private TopUpFragment topUpFragment;
 
     private GoogleApiClient client;
     private ImageButton layerFragmentButton;
@@ -60,7 +61,7 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
                             @Override
                             public void run() {
                                 boonLabel.setText("" + game.getMoney());
-//                                layerFragment.update();
+                                topUpFragment.update();
                             }
                         });
                     }
@@ -87,10 +88,11 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
 
         layerFragment = new LayerFragment();
         upgradeFragment = new UpgradeFragment();
+        topUpFragment = new TopUpFragment();
 
         viewPagerAdapter.addFragment(layerFragment);
         viewPagerAdapter.addFragment(upgradeFragment);
-        viewPagerAdapter.addFragment(new TopUpFragment());
+        viewPagerAdapter.addFragment(topUpFragment);
         //TODO add all fragment
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setOnTouchListener(new View.OnTouchListener() {
