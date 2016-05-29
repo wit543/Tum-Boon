@@ -1,6 +1,7 @@
 package xyz.wit543.wit.tumboon.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,35 +17,40 @@ import xyz.wit543.wit.tumboon.model.Upgrade;
 /**
  * Created by Momo on 27/5/2559.
  */
-public class UpgradeAdapter extends ArrayAdapter<Upgrade>{
-    private List<Upgrade> objects;
+public class UpgradeAdapter extends RecyclerView.Adapter<UpgradeAdapter.UpgradeRecycleViewHolder> {
+    private List<Upgrade> upgrades;
 
-    public UpgradeAdapter(Context context, int resource, List<Upgrade> objects){
-        super(context,resource,objects);
-        this.objects = objects;
+    public static class UpgradeRecycleViewHolder extends RecyclerView.ViewHolder {
+        TextView name;
+        TextView stat;
+        Button upgradeButton;
+
+        public UpgradeRecycleViewHolder(View itemView){
+            super(itemView);
+            name = (TextView)itemView.findViewById(R.id.upgrade_name);
+            stat = (TextView) itemView.findViewById(R.id.upgrade_stat);
+            upgradeButton = (Button)itemView.findViewById(R.id.upgrade_bt);
+        }
+    }
+    public UpgradeAdapter(List<Upgrade> upgrades){
+        this.upgrades = upgrades;
+    }
+    @Override
+    public UpgradeRecycleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.upgrade_cell, parent, false);
+
+        return new UpgradeRecycleViewHolder(v);
+    }
+    public void onBindViewHolder(UpgradeRecycleViewHolder holder,int position){
+        holder.name.setText(""+upgrades.get(position).getName());
+        holder.stat.setText(""+upgrades.get(position).getMultiplier());
+        holder.upgradeButton.setText(String.valueOf(upgrades.get(position).getprice()));
+
     }
 
-    public View getView(final int position,View convertView,ViewGroup parent){
-        View v = convertView;
-        if(v== null){
-            LayoutInflater vi = LayoutInflater.from(getContext());
-            v = vi.inflate(R.layout.upgrade_cell,null);
-        }
-        TextView nameView = (TextView) v.findViewById(R.id.upgrade_name);
-        TextView statView = (TextView) v.findViewById(R.id.upgrade_stat);
-        Button upgradeBt = (Button) v.findViewById(R.id.upgrade_bt);
-        upgradeBt.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        Upgrade upList = getItem(position);
-        nameView.setText(upList.getName());
-        statView.setText(""+upList.getMultiplier());
-        //upgradeBt.setText();
-        return null;
+    public int getItemCount() {
+        return upgrades.size();
     }
 
 }

@@ -1,5 +1,6 @@
 package xyz.wit543.wit.tumboon.fragment;
 
+
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,50 +10,62 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import xyz.wit543.wit.tumboon.R;
-import xyz.wit543.wit.tumboon.adapter.LayerAdapter;
-import xyz.wit543.wit.tumboon.model.Game;
+import xyz.wit543.wit.tumboon.adapter.UpgradeAdapter;
+import xyz.wit543.wit.tumboon.model.Upgrade;
 
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class UpgradeFragment extends Fragment {
 
-public class LayerFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
-    private RecyclerView layerRecycleView;
+    private RecyclerView upgradeRecyclerView;
+    private UpgradeAdapter upgradeAdapter;
+    private List<Upgrade> upgradeList;
 
-    public LayerFragment() {
+    public UpgradeFragment() {
         // Required empty public constructor
     }
 
-
-    public static LayerFragment newInstance() {
-        LayerFragment fragment = new LayerFragment();
+    public static UpgradeFragment newInstance(){
+        UpgradeFragment fragment = new UpgradeFragment();
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_layer, container, false);
+        View rootview = inflater.inflate(R.layout.fragment_upgrade,container,false);
 
-        layerRecycleView = (RecyclerView) view.findViewById(R.id.layer_recycle_view);
+        upgradeList = new ArrayList<Upgrade>();
+        upgradeList.add(new Upgrade("food",10,false));
+        upgradeList.add(new Upgrade("water",10,false));
+        upgradeList.add(new Upgrade("house",10,false));
+
+        upgradeRecyclerView = (RecyclerView)rootview.findViewById(R.id.upgrade_list);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        layerRecycleView.setLayoutManager(mLayoutManager);
-        layerRecycleView.setAdapter(new LayerAdapter(Game.getInstance().getLayers()));
-        layerRecycleView.setNestedScrollingEnabled(false);
+        upgradeRecyclerView.setLayoutManager(mLayoutManager);
 
-        return view;
+        upgradeAdapter = new UpgradeAdapter(upgradeList);
+        upgradeRecyclerView.setAdapter(upgradeAdapter);
+
+        upgradeRecyclerView.setNestedScrollingEnabled(false);
+
+        return rootview;
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);

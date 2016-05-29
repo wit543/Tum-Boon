@@ -8,6 +8,7 @@ public class Upgrade {
     private String name;
     private double multiplier;
     private boolean bought;
+    private double price;
 
     public Upgrade(String name , double multiplier , boolean bought){
         this.name = name;
@@ -38,4 +39,6 @@ public class Upgrade {
     public void setBought(boolean bought) {
         this.bought = bought;
     }
+
+    public double getprice() {return price;}
 }
