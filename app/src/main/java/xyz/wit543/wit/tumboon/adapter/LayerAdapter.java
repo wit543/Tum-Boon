@@ -65,7 +65,8 @@ public class LayerAdapter extends RecyclerView.Adapter<LayerAdapter.LayerRecycle
                 Game game = Game.getInstance();
                 double layerPrice = Math.floor(layer.getBasePrice()*Math.pow(1.15f,layer.getLevel()-1));
                 if(game.getMoney()>=layerPrice){
-                    game.decreaseMoney(layerPrice);
+                    //game.spend(layerPrice);
+                    game.spend(layerPrice);
                     layer.increaseLevel();
                     notifyDataSetChanged();
                 }

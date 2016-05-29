@@ -15,6 +15,7 @@ import java.util.List;
 
 import xyz.wit543.wit.tumboon.R;
 import xyz.wit543.wit.tumboon.adapter.LayerAdapter;
+import xyz.wit543.wit.tumboon.adapter.LayerManagerAdapter;
 import xyz.wit543.wit.tumboon.model.Game;
 import xyz.wit543.wit.tumboon.model.Layer;
 
@@ -23,6 +24,7 @@ public class LayerFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private RecyclerView layerRecycleView;
+    private LayerManagerAdapter layerManagerAdapter;
 
     public LayerFragment() {
         // Required empty public constructor
@@ -37,7 +39,8 @@ public class LayerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Game game = Game.getInstance();
+        layerManagerAdapter = new LayerManagerAdapter(game.getLayerManagers());
     }
 
     @Override
@@ -50,9 +53,9 @@ public class LayerFragment extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layerRecycleView.setLayoutManager(mLayoutManager);
-        Game game = Game.getInstance();
-        System.out.printf("\n"+game.getLayers().size());
-        layerRecycleView.setAdapter(new LayerAdapter(game.getLayers()));
+
+//        layerRecycleView.setAdapter(new LayerAdapter(game.getLayers()));
+        layerRecycleView.setAdapter(layerManagerAdapter);
         layerRecycleView.setNestedScrollingEnabled(false);
 
         return view;
@@ -74,6 +77,10 @@ public class LayerFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+    }
+
+    public void update(){
+        layerManagerAdapter.notifyDataSetChanged();
     }
 
     @Override
