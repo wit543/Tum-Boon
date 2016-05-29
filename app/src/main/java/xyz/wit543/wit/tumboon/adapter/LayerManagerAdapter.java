@@ -74,22 +74,25 @@ public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapte
         });
         holder.buyButton.setText("UPGRADE: "+layer.getPrice());
 
-        final ProgressBar progressBar = holder.progressBar;
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (layer.getProductionTime()>100){
-                    try{
-                        Thread.sleep(10);
-                        progressBar.setProgress(calculateProcess(layer));}
-                    catch (Exception e){
+        //System.out.println("LEVEL ISsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+ layer.getLevel());
+        if(layer.getLevel()>0) {
+            final ProgressBar progressBar = holder.progressBar;
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (layer.getProductionTime() > 100) {
+                        try {
+                            Thread.sleep(10);
+                            progressBar.setProgress(calculateProcess(layer));
+                        } catch (Exception e) {
 
+                        }
                     }
+                    progressBar.setProgress(100);
                 }
-                progressBar.setProgress(100);
-            }
-        });
-        t.start();
+            });
+            t.start();
+        }
     }
 
     @Override

@@ -11,7 +11,7 @@ public class LayerManager {
 
     public LayerManager(Layer layer , int level){
         this.layer = layer;
-        this.level = 0;
+        this.level = level;
         nextProduceTime = System.currentTimeMillis()+ this.getProductionTime().longValue();
     }
 
@@ -64,7 +64,14 @@ public class LayerManager {
     }
 
     public void increaseLevel(){
+        if(level==0)
+
+
         level++;
+    }
+
+    public void startProduce(){
+        nextProduceTime = System.currentTimeMillis();
     }
 
     public double produce(){

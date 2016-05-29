@@ -27,8 +27,8 @@ public class Game {
         layers.add(new Layer("Car" , 1 ,1000,100 , 1000));
         layers.add(new Layer("Helicopter" , 1 ,3000, 200 , 3000));
         layerManagers = new ArrayList<LayerManager>();
-        layerManagers.add(new LayerManager(new Layer("Car" , 1 ,1000,100 , 1000) , 1));
-        layerManagers.add(new LayerManager(new Layer("Helicopter" , 1 ,3000, 200 , 3000),1));
+        layerManagers.add(new LayerManager(new Layer("Car" , 1 ,1000,100 , 1000) , 0));
+        layerManagers.add(new LayerManager(new Layer("Helicopter" , 1 ,3000, 200 , 3000),0));
         multiplier = new Multiplier(5000,10000,4);
         money = 10000;
     }
