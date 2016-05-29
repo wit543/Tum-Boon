@@ -7,8 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import xyz.wit543.wit.tumboon.R;
+import xyz.wit543.wit.tumboon.model.Game;
+import xyz.wit543.wit.tumboon.model.Multiplier;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +31,10 @@ public class TopUpFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private TextView currentMultiplier;
+    private TextView remainingTime;
+    private Button randomButton;
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,8 +72,35 @@ public class TopUpFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_top_up, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_top_up, container, false);
+        Game game = Game.getInstance();
+
+        randomButton = (Button)view.findViewById(R.id.random_button);
+        currentMultiplier = (TextView) view.findViewById(R.id.current_multiplier);
+        remainingTime = (TextView) view.findViewById(R.id.remaining_time);
+
+        randomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Game.getInstance().setNewMultiplier();
+            }
+        });
+        return view;
+    }
+
+    public void update(){
+        Game game = Game.getInstance();
+        Multiplier multiplier = game.getMultiplier();
+        if(remainingTime!=null && currentMultiplier!=null){
+            if(multiplier!=null){
+                remainingTime.setText("Remaining Time: "+multiplier.getRemainingTime());
+                currentMultiplier.setText("Current Multiplier: "+multiplier.getDescription());
+            }else{
+                remainingTime.setText("Remaining Time: "+0);
+                currentMultiplier.setText("Current Multiplier: "+0);
+            }
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -1,13 +1,66 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context="xyz.wit543.wit.tumboon.fragment.TopUpFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/multiplier_subject"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:text="MULTIPLIER"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/current_multiplier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/multiplier_subject"
+        android:text="Current Multiplier: "
+        android:textSize="20dp"
+        />
+
+    <TextView
+        android:id="@+id/remaining_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/current_multiplier"
+        android:text="Remaining Time: "
+        android:textSize="20dp"
+        />
+
+    <RelativeLayout
+        android:layout_below="@id/remaining_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:background="#000000"
+        android:id="@+id/linearLayout"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:id="@+id/randomHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RANDOM NEW"
+            android:textSize="40dp"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"
+            />
+
+        <Button
+            android:id="@+id/random_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ใบ้หวย"
+            android:layout_below="@+id/randomHeader"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+
+</RelativeLayout>
