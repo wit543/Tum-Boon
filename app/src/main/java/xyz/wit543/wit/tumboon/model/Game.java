@@ -30,7 +30,7 @@ public class Game {
         layerManagers.add(new LayerManager(new Layer("Car" , 1 ,1000,100 , 1000) , 0));
         layerManagers.add(new LayerManager(new Layer("Helicopter" , 1 ,3000, 200 , 3000),0));
         multiplier = new Multiplier(5000,10000,4);
-        money = 10000;
+        money = 1000;
     }
 
     public static Game getInstance(){

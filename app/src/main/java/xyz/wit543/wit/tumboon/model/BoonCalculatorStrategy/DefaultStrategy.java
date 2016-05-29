@@ -30,9 +30,11 @@ public class DefaultStrategy implements CalculateStrategy{
         int outcome=0;
         for(int i=0 ; i<layers.size(); i++){
             LayerManager l = layers.get(i);
-            if(currentTime>=l.getNextProduceTime()){
-                outcome+=l.produce();
-//                //System.out.printf("GET %d FROM %s AT %d NEXT PRODUCE TIME IS %d \n",l.getOutcome(),l.getName() , gameTime , nextProduceTimes[i]);
+            if(l.canProduce()){
+                if(currentTime>=l.getNextProduceTime()){
+                    outcome+=l.produce();
+    //                //System.out.printf("GET %d FROM %s AT %d NEXT PRODUCE TIME IS %d \n",l.getOutcome(),l.getName() , gameTime , nextProduceTimes[i]);
+                }
             }
         }
         return outcome;

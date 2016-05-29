@@ -56,6 +56,7 @@ public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapte
     @Override
     public void onBindViewHolder(LayerManagerRecycleViewHolder holder, int position) {
         final LayerManager layer = layers.get(position);
+        final Game game = Game.getInstance();
 
         holder.name.setText(""+layer.getLayer().getName());
         holder.level.setText(""+layer.getLevel());
@@ -64,7 +65,6 @@ public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapte
         holder.buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Game game = Game.getInstance();
                 if(game.getMoney()>=layer.getPrice()){
                     game.spend(layer.getPrice());
                     layer.increaseLevel();
@@ -77,6 +77,7 @@ public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapte
         //System.out.println("LEVEL ISsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+ layer.getLevel());
         if(layer.getLevel()>0) {
             final ProgressBar progressBar = holder.progressBar;
+            final Button buyButton = holder.buyButton;
             Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -84,6 +85,12 @@ public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapte
                         try {
                             Thread.sleep(10);
                             progressBar.setProgress(calculateProcess(layer));
+//                            if(!(game.getMoney()>=layer.getPrice())){
+//                                buyButton.setText("CAN'T BUY");
+//                            }else{
+//                                buyButton.setText("UPGRADE: "+layer.getPrice());
+//                            }
+
                         } catch (Exception e) {
 
                         }
