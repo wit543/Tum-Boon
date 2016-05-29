@@ -34,6 +34,7 @@ public class Game {
         mr = new MultiplierRandomizer(multipliers);
 
         upgrades = new ArrayList<Upgrade>();
+
         layerManagers = new ArrayList<LayerManager>();
         layerManagers.add(new LayerManager(new Layer("Car" , 1 ,1000,100 , 1000) , 0));
         layerManagers.add(new LayerManager(new Layer("Helicopter" , 1 ,3000, 200 , 3000),0));
