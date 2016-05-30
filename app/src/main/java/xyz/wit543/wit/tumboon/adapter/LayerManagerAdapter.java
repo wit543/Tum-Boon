@@ -65,7 +65,7 @@ public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapte
             @Override
             public void onClick(View v) {
                 if(game.getMoney()>=layer.getPrice()){
-                    game.spendBoon(layer.getPrice());
+                    game.spend(layer.getPrice());
                     layer.increaseLevel();
                     notifyDataSetChanged();
                 }
