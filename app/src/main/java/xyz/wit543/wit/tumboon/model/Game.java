@@ -34,10 +34,14 @@ public class Game {
         mr = new MultiplierRandomizer(multipliers);
 
         upgrades = new ArrayList<Upgrade>();
-
         layerManagers = new ArrayList<LayerManager>();
         layerManagers.add(new LayerManager(new Layer("Car" , 1 ,1000,100 , 1000) , 0));
         layerManagers.add(new LayerManager(new Layer("Helicopter" , 1 ,3000, 200 , 3000),0));
+
+        upgrades.add(new Upgrade("car","BMW",0,false,1000));
+        upgrades.add(new Upgrade("water","klong",0,false,2000));
+        upgrades.add(new Upgrade("house","dogdog",0,false,4000));
+
         multiplier = new Multiplier("FUCK",System.currentTimeMillis(),100000,4);
         money = 1000;
     }
@@ -47,6 +51,8 @@ public class Game {
             game = new Game();
         return game;
     }
+
+    public List<Upgrade> getUpgrades(){return upgrades;}
 
     public void setNewMultiplier(){
         multiplier = mr.randomMultiplier();
