@@ -91,7 +91,7 @@ public class TopUpFragment extends Fragment {
 
     public void update(){
         Game game = Game.getInstance();
-        Multiplier multiplier = game.getMultiplier();
+        Multiplier multiplier = game.getCurrentMultiplier();
         if(remainingTime!=null && currentMultiplier!=null){
             if(multiplier!=null){
                 remainingTime.setText("Remaining Time: "+multiplier.getRemainingTime());

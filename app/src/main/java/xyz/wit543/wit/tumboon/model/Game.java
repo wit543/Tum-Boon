@@ -5,45 +5,73 @@ package xyz.wit543.wit.tumboon.model;
  */
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 import xyz.wit543.wit.tumboon.model.util.BoonCalculator;
 import xyz.wit543.wit.tumboon.model.util.MultiplierRandomizer;
 
-public class Game {
+public class Game extends Observable{
     private static Game game;
     private List<LayerManager> layerManagers;
     private List<Map> maps;
     private List<Upgrade> upgrades;
+    private List<Multiplier> multipliers;
+
+    private double totalMoney;
     private double money;
+    private int totalFollower;
+    private int follower;
+    private int totalDisciple;
+    private int disciple;
+    private int rebirthCount;
+
     private boolean running;
     private long startTime;
-    private Multiplier multiplier;
+    private Multiplier currentMultiplier;
 
     private BoonCalculator mc;
     private MultiplierRandomizer mr;
 
     private final int DELAY = 100;
+    private final double startMoney = 1000;
 
     private Game(){
+        this.resetGame();
+    }
 
-        List<Multiplier> multipliers = new ArrayList<Multiplier>();
+    public void defineEnvironment(){
+
+        multipliers = new ArrayList<Multiplier>();
+        upgrades = new ArrayList<Upgrade>();
+        layerManagers = new ArrayList<LayerManager>();
+
         multipliers.add(new Multiplier("แสดงอภินิหาร",0,100000,4));
         multipliers.add(new Multiplier("ใบ้หวย",0,100000,2));
 
-        mc = new BoonCalculator();
-        mr = new MultiplierRandomizer(multipliers);
-
-        upgrades = new ArrayList<Upgrade>();
-        layerManagers = new ArrayList<LayerManager>();
         layerManagers.add(new LayerManager(new Layer("Car" , 1 ,1000,100 , 1000) , 0));
         layerManagers.add(new LayerManager(new Layer("Helicopter" , 1 ,3000, 200 , 3000),0));
-
         upgrades.add(new Upgrade("car","BMW",0,false,1000));
         upgrades.add(new Upgrade("water","klong",0,false,2000));
         upgrades.add(new Upgrade("house","dogdog",0,false,4000));
 
-        multiplier = new Multiplier("FUCK",System.currentTimeMillis(),100000,4);
-        money = 1000;
+        mc = new BoonCalculator();
+        mr = new MultiplierRandomizer(multipliers);
+    }
+
+    public double getFollower() {
+        return follower;
+    }
+
+    public void setFollower(int follower) {
+        this.follower = follower;
+    }
+
+    public double getDisciple() {
+        return disciple;
+    }
+
+    public void setDisciple(int disciple) {
+        this.disciple = disciple;
     }
 
     public static Game getInstance(){
@@ -55,14 +83,40 @@ public class Game {
     public List<Upgrade> getUpgrades(){return upgrades;}
 
     public void setNewMultiplier(){
-        multiplier = mr.randomMultiplier();
+        currentMultiplier = mr.randomMultiplier();
     }
 
     public void spend(double price){
         this.money-=price;
     }
 
-    public void earn(double price){ this.money+=price; }
+    public void earn(double price){
+        this.money+=price;
+        this.totalMoney+=price;
+    }
+
+    public void sacrificeFollower(int amount){
+        this.follower-=amount;
+        this.notifyObservers();
+        this.setChanged();
+    }
+
+    public void earnFollower(int amount){
+        this.follower+=amount;
+        this.totalFollower+=amount;
+        this.notifyObservers();
+        this.setChanged();
+    }
+
+    public void sacrificeDisciple(int amount){
+        this.disciple-=amount;
+    }
+
+    public void earnDisciple(int amount){
+        this.disciple+=amount;
+        this.totalDisciple+=amount;
+    }
+
 
     public void startGame(){
         running = true;
@@ -79,12 +133,12 @@ public class Game {
         thread.start();
     }
 
-    public Multiplier getMultiplier() {
-        return multiplier;
+    public Multiplier getCurrentMultiplier() {
+        return currentMultiplier;
     }
 
-    public void setMultiplier(Multiplier multiplier) {
-        this.multiplier = multiplier;
+    public void setCurrentMultiplier(Multiplier currentMultiplier) {
+        this.currentMultiplier = currentMultiplier;
     }
 
     public void update(){
@@ -92,37 +146,56 @@ public class Game {
     }
 
     public void resetGame(){
+        this.defineEnvironment();
+        totalMoney=startMoney;
+        money=startMoney;
+        totalFollower=0;
+        follower=0;
+        totalDisciple=0;
+        disciple=0;
+        rebirthCount=0;
+    }
 
+    public void rebirth(){
+        this.earnDisciple(this.follower);
+        money=startMoney;
+        follower=0;
+        rebirthCount+=1;
+//        this.defineEnvironment();
+        for(LayerManager layerManager : this.getLayerManagers()){
+            layerManager.setLevel(0);
+        }
+        for(Upgrade upgrade : this.getUpgrades()){
+            upgrade.setMultiplier(0);
+        }
+        this.notifyObservers();
+        this.setChanged();
     }
 
     public boolean hasMultiplier(){
-        if(multiplier!=null)
+        if(currentMultiplier !=null)
             return true;
         return false;
     }
 
-//    public double calculateNetBoon(){
-//        double netBoon = mc.calculateBoon(getGameTime(),layers) * getMultiplierValue();
-//        return netBoon;
-//    }
-
     public double calculateNetBoon(){
         double netBoon = mc.calculateBoon(System.currentTimeMillis(),layerManagers) * getMultiplierValue();
+        netBoon += netBoon*(this.disciple/10000);
         return netBoon;
     }
 
     public double getMultiplierValue(){
         this.updateMultiplier();
-        if(multiplier == null)
+        if(currentMultiplier == null)
             return 1;
-        return multiplier.getMultiply();
+        return currentMultiplier.getMultiply();
     }
 
     public void updateMultiplier(){
-        if(multiplier == null)
+        if(currentMultiplier == null)
             return;
-        if(multiplier.startTime+multiplier.duration < System.currentTimeMillis())
-            multiplier = null;
+        if(currentMultiplier.startTime+ currentMultiplier.duration < System.currentTimeMillis())
+            currentMultiplier = null;
     }
 
     public int getGameTime(){
