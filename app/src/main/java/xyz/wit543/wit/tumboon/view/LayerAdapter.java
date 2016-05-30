@@ -42,7 +42,7 @@ public class LayerAdapter extends ArrayAdapter<Layer> {
                 Game game = Game.getInstance();
                 double layerPrice = Math.floor(layer.getBasePrice()*Math.pow(1.15f,layer.getLevel()-1));
                 if(game.getMoney()>=layerPrice){
-                    game.spend(layerPrice);
+                    game.spendBoon(layerPrice);
                     layer.increaseLevel();
                     notifyDataSetChanged();
                 }

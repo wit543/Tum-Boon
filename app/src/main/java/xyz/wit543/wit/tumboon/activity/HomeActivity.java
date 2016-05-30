@@ -15,6 +15,8 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.util.Observer;
+
 import xyz.wit543.wit.tumboon.R;
 import xyz.wit543.wit.tumboon.adapter.ViewPagerAdapter;
 import xyz.wit543.wit.tumboon.fragment.LayerFragment;
@@ -24,7 +26,7 @@ import xyz.wit543.wit.tumboon.model.Game;
 import xyz.wit543.wit.tumboon.view.LayerAdapter;
 
 public class HomeActivity extends AppCompatActivity implements  LayerFragment.OnFragmentInteractionListener
-,TopUpFragment.OnFragmentInteractionListener , UpgradeFragment.OnFragmentInteractionListener{
+,TopUpFragment.OnFragmentInteractionListener , UpgradeFragment.OnFragmentInteractionListener {
 
     private TextView boonLabel;
     private ListView layerList;
@@ -62,6 +64,7 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
                             public void run() {
                                 boonLabel.setText("" + game.getMoney());
                                 topUpFragment.update();
+                                game.update();
                             }
                         });
                     }
@@ -125,9 +128,6 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
                 viewPager.setCurrentItem(2);
             }
         });
-
-
-
         //TODO set all button
         game.startGame();
 
@@ -137,8 +137,6 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
     public void onStart() {
         super.onStart();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
 //        client.connect();
 //        Action viewAction = Action.newAction(
 //                Action.TYPE_VIEW, // TODO: choose an action type.

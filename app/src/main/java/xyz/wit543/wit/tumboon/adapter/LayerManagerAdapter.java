@@ -13,7 +13,6 @@ import java.util.List;
 
 import xyz.wit543.wit.tumboon.R;
 import xyz.wit543.wit.tumboon.model.Game;
-import xyz.wit543.wit.tumboon.model.Layer;
 import xyz.wit543.wit.tumboon.model.LayerManager;
 
 /**
@@ -66,7 +65,7 @@ public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapte
             @Override
             public void onClick(View v) {
                 if(game.getMoney()>=layer.getPrice()){
-                    game.spend(layer.getPrice());
+                    game.spendBoon(layer.getPrice());
                     layer.increaseLevel();
                     notifyDataSetChanged();
                 }

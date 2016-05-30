@@ -35,28 +35,36 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
-        android:background="#fa733e"
+        android:background="#d8ff7e4f"
         android:id="@+id/linearLayout">
         <ImageButton
             android:id="@+id/layer_menu_button"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/home_btt"
             android:background="@null"/>
         <ImageButton
             android:id="@+id/upgrade_menu_button"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/upgrade_btt"
             android:background="@null"/>
         <ImageButton
             android:id="@+id/convert_menu_button"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/multi_btt"
             android:background="@null"/>
         <ImageButton
             android:id="@+id/multiplier_menu_button"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/multi_btt"
