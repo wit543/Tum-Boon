@@ -1,6 +1,5 @@
 package xyz.wit543.wit.tumboon.activity;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -19,12 +18,12 @@ import xyz.wit543.wit.tumboon.R;
 import xyz.wit543.wit.tumboon.adapter.ViewPagerAdapter;
 import xyz.wit543.wit.tumboon.fragment.LayerFragment;
 import xyz.wit543.wit.tumboon.fragment.TopUpFragment;
+import xyz.wit543.wit.tumboon.fragment.RebirthFragment;
 import xyz.wit543.wit.tumboon.fragment.UpgradeFragment;
 import xyz.wit543.wit.tumboon.model.Game;
-import xyz.wit543.wit.tumboon.view.LayerAdapter;
 
 public class HomeActivity extends AppCompatActivity implements  LayerFragment.OnFragmentInteractionListener
-,TopUpFragment.OnFragmentInteractionListener , UpgradeFragment.OnFragmentInteractionListener{
+,TopUpFragment.OnFragmentInteractionListener , UpgradeFragment.OnFragmentInteractionListener , RebirthFragment.OnFragmentInteractionListener{
 
     private TextView boonLabel;
     private ListView layerList;
@@ -38,13 +37,13 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
     private LayerFragment layerFragment;
     private UpgradeFragment upgradeFragment;
     private TopUpFragment topUpFragment;
+    private RebirthFragment rebirthFragment;
 
     private GoogleApiClient client;
     private ImageButton layerFragmentButton;
     private ImageButton topUpFragmentButton;
     private ImageButton upgradeFragmentButton;
-    private ImageButton mutiplierFragmentButton;
-    private ImageButton convertFragmentButton;
+    private ImageButton tranformFragmentButton;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +61,7 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
                             public void run() {
                                 boonLabel.setText("" + game.getMoney());
                                 topUpFragment.update();
+                                game.update();
                             }
                         });
                     }
@@ -90,8 +90,15 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
         upgradeFragment = new UpgradeFragment();
         topUpFragment = new TopUpFragment();
 
+
+
+        rebirthFragment = new RebirthFragment();
+
+        System.out.print("FUCK");
+
         viewPagerAdapter.addFragment(layerFragment);
         viewPagerAdapter.addFragment(upgradeFragment);
+        viewPagerAdapter.addFragment(rebirthFragment);
         viewPagerAdapter.addFragment(topUpFragment);
         //TODO add all fragment
         viewPager.setAdapter(viewPagerAdapter);
@@ -118,14 +125,21 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
             }
         });
 
-        convertFragmentButton = (ImageButton) findViewById(R.id.convert_menu_button);
-        convertFragmentButton.setOnClickListener(new View.OnClickListener() {
+        tranformFragmentButton = (ImageButton) findViewById(R.id.tranform_menu_button);
+        tranformFragmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 viewPager.setCurrentItem(2);
             }
         });
 
+        topUpFragmentButton = (ImageButton) findViewById(R.id.top_up_menu_button);
+        topUpFragmentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewPager.setCurrentItem(3);
+            }
+        });
 
 
         //TODO set all button
@@ -137,8 +151,6 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
     public void onStart() {
         super.onStart();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
 //        client.connect();
 //        Action viewAction = Action.newAction(
 //                Action.TYPE_VIEW, // TODO: choose an action type.

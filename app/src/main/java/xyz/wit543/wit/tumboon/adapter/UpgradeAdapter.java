@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import xyz.wit543.wit.tumboon.R;
+import xyz.wit543.wit.tumboon.model.Game;
 import xyz.wit543.wit.tumboon.model.Upgrade;
 
 /**
@@ -43,10 +44,25 @@ public class UpgradeAdapter extends RecyclerView.Adapter<UpgradeAdapter.UpgradeR
         return new UpgradeRecycleViewHolder(v);
     }
     public void onBindViewHolder(UpgradeRecycleViewHolder holder,int position){
-        holder.name.setText(""+upgrades.get(position).getName());
-        holder.stat.setText(""+upgrades.get(position).getMultiplier());
-        holder.upgradeButton.setText(String.valueOf(upgrades.get(position).getprice()));
+        final Upgrade upgrade = upgrades.get(position);
+        final Game game = Game.getInstance();
 
+        holder.name.setText(""+upgrade.getUpName());
+        holder.stat.setText(""+upgrade.getMultiplier());
+        holder.upgradeButton.setText(String.valueOf(upgrades.get(position).getprice()));
+        holder.upgradeButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if(game.getMoney()>=upgrade.getprice()){
+                    game.spend(upgrade.getprice());
+                    upgrade.upPrice();
+                    System.out.println("");
+                    notifyDataSetChanged();
+                }
+            }
+        });
+        holder.stat.setText(""+upgrade.getMultiplier()+"%");
+        holder.upgradeButton.setText(""+upgrade.getprice());
     }
 
     public int getItemCount() {

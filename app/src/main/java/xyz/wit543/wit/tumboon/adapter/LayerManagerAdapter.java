@@ -13,7 +13,6 @@ import java.util.List;
 
 import xyz.wit543.wit.tumboon.R;
 import xyz.wit543.wit.tumboon.model.Game;
-import xyz.wit543.wit.tumboon.model.Layer;
 import xyz.wit543.wit.tumboon.model.LayerManager;
 
 /**
