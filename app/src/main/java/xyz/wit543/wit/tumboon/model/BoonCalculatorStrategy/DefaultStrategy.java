@@ -29,6 +29,7 @@ public class DefaultStrategy implements CalculateStrategy{
 
         int outcome=0;
         for(int i=0 ; i<layers.size(); i++){
+
             LayerManager l = layers.get(i);
             if(l.canProduce()){
                 if(currentTime>=l.getNextProduceTime()){

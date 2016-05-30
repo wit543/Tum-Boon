@@ -15,6 +15,9 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import xyz.wit543.wit.tumboon.R;
 import xyz.wit543.wit.tumboon.adapter.ViewPagerAdapter;
 import xyz.wit543.wit.tumboon.fragment.LayerFragment;
@@ -24,9 +27,10 @@ import xyz.wit543.wit.tumboon.model.Game;
 import xyz.wit543.wit.tumboon.view.LayerAdapter;
 
 public class HomeActivity extends AppCompatActivity implements  LayerFragment.OnFragmentInteractionListener
-,TopUpFragment.OnFragmentInteractionListener , UpgradeFragment.OnFragmentInteractionListener{
+,TopUpFragment.OnFragmentInteractionListener , UpgradeFragment.OnFragmentInteractionListener,Observer{
 
     private TextView boonLabel;
+    private TextView followerLabel;
     private ListView layerList;
     private Game game;
     private ViewPager viewPager;
@@ -80,9 +84,11 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
 
     private void initialize() {
         boonLabel = (TextView) findViewById(R.id.boon);
+        followerLabel = (TextView) findViewById(R.id.follower);
         //layerList = (ListView) findViewById(R.id.layerLists);
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         game = Game.getInstance();
+        game.addObserver(this);
         //layerList.setAdapter(new LayerAdapter(this, R.layout.layer_cell, game.getLayers()));
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
@@ -176,5 +182,10 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    public void update(Observable observable, Object data) {
+        followerLabel.setText(""+Game.getInstance().getFollower());
     }
 }
