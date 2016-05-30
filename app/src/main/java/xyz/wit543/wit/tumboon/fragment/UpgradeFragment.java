@@ -17,6 +17,7 @@ import java.util.List;
 
 import xyz.wit543.wit.tumboon.R;
 import xyz.wit543.wit.tumboon.adapter.UpgradeAdapter;
+import xyz.wit543.wit.tumboon.model.Game;
 import xyz.wit543.wit.tumboon.model.Upgrade;
 
 /**
@@ -49,10 +50,7 @@ public class UpgradeFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_upgrade,container,false);
 
-        upgradeList = new ArrayList<Upgrade>();
-        upgradeList.add(new Upgrade("food",10,false));
-        upgradeList.add(new Upgrade("water",10,false));
-        upgradeList.add(new Upgrade("house",10,false));
+        upgradeList = Game.getInstance().getUpgrades();
 
         upgradeRecyclerView = (RecyclerView)rootview.findViewById(R.id.upgrade_list);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());

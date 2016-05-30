@@ -8,6 +8,7 @@ public class LayerManager {
     private int level;
     private long nextProduceTime;
     private long startTime;
+    private double upgrade;
     private static final int speedIncreasePerSec = 10;
 
     public LayerManager(Layer layer , int level){
@@ -15,6 +16,15 @@ public class LayerManager {
         this.level = level;
         nextProduceTime = System.currentTimeMillis()+ this.getProductionTime().longValue();
         startTime = System.currentTimeMillis();
+        upgrade = 0;
+    }
+
+    public double getUpgrade() {
+        return upgrade;
+    }
+
+    public void setUpgrade(double upgrade) {
+        this.upgrade = upgrade;
     }
 
     public Double getProductionTime(){
