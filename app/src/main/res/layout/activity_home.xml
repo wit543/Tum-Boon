@@ -54,7 +54,7 @@
             android:src="@drawable/upgrade_btt"
             android:background="@null"/>
         <ImageButton
-            android:id="@+id/convert_menu_button"
+            android:id="@+id/tranform_menu_button"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
             android:src="@drawable/multi_btt"
             android:background="@null"/>
         <ImageButton
-            android:id="@+id/multiplier_menu_button"
+            android:id="@+id/top_up_menu_button"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_width="wrap_content"
