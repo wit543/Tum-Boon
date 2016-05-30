@@ -5,11 +5,12 @@ package xyz.wit543.wit.tumboon.model;
  */
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 import xyz.wit543.wit.tumboon.model.util.BoonCalculator;
 import xyz.wit543.wit.tumboon.model.util.MultiplierRandomizer;
 
-public class Game {
+public class Game extends Observable{
     private static Game game;
     private List<LayerManager> layerManagers;
     private List<Map> maps;
@@ -18,11 +19,11 @@ public class Game {
 
     private double totalMoney;
     private double money;
-    private double totalFollower;
-    private double follower;
-    private double totalDisciple;
-    private double disciple;
-    private double rebirthCount;
+    private int totalFollower;
+    private int follower;
+    private int totalDisciple;
+    private int disciple;
+    private int rebirthCount;
 
     private boolean running;
     private long startTime;
@@ -57,7 +58,21 @@ public class Game {
         mr = new MultiplierRandomizer(multipliers);
     }
 
+    public double getFollower() {
+        return follower;
+    }
 
+    public void setFollower(int follower) {
+        this.follower = follower;
+    }
+
+    public double getDisciple() {
+        return disciple;
+    }
+
+    public void setDisciple(int disciple) {
+        this.disciple = disciple;
+    }
 
     public static Game getInstance(){
         if(game==null)
@@ -82,11 +97,15 @@ public class Game {
 
     public void sacrificeFollower(int amount){
         this.follower-=amount;
+        this.notifyObservers();
+        this.setChanged();
     }
 
     public void earnFollower(int amount){
         this.follower+=amount;
         this.totalFollower+=amount;
+        this.notifyObservers();
+        this.setChanged();
     }
 
     public void sacrificeDisciple(int amount){
@@ -138,14 +157,19 @@ public class Game {
     }
 
     public void rebirth(){
+        this.earnDisciple(this.follower);
         money=startMoney;
         follower=0;
-        disciple=0;
         rebirthCount+=1;
 //        this.defineEnvironment();
         for(LayerManager layerManager : this.getLayerManagers()){
             layerManager.setLevel(0);
         }
+        for(Upgrade upgrade : this.getUpgrades()){
+            upgrade.setMultiplier(0);
+        }
+        this.notifyObservers();
+        this.setChanged();
     }
 
     public boolean hasMultiplier(){
@@ -154,13 +178,9 @@ public class Game {
         return false;
     }
 
-//    public double calculateNetBoon(){
-//        double netBoon = mc.calculateBoon(getGameTime(),layers) * getMultiplierValue();
-//        return netBoon;
-//    }
-
     public double calculateNetBoon(){
         double netBoon = mc.calculateBoon(System.currentTimeMillis(),layerManagers) * getMultiplierValue();
+        netBoon += netBoon*(this.disciple/10000);
         return netBoon;
     }
 
