@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import xyz.wit543.wit.tumboon.R;
+import xyz.wit543.wit.tumboon.model.Game;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,8 +72,7 @@ public class RebirthFragment extends Fragment {
         builder.setMessage("Are you sure?");
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                // Do nothing but close the dialog
-
+                Game.getInstance().rebirth();
                 dialog.dismiss();
             }
         });
