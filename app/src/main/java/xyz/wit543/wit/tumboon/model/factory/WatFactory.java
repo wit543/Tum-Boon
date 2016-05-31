@@ -12,33 +12,6 @@ import xyz.wit543.wit.tumboon.model.MapConstant;
  * Created by WIT on 26-May-16.
  */
 public class WatFactory extends LayerAbstractFactory {
-//    static final double WAT_DONATE_MONEY_LAYER_BASE_OUTCOME = 10;
-//    static final int WAT_DONATE_MONEY_LAYER_PRODUCTION_TIME= 10;
-//    static final String WAT_DONATE_MONEY_LAYER_NAME = "Donate Money";
-//
-//    static final double WAT_DONATE_LAND_LAYER_BASE_OUTCOME=10;
-//    static final int WAT_DONATE_LAND_LAYER_PRODUCTION_TIME=10;
-//    static final String WAT_DONATE_LAND_LAYER_NAME = "Donate Land";
-//
-//    static final double WAT_DONATE_CAR_LAYER_BASE_OUTCOME=10;
-//    static final int WAT_DONATE_CAR_LAYER_PRODUCTION_TIME=10;
-//    static final String WAT_DONATE_CAR_LAYER_NAME = "Donate Car";
-//
-//    static final double WAT_DONATE_AIRPLANE_LAYER_BASE_OUTCOME=10;
-//    static final int WAT_DONATE_AIRPLANE_LAYER_PRODUCTION_TIME=10;
-//    static final String WAT_DONATE_AIRPLANE_LAYER_NAME = "Donate Airplane";
-//
-//    static final double WAT_PARADE_LAYER_BASE_OUTCOME=10;
-//    static final int WAT_PARADE_LAYER_PRODUCTION_TIME=10;
-//    static final String WAT_OARADE_LAYER_LAYER_NAME = "Parade";
-//
-//    static final double WAT_SOUVENIR_SHOP_LAYER_BASE_OUTCOME=10;
-//    static final int WAT_SOUVENIR_SHOP_LAYER_PRODUCTION_TIME=10;
-//    static final String WAT_SOUVENIR_SHOP_LAYER_NAME = "Souvenir";
-//
-//    static final double WAT_PR_LAYER_BASE_OUTCOME=10;
-//    static final int WAT_PR_LAYER_PRODUCTION_TIME=10;
-//    static final String WAT_PR_LAYER_NAME = "PR";
 
     private MapConstant wat = MapConstant.WAT;
 
@@ -86,44 +59,3 @@ public class WatFactory extends LayerAbstractFactory {
     }
 
 }
-//    @Override
-//    public Layer createDonateMoneyLayer() {
-//        return standardLayerCreator(wat.DONATE_MONEY_LAYER);
-//    }
-//
-//    @Override
-//    public Layer createDonateLandLayer() {
-//        return standardLayerCreator(wat.DONATE_LAND_LAYER);
-//
-//    }
-//    @Override
-//    public Layer createDonateCarLayer() {
-//        return standardLayerCreator(wat.DONATE_CAR_LAYER);
-//    }
-//
-//    @Override
-//    public Layer createDonateAirplaneLayer() {
-//        return standardLayerCreator(wat.DONATE_AIRPLANE_LAYER);
-//
-//    }
-//
-//    @Override
-//    public Layer createParadeLayer() {
-//        return standardLayerCreator(wat.PARADE_LAYER);
-//    }
-//
-//    @Override
-//    public Layer createSouvenirShopLayer() {
-//        return standardLayerCreator(wat.SOUVENIR_SHOP_LAYER);
-//    }
-//
-//    @Override
-//    public Layer createPRLayer() {
-//        return standardLayerCreator(wat.PR_LAYER);
-//<<<<<<< HEAD:app/src/main/java/xyz/wit543/wit/tumboon/model/factory/WatFactory.java
-////    }
-//}
-//=======
-//    }
-//
-//>>>>>>> origin/Momo:app/src/main/java/xyz/wit543/wit/tumboon/model/WatFactory.java

@@ -38,7 +38,6 @@ public class Game extends Observable{
     private MultiplierRandomizer mr;
     private LayerAbstractFactory layerFactory;
 
-    private final int DELAY = 100;
     private final double startMoney = 1000;
 
     private Game(){
@@ -51,22 +50,16 @@ public class Game extends Observable{
         multipliers = new ArrayList<Multiplier>();
         upgrades = new ArrayList<Upgrade>();
         layerManagers = layerFactory.getAllLayer();
-        //layerManagers = new ArrayList<LayerManager>();
 
         multipliers.add(new Multiplier("แสดงอภินิหาร",0,100000,4));
         multipliers.add(new Multiplier("ใบ้หวย",0,100000,2));
 
+        upgrades.add(new Upgrade("money","BMW",1000));
+        upgrades.add(new Upgrade("water","klong",2000));
+        upgrades.add(new Upgrade("house","dogdog",4000));
 
-//        layerManagers.add(new LayerManager(new Layer("Car"  ,1000,100 , 1000) , 0));
-//        layerManagers.add(new LayerManager(new Layer("Helicopter" ,3000, 200 , 3000),0));
-
-        upgrades.add(new Upgrade("money","BMW",0,false,1000));
-        upgrades.add(new Upgrade("water","klong",0,false,2000));
-        upgrades.add(new Upgrade("house","dogdog",0,false,4000));
-
-        mc = new BoonCalculator(this.layerManagers);
+        mc = new BoonCalculator();
         mr = new MultiplierRandomizer(multipliers);
-
 
     }
 
@@ -111,8 +104,6 @@ public class Game extends Observable{
     public void earnBoon(double amount){
         this.money+=amount;
         this.totalMoney+=amount;
-//        notifyObservers();
-//        setChanged();
     }
 
     public void sacrificeFollower(int amount){
@@ -147,10 +138,6 @@ public class Game extends Observable{
         return currentMultiplier;
     }
 
-    public void setCurrentMultiplier(Multiplier currentMultiplier) {
-        this.currentMultiplier = currentMultiplier;
-    }
-
     public void update(){
         this.earnBoon(calculateNetBoon());
     }
@@ -171,7 +158,7 @@ public class Game extends Observable{
         money=startMoney;
         follower=0;
         rebirthCount+=1;
-//        this.defineEnvironment();
+
         for(LayerManager layerManager : this.getLayerManagers()){
             layerManager.setLevel(0);
         }
@@ -206,10 +193,6 @@ public class Game extends Observable{
             return;
         if(currentMultiplier.startTime+ currentMultiplier.duration < System.currentTimeMillis())
             currentMultiplier = null;
-    }
-
-    public int getGameTime(){
-        return (int) (System.currentTimeMillis() - startTime);
     }
 
     public List<LayerManager> getLayerManagers(){
@@ -250,12 +233,64 @@ public class Game extends Observable{
         this.mc = mc;
     }
 
-    public void delay(){
-        try {
-            Thread.sleep(DELAY);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    public Mememto saveState(){
+        int[] layerLevel = new int[layerManagers.size()];
+        int[] upgradesCount = new int[upgrades.size()];
+        for(int i=0; i<layerManagers.size();i++){
+            layerLevel[i] = layerManagers.get(i).getLevel();
+        }
+        for(int i=0; i<upgrades.size();i++){
+            upgradesCount[i] = upgrades.get(i).getUpgradeCount();
+        }
+        return new Mememto(totalMoney,money,totalFollower,follower,totalDisciple,disciple , layerLevel,upgradesCount);
+    }
+
+    public void restore(Mememto m){
+        this.totalMoney = m.totalMoney;
+        this.money = m.money;
+        this.totalFollower = m.totalFollower;
+        this.follower = m.follower;
+        this.totalDisciple = m.disciple;
+        this.disciple = m.disciple;
+        int[] layerLevel = m.layerLevel;
+        int[] upgradeCount = m.upgradeLevel;
+
+        if(layerLevel!=null){
+            for(int i=0 ; i<layerManagers.size();i++){
+                layerManagers.get(i).setLevel(layerLevel[i]);
+            }
+        }
+        if(upgradeCount!=null){
+            for(int i=0; i<upgrades.size();i++){
+                for(int j=0; j<upgradeCount[i];j++){
+                    upgrades.get(i).upPrice();
+                }
+            }
         }
     }
 
+
+    public static class Mememto {
+        private double totalMoney;
+        private double money;
+        private int totalFollower;
+        private int follower;
+        private int totalDisciple;
+        private int disciple;
+        private int[] layerLevel;
+        private int[] upgradeLevel;
+
+        private Mememto(double totalMoney ,double money ,int totalFollower ,int follower ,int totalDisciple ,int disciple ,int[] layerLevel , int[] upgradeLevel ){
+
+            this.totalMoney = totalMoney;
+            this.money = money;
+            this.totalFollower =  totalFollower;
+            this.follower = follower;
+            this.totalDisciple = totalDisciple;
+            this.disciple = disciple;
+            this.layerLevel = layerLevel;
+            this.upgradeLevel = upgradeLevel;
+        }
+
+    }
 }

@@ -1,5 +1,7 @@
 package xyz.wit543.wit.tumboon.activity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.gson.Gson;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -30,7 +33,6 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
 ,TopUpFragment.OnFragmentInteractionListener , UpgradeFragment.OnFragmentInteractionListener , RebirthFragment.OnFragmentInteractionListener ,Observer{
 
     private TextView boonLabel;
-    private ListView layerList;
     private TextView followerLabel;
 
     private Game game;
@@ -50,12 +52,14 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
     private ImageButton topUpFragmentButton;
     private ImageButton upgradeFragmentButton;
     private ImageButton tranformFragmentButton;
-    @Override
+
+    private final String saveGameKey = "saveGameKey";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         this.initialize();
+        this.loadSave();
         Thread t = new Thread() {
             @Override
             public void run() {
@@ -74,12 +78,7 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
                 }
             }
         };
-
         t.start();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private void updateUI(){
@@ -87,6 +86,16 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
         game.update();
         boonLabel.setText(BoonUnitTranformer.getReadableValue(Game.getInstance().getMoney()));
         followerLabel.setText(""+Game.getInstance().getFollower());
+    }
+
+    private void loadSave(){
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPref.getString(saveGameKey, "");
+        Game.Mememto m = gson.fromJson(json, Game.Mememto.class);
+        if(m!=null){
+            game.restore(m);
+        }
     }
 
     private void initialize() {
@@ -179,21 +188,18 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
     @Override
     public void onStop() {
         super.onStop();
+//        String save = ""+Game.getInstance().getMoney();
+//        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPref.edit();
+//        editor.putString(saveGameKey,save);
+//        editor.commit();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-//        Action viewAction = Action.newAction(
-//                Action.TYPE_VIEW, // TODO: choose an action type.
-//                "Home Page", // TODO: Define a title for the content shown.
-//                // TODO: If you have web page content that matches this app activity's content,
-//                // make sure this auto-generated web page URL is correct.
-//                // Otherwise, set the URL to null.
-//                Uri.parse("http://host/path"),
-//                // TODO: Make sure this auto-generated app URL is correct.
-//                Uri.parse("android-app://xyz.wit543.wit.tumboon.activity/http/host/path")
-//        );
-//        AppIndex.AppIndexApi.end(client, viewAction);
-//        client.disconnect();
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(Game.getInstance().saveState());
+        editor.putString(saveGameKey, json);
+        editor.commit();
     }
 
     @Override

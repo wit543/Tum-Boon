@@ -14,12 +14,9 @@ import xyz.wit543.wit.tumboon.model.LayerManager;
 public class BoonCalculator{
 
     private CalculateStrategy calculateStrategy;
-    private List<LayerManager> layerManagers;
-    private final int DELAY = 100;
 
-    public BoonCalculator(List<LayerManager> layerManagers){
+    public BoonCalculator(){
         calculateStrategy = DefaultStrategy.getInstance();
-        this.layerManagers = layerManagers;
     }
 
     public void setStrategy(CalculateStrategy calculateStrategy){
