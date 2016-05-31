@@ -1,6 +1,11 @@
 package xyz.wit543.wit.tumboon.model.factory;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import xyz.wit543.wit.tumboon.R;
 import xyz.wit543.wit.tumboon.model.Layer;
+import xyz.wit543.wit.tumboon.model.LayerManager;
 import xyz.wit543.wit.tumboon.model.MapConstant;
 
 /**
@@ -41,9 +46,13 @@ public class WatFactory extends LayerAbstractFactory {
         Layer.Builder layerBuilder = new Layer.Builder();
 
         layerBuilder.baseOutcome(layer.BASE_OUTCOME).
-                productionTime(layer.PRODUCTION_TIME).
-                name(layer.NAME).basePrice(layer.BASE_PRICE);
+                productionTime(layer.BASE_PRODUCTION_TIME).
+                name(layer.NAME).basePrice(layer.BASE_PRICE).layerPic(layer.LAYER_PIC);
         return layerBuilder.build();
+    }
+
+    private LayerManager standardLayerManagerCreator(MapConstant.Layer layer) {
+        return new LayerManager(standardLayerCreator(layer),0);
     }
 
     @Override
@@ -62,6 +71,18 @@ public class WatFactory extends LayerAbstractFactory {
             return standardLayerCreator(wat.SOUVENIR_SHOP_LAYER);
         }
         return null;
+    }
+
+    @Override
+    public List<LayerManager> getAllLayer() {
+        List<LayerManager> layerManagers = new ArrayList<LayerManager>();
+        layerManagers.add(standardLayerManagerCreator(wat.DONATE_MONEY_LAYER));
+        layerManagers.add(standardLayerManagerCreator(wat.DONATE_LAND_LAYER));
+        layerManagers.add(standardLayerManagerCreator(wat.DONATE_CAR_LAYER));
+        layerManagers.add(standardLayerManagerCreator(wat.DONATE_AIRPLANE_LAYER));
+        layerManagers.add(standardLayerManagerCreator(wat.PARADE_LAYER));
+        layerManagers.add(standardLayerManagerCreator(wat.SOUVENIR_SHOP_LAYER));
+        return layerManagers;
     }
 
 }

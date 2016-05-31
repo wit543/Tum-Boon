@@ -29,26 +29,26 @@ public class LayerAdapter extends ArrayAdapter<Layer> {
             LayoutInflater vl = LayoutInflater.from(getContext());
             v = vl.inflate(R.layout.layer_cell, null);
         }
-        TextView layerName = (TextView) v.findViewById(R.id.layer_name);
-        TextView layerLv = (TextView) v.findViewById(R.id.layer_lv);
-        Button button = (Button) v.findViewById(R.id.upgrade_button);
-
-        final Layer layer = getItem(position);
-        layerName.setText(layer.getName());
-        layerLv.setText("LV: "+layer.getLevel());
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Game game = Game.getInstance();
-                double layerPrice = Math.floor(layer.getBasePrice()*Math.pow(1.15f,layer.getLevel()-1));
-                if(game.getMoney()>=layerPrice){
-                    game.spend(layerPrice);
-                    layer.increaseLevel();
-                    notifyDataSetChanged();
-                }
-            }
-        });
-        button.setText("UPGRADE: "+Math.floor(layer.getBasePrice()*Math.pow(1.15f,layer.getLevel()-1)));
+//        TextView layerName = (TextView) v.findViewById(R.id.layer_name);
+//        TextView layerLv = (TextView) v.findViewById(R.id.layer_lv);
+//        Button button = (Button) v.findViewById(R.id.upgrade_button);
+//
+//        final Layer layer = getItem(position);
+//        layerName.setText(layer.getName());
+//        layerLv.setText("LV: "+layer.getLevel());
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Game game = Game.getInstance();
+//                double layerPrice = Math.floor(layer.getBasePrice()*Math.pow(1.15f,layer.getLevel()-1));
+//                if(game.getMoney()>=layerPrice){
+//                    game.spend(layerPrice);
+//                    layer.increaseLevel();
+//                    notifyDataSetChanged();
+//                }
+//            }
+//        });
+//        button.setText("UPGRADE: "+Math.floor(layer.getBasePrice()*Math.pow(1.15f,layer.getLevel()-1)));
         return v;
     }
 }

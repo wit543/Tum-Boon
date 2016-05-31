@@ -40,16 +40,4 @@ public class DefaultStrategy implements CalculateStrategy{
         return outcome;
     }
 
-    public double getProductionTime(Layer l){
-        double netTime = l.getBaseProductionTime() - (l.getLevel()-1)*speedIncreasePerSec;
-        if(netTime < 100){
-            netTime = 100;
-        }
-        return netTime;
-
-    }
-
-    public double getProductOutcome(Layer l){
-        return l.getLevel() * l.getBaseOutcome();
-    }
 }

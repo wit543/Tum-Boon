@@ -1,6 +1,9 @@
 package xyz.wit543.wit.tumboon.model.factory;
 
+import java.util.List;
+
 import xyz.wit543.wit.tumboon.model.Layer;
+import xyz.wit543.wit.tumboon.model.LayerManager;
 
 /**
  * Created by WIT on 22-May-16.
@@ -14,4 +17,5 @@ public abstract class LayerAbstractFactory {
 //    public abstract Layer createSouvenirShopLayer();
 //    public abstract Layer createPRLayer();
     public abstract Layer getLayer(String  constant);
+    public abstract List<LayerManager> getAllLayer();
 }

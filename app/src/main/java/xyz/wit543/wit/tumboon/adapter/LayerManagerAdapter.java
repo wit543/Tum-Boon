@@ -2,10 +2,10 @@ package xyz.wit543.wit.tumboon.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -14,6 +14,7 @@ import java.util.List;
 import xyz.wit543.wit.tumboon.R;
 import xyz.wit543.wit.tumboon.model.Game;
 import xyz.wit543.wit.tumboon.model.LayerManager;
+import xyz.wit543.wit.tumboon.model.util.BoonUnitTranformer;
 
 /**
  * Created by Asus on 5/28/2016.
@@ -26,7 +27,8 @@ public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapte
         TextView rate;
         ProgressBar progressBar;
         Button buyButton;
-        SurfaceView animationView;
+//        SurfaceView animationView;
+        ImageView animationView;
         public LayerManagerRecycleViewHolder(View itemView) {
             super(itemView);
             name=(TextView)itemView.findViewById(R.id.layer_name);
@@ -34,7 +36,8 @@ public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapte
             rate=(TextView)itemView.findViewById(R.id.layer_rate);
             progressBar=(ProgressBar)itemView.findViewById(R.id.production_progress_bar);
             buyButton=(Button)itemView.findViewById(R.id.upgrade_button);
-            animationView=(SurfaceView)itemView.findViewById(R.id.layer_animation);
+            //animationView=(SurfaceView)itemView.findViewById(R.id.layer_animation);
+            animationView=(ImageView)itemView.findViewById(R.id.layer_animation);
 
         }
     }
@@ -60,7 +63,7 @@ public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapte
         holder.name.setText(""+layer.getLayer().getName());
         holder.level.setText(""+layer.getLevel());
         holder.rate.setText(String.valueOf(layer.getProductOutcome()));
-        holder.buyButton.setText(String.valueOf(layer.getPrice()));
+        holder.buyButton.setText(BoonUnitTranformer.getReadableValue(layer.getPrice()));
         holder.buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,9 +74,13 @@ public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapte
                 }
             }
         });
-        holder.buyButton.setText("UPGRADE: "+layer.getPrice());
 
-        //System.out.println("LEVEL ISsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+ layer.getLevel());
+        Integer image = layer.getLayer().getLayerPic();
+        if(image!=0)
+            holder.animationView.setImageResource(layer.getLayer().getLayerPic());
+        else
+            holder.animationView.setImageResource(R.drawable.car_layer);
+
         if(layer.getLevel()>0) {
             final ProgressBar progressBar = holder.progressBar;
             final Button buyButton = holder.buyButton;
@@ -83,7 +90,11 @@ public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapte
                     while (layer.getProductionTime() > 100) {
                         try {
                             Thread.sleep(10);
+
+
+
                             progressBar.setProgress(calculateProcess(layer));
+
 //                            if(!(game.getMoney()>=layer.getPrice())){
 //                                buyButton.setText("CAN'T BUY");
 //                            }else{
@@ -106,9 +117,9 @@ public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapte
         return layers.size();
     }
 
-    public int calculateProcess(LayerManager layer){
+    public synchronized int calculateProcess(LayerManager layer){
         int remaining = (int)(layer.getNextProduceTime() - System.currentTimeMillis());
-        double duration = (int)layer.getProductionTime().intValue();
+        double duration = layer.getProductionTime().intValue();
         return (int)((duration-remaining)/duration * 100);
     }
 
