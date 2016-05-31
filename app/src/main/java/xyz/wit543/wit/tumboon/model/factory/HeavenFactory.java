@@ -1,6 +1,9 @@
 package xyz.wit543.wit.tumboon.model.factory;
 
+import java.util.List;
+
 import xyz.wit543.wit.tumboon.model.Layer;
+import xyz.wit543.wit.tumboon.model.LayerManager;
 import xyz.wit543.wit.tumboon.model.MapConstant;
 
 /**
@@ -13,7 +16,7 @@ public class HeavenFactory extends LayerAbstractFactory {
         Layer.Builder layerBuilder = new  Layer.Builder();
 
         layerBuilder.baseOutcome(layer.BASE_OUTCOME).
-                productionTime(layer.PRODUCTION_TIME).
+                productionTime(layer.BASE_PRODUCTION_TIME).
                 name(layer.NAME).basePrice(layer.BASE_PRICE);
         return layerBuilder.build();
     }
@@ -37,6 +40,11 @@ public class HeavenFactory extends LayerAbstractFactory {
         else if("souvenirShop".equalsIgnoreCase(type)){
             return standardLayerCreator(heaven.SOUVENIR_SHOP_LAYER);
         }
+        return null;
+    }
+
+    @Override
+    public List<LayerManager> getAllLayer() {
         return null;
     }
 //    @Override

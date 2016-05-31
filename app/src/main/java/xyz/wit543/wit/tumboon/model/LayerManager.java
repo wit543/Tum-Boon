@@ -27,7 +27,7 @@ public class LayerManager {
         this.upgrade = upgrade;
     }
 
-    public Double getProductionTime(){
+    public synchronized Double getProductionTime(){
         double netTime = layer.getBaseProductionTime() - (level-1)*speedIncreasePerSec;
         if(netTime < 100){
             netTime = 100;
@@ -36,7 +36,7 @@ public class LayerManager {
     }
 
     public double getPrice(){
-        return Math.floor(layer.getBasePrice()*Math.pow(1.15f,layer.getLevel()-1));
+        return Math.floor(layer.getBasePrice()*Math.pow(1.15f,level-1));
     }
 
     public boolean canProduce(){
@@ -63,7 +63,7 @@ public class LayerManager {
         this.level = level;
     }
 
-    public long getNextProduceTime() {
+    public synchronized long getNextProduceTime() {
         return nextProduceTime;
     }
 

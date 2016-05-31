@@ -6,12 +6,17 @@ package xyz.wit543.wit.tumboon.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 
+import xyz.wit543.wit.tumboon.model.factory.FactoryProducer;
+import xyz.wit543.wit.tumboon.model.factory.LayerAbstractFactory;
 import xyz.wit543.wit.tumboon.model.util.BoonCalculator;
 import xyz.wit543.wit.tumboon.model.util.MultiplierRandomizer;
 
 public class Game extends Observable{
     private static Game game;
+    private MapConstant map = MapConstant.WAT;
+
     private List<LayerManager> layerManagers;
     private List<Map> maps;
     private List<Upgrade> upgrades;
@@ -31,6 +36,7 @@ public class Game extends Observable{
 
     private BoonCalculator mc;
     private MultiplierRandomizer mr;
+    private LayerAbstractFactory layerFactory;
 
     private final int DELAY = 100;
     private final double startMoney = 1000;
@@ -40,22 +46,28 @@ public class Game extends Observable{
     }
 
     public void defineEnvironment(){
+        layerFactory = FactoryProducer.getFactory(map);
 
         multipliers = new ArrayList<Multiplier>();
         upgrades = new ArrayList<Upgrade>();
-        layerManagers = new ArrayList<LayerManager>();
+        layerManagers = layerFactory.getAllLayer();
+        //layerManagers = new ArrayList<LayerManager>();
 
         multipliers.add(new Multiplier("แสดงอภินิหาร",0,100000,4));
         multipliers.add(new Multiplier("ใบ้หวย",0,100000,2));
 
-        layerManagers.add(new LayerManager(new Layer("Car" , 1 ,1000,100 , 1000) , 0));
-        layerManagers.add(new LayerManager(new Layer("Helicopter" , 1 ,3000, 200 , 3000),0));
-        upgrades.add(new Upgrade("car","BMW",0,false,1000));
+
+//        layerManagers.add(new LayerManager(new Layer("Car"  ,1000,100 , 1000) , 0));
+//        layerManagers.add(new LayerManager(new Layer("Helicopter" ,3000, 200 , 3000),0));
+
+        upgrades.add(new Upgrade("money","BMW",0,false,1000));
         upgrades.add(new Upgrade("water","klong",0,false,2000));
         upgrades.add(new Upgrade("house","dogdog",0,false,4000));
 
-        mc = new BoonCalculator();
+        mc = new BoonCalculator(this.layerManagers);
         mr = new MultiplierRandomizer(multipliers);
+
+
     }
 
     public double getFollower() {
@@ -90,9 +102,17 @@ public class Game extends Observable{
         this.money-=price;
     }
 
-    public void earn(double price){
-        this.money+=price;
-        this.totalMoney+=price;
+    public void earnBoonFromClick(double amount){
+        this.money+=amount;
+        this.totalMoney+=amount;
+        this.notifyObservers();
+    }
+
+    public void earnBoon(double amount){
+        this.money+=amount;
+        this.totalMoney+=amount;
+//        notifyObservers();
+//        setChanged();
     }
 
     public void sacrificeFollower(int amount){
@@ -121,16 +141,6 @@ public class Game extends Observable{
     public void startGame(){
         running = true;
         startTime = System.currentTimeMillis();
-        Thread thread = new Thread(){
-            public void run(){
-                super.run();
-                while(running) {
-                    delay();
-                    update();
-                }
-            }
-        };
-        thread.start();
     }
 
     public Multiplier getCurrentMultiplier() {
@@ -142,7 +152,7 @@ public class Game extends Observable{
     }
 
     public void update(){
-        money+=calculateNetBoon();
+        this.earnBoon(calculateNetBoon());
     }
 
     public void resetGame(){
@@ -186,9 +196,9 @@ public class Game extends Observable{
 
     public double getMultiplierValue(){
         this.updateMultiplier();
-        if(currentMultiplier == null)
-            return 1;
-        return currentMultiplier.getMultiply();
+        if(hasMultiplier())
+            return currentMultiplier.getMultiply();
+        return 1;
     }
 
     public void updateMultiplier(){

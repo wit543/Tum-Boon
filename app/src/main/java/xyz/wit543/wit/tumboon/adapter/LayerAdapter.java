@@ -54,26 +54,26 @@ public class LayerAdapter extends RecyclerView.Adapter<LayerAdapter.LayerRecycle
 
     @Override
     public void onBindViewHolder(LayerRecycleViewHolder holder, int position) {
-        final Layer layer = layers.get(position);
-        holder.name.setText(""+layer.getName());
-        holder.level.setText(""+layer.getLevel());
-        holder.rate.setText(String.valueOf(layer.getOutcome()));
-        holder.buyButton.setText(String.valueOf(layer.getPrice()));
-        holder.buyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Game game = Game.getInstance();
-                double layerPrice = Math.floor(layer.getBasePrice()*Math.pow(1.15f,layer.getLevel()-1));
-                if(game.getMoney()>=layerPrice){
-                    game.spend(layerPrice);
-                    layer.increaseLevel();
-                    notifyDataSetChanged();
-                }
-            }
-        });
-        holder.buyButton.setText("UPGRADE: "+Math.floor(layer.getBasePrice()*Math.pow(1.15f,layer.getLevel()-1)));
-        holder.progressBar.setMax((int)layer.getProductionTime());
-        holder.progressBar.setProgress(1000);
+//        final Layer layer = layers.get(position);
+//        holder.name.setText(""+layer.getName());
+//        holder.level.setText(""+layer.getLevel());
+//        holder.rate.setText(String.valueOf(layer.getOutcome()));
+//        holder.buyButton.setText(String.valueOf(layer.getPrice()));
+//        holder.buyButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Game game = Game.getInstance();
+//                double layerPrice = Math.floor(layer.getBasePrice()*Math.pow(1.15f,layer.getLevel()-1));
+//                if(game.getMoney()>=layerPrice){
+//                    game.spend(layerPrice);
+//                    layer.increaseLevel();
+//                    notifyDataSetChanged();
+//                }
+//            }
+//        });
+//        holder.buyButton.setText("UPGRADE: "+Math.floor(layer.getBasePrice()*Math.pow(1.15f,layer.getLevel()-1)));
+//        holder.progressBar.setMax((int)layer.getProductionTime());
+//        holder.progressBar.setProgress(1000);
     }
 
     @Override

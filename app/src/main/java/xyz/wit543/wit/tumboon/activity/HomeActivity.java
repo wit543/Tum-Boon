@@ -14,6 +14,9 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import xyz.wit543.wit.tumboon.R;
 import xyz.wit543.wit.tumboon.adapter.ViewPagerAdapter;
 import xyz.wit543.wit.tumboon.fragment.LayerFragment;
@@ -21,12 +24,15 @@ import xyz.wit543.wit.tumboon.fragment.TopUpFragment;
 import xyz.wit543.wit.tumboon.fragment.RebirthFragment;
 import xyz.wit543.wit.tumboon.fragment.UpgradeFragment;
 import xyz.wit543.wit.tumboon.model.Game;
+import xyz.wit543.wit.tumboon.model.util.BoonUnitTranformer;
 
 public class HomeActivity extends AppCompatActivity implements  LayerFragment.OnFragmentInteractionListener
-,TopUpFragment.OnFragmentInteractionListener , UpgradeFragment.OnFragmentInteractionListener , RebirthFragment.OnFragmentInteractionListener{
+,TopUpFragment.OnFragmentInteractionListener , UpgradeFragment.OnFragmentInteractionListener , RebirthFragment.OnFragmentInteractionListener ,Observer{
 
     private TextView boonLabel;
     private ListView layerList;
+    private TextView followerLabel;
+
     private Game game;
     private ViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
@@ -54,14 +60,12 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
             @Override
             public void run() {
                 try {
-                    while (!isInterrupted()) {
+                    while (game.isRunning()) {
                         Thread.sleep(20);
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                boonLabel.setText("" + game.getMoney());
-                                topUpFragment.update();
-                                game.update();
+                                updateUI();
                             }
                         });
                     }
@@ -78,12 +82,18 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
         //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
+    private void updateUI(){
+        topUpFragment.update();
+        game.update();
+        boonLabel.setText(BoonUnitTranformer.getReadableValue(Game.getInstance().getMoney()));
+        followerLabel.setText(""+Game.getInstance().getFollower());
+    }
+
     private void initialize() {
         boonLabel = (TextView) findViewById(R.id.boon);
-        //layerList = (ListView) findViewById(R.id.layerLists);
+        followerLabel = (TextView) findViewById(R.id.follower);
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         game = Game.getInstance();
-        //layerList.setAdapter(new LayerAdapter(this, R.layout.layer_cell, game.getLayers()));
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         layerFragment = new LayerFragment();
@@ -94,7 +104,7 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
 
         rebirthFragment = new RebirthFragment();
 
-        System.out.print("FUCK");
+
 
         viewPagerAdapter.addFragment(layerFragment);
         viewPagerAdapter.addFragment(upgradeFragment);
@@ -143,6 +153,7 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
 
 
         //TODO set all button
+        game.addObserver(this);
         game.startGame();
 
     }
@@ -171,22 +182,27 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Home Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://xyz.wit543.wit.tumboon.activity/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
+//        Action viewAction = Action.newAction(
+//                Action.TYPE_VIEW, // TODO: choose an action type.
+//                "Home Page", // TODO: Define a title for the content shown.
+//                // TODO: If you have web page content that matches this app activity's content,
+//                // make sure this auto-generated web page URL is correct.
+//                // Otherwise, set the URL to null.
+//                Uri.parse("http://host/path"),
+//                // TODO: Make sure this auto-generated app URL is correct.
+//                Uri.parse("android-app://xyz.wit543.wit.tumboon.activity/http/host/path")
+//        );
+//        AppIndex.AppIndexApi.end(client, viewAction);
+//        client.disconnect();
     }
 
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    public void update(Observable observable, Object data) {
+        this.updateUI();
     }
 }

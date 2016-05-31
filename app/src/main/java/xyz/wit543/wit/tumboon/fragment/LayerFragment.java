@@ -1,6 +1,7 @@
 package xyz.wit543.wit.tumboon.fragment;
 
 import android.content.Context;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.List;
 import xyz.wit543.wit.tumboon.R;
 import xyz.wit543.wit.tumboon.adapter.LayerAdapter;
 import xyz.wit543.wit.tumboon.adapter.LayerManagerAdapter;
+import xyz.wit543.wit.tumboon.model.Clicker;
 import xyz.wit543.wit.tumboon.model.Game;
 import xyz.wit543.wit.tumboon.model.Layer;
 
@@ -25,6 +28,8 @@ public class LayerFragment extends Fragment {
 
     private RecyclerView layerRecycleView;
     private LayerManagerAdapter layerManagerAdapter;
+    private ImageButton clickerBt;
+    private Clicker click;
 
     public LayerFragment() {
         // Required empty public constructor
@@ -57,6 +62,17 @@ public class LayerFragment extends Fragment {
 //        layerRecycleView.setAdapter(new LayerAdapter(game.getLayers()));
         layerRecycleView.setAdapter(layerManagerAdapter);
         layerRecycleView.setNestedScrollingEnabled(false);
+
+        click = new Clicker();
+        clickerBt = (ImageButton) view.findViewById(R.id.clicker_bt);
+        clickerBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Game.getInstance().earnFollower(click.getAttack());
+                System.out.println("Follower : "+Game.getInstance().getFollower());
+
+            }
+        });
 
         return view;
     }
