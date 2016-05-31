@@ -39,7 +39,7 @@ public class Game extends Observable{
     private LayerAbstractFactory layerFactory;
 
     private final int DELAY = 100;
-    private final double startMoney = 1000000;
+    private final double startMoney = 1000;
 
     private Game(){
         this.resetGame();
@@ -60,7 +60,7 @@ public class Game extends Observable{
 //        layerManagers.add(new LayerManager(new Layer("Car"  ,1000,100 , 1000) , 0));
 //        layerManagers.add(new LayerManager(new Layer("Helicopter" ,3000, 200 , 3000),0));
 
-        upgrades.add(new Upgrade("car","BMW",0,false,1000));
+        upgrades.add(new Upgrade("money","BMW",0,false,1000));
         upgrades.add(new Upgrade("water","klong",0,false,2000));
         upgrades.add(new Upgrade("house","dogdog",0,false,4000));
 
