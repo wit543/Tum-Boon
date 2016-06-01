@@ -19,7 +19,6 @@ public class Clicker {
         people = new ArrayList<Integer>();
         people.add(R.drawable.ufo_scoobydoo);
         people.add(R.drawable.ufo_steve);
-        people.add(R.drawable.ufo_bean);
         people.add(R.drawable.ufo_dexter);
     }
 

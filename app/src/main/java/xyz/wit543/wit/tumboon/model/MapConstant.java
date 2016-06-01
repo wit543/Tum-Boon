@@ -13,17 +13,14 @@ public enum MapConstant {
 
 
     public enum Layer{
-        WAT_DONATE_MONEY_LAYER("บริจาคเงิน",10,20, 1000 , R.drawable.money_layer ),
-        WAT_DONATE_LAND_LAYER("บริจาคที่ดิน",10,20,5000 , R.drawable.land_layer),
-        WAT_DONATE_CAR_LAYER("บริจาครถ",10,20,10000, R.drawable.car_layer),
-        WAT_DONATE_AIRPLANE_LAYER("บริจาคเครื่องบิน",10,20,20000 , R.drawable.plane_layer2),
-//WAT_DONATE_MONEY_LAYER("Money",10,20, 1000 ),
-//        WAT_DONATE_LAND_LAYER("Land",10,20,5000 ),
-//        WAT_DONATE_CAR_LAYER("Car",10,20,10000),
-//        WAT_DONATE_AIRPLANE_LAYER("Airplane",10,20,20000),
-        WAT_BLACK_HOLE_LAYER("วางรถแบล็คโฮล์",10,20,100000),
-        WAT_PARADE_LAYER("จัดพาเรด",10,20,500000),
-        WAT_HUMAN_WALL_LAYER("กำแพงมนุษย์",10,20,10),
+        WAT_DONATE_MONEY_LAYER("บริจาคเงิน",40,10, 1000 , R.drawable.money_layer ),
+        WAT_DONATE_LAND_LAYER("บริจาคที่ดิน",200,150,5000 , R.drawable.land_layer),
+        WAT_DONATE_CAR_LAYER("บริจาครถ",1300,500,10000, R.drawable.car_layer),
+        WAT_DONATE_AIRPLANE_LAYER("บริจาคเครื่องบิน",8500,5000,20000 , R.drawable.plane_layer2),
+
+        WAT_BLACK_HOLE_LAYER("วางรถแบล็คโฮล์",32000,10000,100000, R.drawable.backhole_layer),
+        WAT_PARADE_LAYER("จัดพาเรด",150000,100000,250000 , R.drawable.parade_layer),
+        WAT_HUMAN_WALL_LAYER("กำแพงมนุษย์",1000000,999999,500000 , R.drawable.humanwall_layer),
 
         CITY_DONATE_MONEY_LAYER("Money",10,20, 10),
         CITY_DONATE_LAND_LAYER("Land",10,20,10),

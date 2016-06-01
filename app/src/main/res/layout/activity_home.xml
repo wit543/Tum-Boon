@@ -81,14 +81,14 @@
             android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/multi_bt"
+            android:src="@drawable/rebirth_bt"
             android:background="@null"/>
         <ImageButton
             android:id="@+id/top_up_menu_button"
             android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/stat_bt"
+            android:src="@drawable/multi_bt"
             android:background="@null"/>
     </LinearLayout>
 </RelativeLayout>
