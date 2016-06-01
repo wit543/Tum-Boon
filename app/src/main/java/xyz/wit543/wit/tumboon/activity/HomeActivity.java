@@ -56,7 +56,7 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         this.initialize();
-        //this.loadSave();
+        this.loadSave();
         Thread t = new Thread() {
             @Override
             public void run() {

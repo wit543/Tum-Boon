@@ -1,3 +1,113 @@
 # Tum-Boon
-![status](https://circleci.com/gh/wit543/Tum-Boon.svg?style=shield&circle-token=:circle-token)
-<div class="mxgraph" style="max-width:100%;background-color:#ffffff;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile userAgent=\&quot;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36\&quot; version=\&quot;5.5.0.1\&quot; editor=\&quot;www.draw.io\&quot; type=\&quot;google\&quot;&gt;&lt;diagram&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+
+Group: 1
+Project: TumBoon - Idle Clicker Game
+
+<dt>Members :</dt>
+      <dd>1) Parisa Supitayakul    5710546313</dd>
+      <dd>2) Pongsakorn Somsri  5710546321</dd>
+      <dd>3) Norawit  5710546437</dd>
+
+
+#1) Project Detail
+	This project is a idle clicker game that use some doctrine in Thailand as a theme. This game is about ridicule that doctrine and use its crazy dogma as a gameplay. In this game the higher you donate the higher "BOON" you deserve.
+	##GAMEPLAY
+	  There are 2 parts of the gameplay, the first part is collection the "BOON" as much as possible. You can collect boon by donating thing.
+	  There are many objects that you can donate. The more expensive of the object the more boon you gain, but the expensive object will waste a lot of time to produce as well,
+	  the produce boon of each object can be reduce by leveling up that object. The fastest produce time that one object can gain is 1 time per 0.1 second.
+	  The second part of the game is control the innocent people's brain and make them to our follower. You can do this by clicking the UFO on the game. The follower can be change to the disciple later to increase your boon.
+
+	##Feature
+		1.)Donating Thing
+		  -Donating will have different price,outcome and produce time.
+		  -The more you donate the faster it produce the boon.
+		  -The more you buy and object, it will also increase the boon you need to donate that object next time.
+		  -The fastest produce time is 0.1 second.
+
+		2.)Upgrade the donating thing
+		  -Upgrade the all of the outcome of the upgraded object in percent.
+		  -Upgrade will increase its price to 2 times higher and the upgrade will increase 10 percent.
+
+		3.)Control innocent people's brain
+		  -Receive the follower from clicking the ufo.
+
+		4.)Rebirth
+		  -Suicide yourself with your follower. You will born in the next life and your follower from the
+		  previous life will become your disciple. The outcome in the current life will increase from the number of the disciple.
+
+		5.)Show a supernatural thing(!?)
+		  -Sacrifire your follower and show a miracle. You will get random multiply outcome form showing the miracle.
+
+		6.)Saving the game
+		  -Save the game when player quit the game. Use the shared preference to save the game.
+
+
+#2) Design Pattern
+			The design pattern that use in this project are Singleton, Factory, Strategy, Builder , Adapter, Observer and Memento pattern.
+
+			1) Singleton Pattern
+			WHERE - Game.java
+			FOR - Use singleton in game.java because java is our controller and we need only one Game object to communicate with the
+			      UI. The other reason is it easy to access this object from everywhere.
+
+			2) Factory Pattern
+			WHERE - factory package in the model package
+			FOR - We use factory pattern to let the factory create every game object for us so the game and doesn't need to call it
+			      directly. We can change map of our game by switch the factory. Changing map will change the factory each factory will create a different objects of game.
+
+			3) Strategy Pattern
+			WHERE - package BoonCalculatorStrategy in model package
+			FOR - We can select the strategy to calculate boon from each donation thing.
+
+			4) Builder Pattern
+			WHERE - Layer.java
+			FOR - Using builder pattern to solve the telescoping problem of constructor in case that we doesn't need to create            various constructor.
+
+			5) Adapter Pattern
+			WHERE - package adapter
+			FOR - We create a adapter for Recycler view to bind the object and ui together.
+
+			6) Observer Pattern
+			WHERE - HomeActivity and Game.java
+			FOR - HomeActivity will observe the game. When the follower in the game has change ,it will notify the HomeActivity
+			      too change the new value of the follower.
+
+			7) Mememto Pattern
+			WHERE - Game.java
+			FOR - We use mememto pattern to save the game. When player quit the game, we will save the state of the game and then
+			      save the mememto object into the sharepreference. When we comeback to the game, the mememto will be load from the sharepreference and then game will restore from that mememto to load the game.
+
+
+#3) Design Principles
+
+		1) Creator :
+			- Game create a upgrade,layer(donating thing) because it contains all of these thing.
+
+	  	2) Information Expert :
+			- Out factory have infomation to create all of the objects.
+
+		3) Low Coupling
+			- Adding a new layer won't affect the layer that already exist in our game.
+
+		4) Controller
+			- Game is a controller of out game, so the ui will interact only the game object.
+
+		5) High Cohesion
+			- The layer shouldn't need to have the nextProductionTime and ability to calculate the outcome by itself so I create a LayerManager to wrap the layer and handle those method.
+
+	  	6) Polymorphism
+			- The factory in the factory package is extend layerAbstractFactory.
+
+		7) Pure Fabrication
+			- BoonCalculator and BoonUnitTranformer is create to calculating boon, tranform the unit in to readable value.
+
+		8) Indirection
+			- Adapter in the adapter package
+
+		9) Protect Variation
+			- We use the layerManager to wrap keep the lv of each layer, so we doesn't need to change the layer.
+
+    	10) Dry
+
+    	11) SRP
+    		- BoonCalculator have only responsibility that is too calculate boon from every layers

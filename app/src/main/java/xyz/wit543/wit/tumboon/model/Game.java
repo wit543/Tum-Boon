@@ -225,7 +225,7 @@ public class Game extends Observable{
     }
 
     public double getNetBoonForLayer(LayerManager layerManager){
-        return layerManager.getProductOutcome()*this.getMultiplierValue()*this.calculateDiscipleMultiply();
+        return layerManager.getProductOutcome()*this.getMultiplierValue()*this.calculateDiscipleMultiply()*(1+layerManager.getUpgrade());
     }
 
     public List<LayerManager> getLayerManagers(){
