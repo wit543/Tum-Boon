@@ -64,7 +64,8 @@
             android:id="@+id/random_button"
             android:layout_below="@id/miracle_detail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:background="@drawable/boon_label"
             android:text="แสดงอภินิหาร"
             android:layout_centerHorizontal="true"
         />

@@ -195,7 +195,7 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
     @Override
     public void update(Observable observable, Object data) {
         this.updateUI();
-        System.out.print("F\nF\nF\nf\nF\nF\nF\n");
+        //System.out.print("F\nF\nF\nf\nF\nF\nF\n");
         if(data!=null && ((String)data).equals("rebirth")){
             getSupportFragmentManager()
                     .beginTransaction()
@@ -204,7 +204,7 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
                     .commit();
 
             rebirthFragment.setDisciple();
-            System.out.print("F\nF\nF\nf\nF\nF\nF\n");
+           // System.out.print("F\nF\nF\nf\nF\nF\nF\n");
         }
     }
 }

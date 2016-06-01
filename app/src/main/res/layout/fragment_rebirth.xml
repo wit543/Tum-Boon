@@ -55,8 +55,9 @@
     <Button
         android:id="@+id/rebirth_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_below="@+id/rebirth_detail"
-        android:text="REBIRTH"/>
+        android:background="@drawable/boon_label"
+        android:text="จุติ"/>
 
 </RelativeLayout>
