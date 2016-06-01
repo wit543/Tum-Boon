@@ -29,7 +29,7 @@ public class LayerFragment extends Fragment {
     private RecyclerView layerRecycleView;
     private LayerManagerAdapter layerManagerAdapter;
     private ImageButton clickerBt;
-    private Clicker click;
+    private Clicker clicker;
 
     public LayerFragment() {
         // Required empty public constructor
@@ -63,14 +63,14 @@ public class LayerFragment extends Fragment {
         layerRecycleView.setAdapter(layerManagerAdapter);
         layerRecycleView.setNestedScrollingEnabled(false);
 
-        click = new Clicker();
+        clicker = Game.getInstance().getClicker();
         clickerBt = (ImageButton) view.findViewById(R.id.clicker_bt);
         clickerBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Game.getInstance().earnFollower(click.getAttack());
-                System.out.println("Follower : "+Game.getInstance().getFollower());
-
+                Game.getInstance().earnFollower(clicker.getAttack());
+                clicker.randomPeople();
+                clickerBt.setImageResource(clicker.getCurrentPeoplePicture());
             }
         });
 
@@ -118,5 +118,9 @@ public class LayerFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void refresh(){
+        layerManagerAdapter.notifyDataSetChanged();
     }
 }

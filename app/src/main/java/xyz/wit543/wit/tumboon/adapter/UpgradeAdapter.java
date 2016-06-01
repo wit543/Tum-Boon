@@ -14,6 +14,7 @@ import java.util.List;
 import xyz.wit543.wit.tumboon.R;
 import xyz.wit543.wit.tumboon.model.Game;
 import xyz.wit543.wit.tumboon.model.Upgrade;
+import xyz.wit543.wit.tumboon.model.util.BoonUnitTranformer;
 
 /**
  * Created by Momo on 27/5/2559.
@@ -62,7 +63,7 @@ public class UpgradeAdapter extends RecyclerView.Adapter<UpgradeAdapter.UpgradeR
             }
         });
         holder.stat.setText(""+upgrade.getMultiplier()+"%");
-        holder.upgradeButton.setText(""+upgrade.getprice());
+        holder.upgradeButton.setText(BoonUnitTranformer.getReadableValue(upgrade.getprice()));
     }
 
     public int getItemCount() {

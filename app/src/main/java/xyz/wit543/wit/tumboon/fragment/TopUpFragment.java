@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import xyz.wit543.wit.tumboon.R;
 import xyz.wit543.wit.tumboon.model.Game;
@@ -33,6 +34,7 @@ public class TopUpFragment extends Fragment {
     private String mParam2;
 
     private TextView currentMultiplier;
+    private TextView currentMultiplierValue;
     private TextView remainingTime;
     private Button randomButton;
 
@@ -74,16 +76,22 @@ public class TopUpFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_top_up, container, false);
         // Inflate the layout for this fragment
-        Game game = Game.getInstance();
+        final Game game = Game.getInstance();
 
         randomButton = (Button)view.findViewById(R.id.random_button);
         currentMultiplier = (TextView) view.findViewById(R.id.current_multiplier);
+        currentMultiplierValue = (TextView) view.findViewById(R.id.current_multiplier_value);
         remainingTime = (TextView) view.findViewById(R.id.remaining_time);
 
         randomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Game.getInstance().setNewMultiplier();
+                if(game.canBuyMultiplier())
+                    game.buyMultiplier();
+                else {
+                    Toast.makeText(getActivity(), "ต้องการผู้งมงาย 1000 คน",
+                            Toast.LENGTH_LONG).show();
+                }
             }
         });
         return view;
@@ -94,11 +102,13 @@ public class TopUpFragment extends Fragment {
         Multiplier multiplier = game.getCurrentMultiplier();
         if(remainingTime!=null && currentMultiplier!=null){
             if(multiplier!=null){
-                remainingTime.setText("Remaining Time: "+multiplier.getRemainingTime());
-                currentMultiplier.setText("Current Multiplier: "+multiplier.getDescription());
+                remainingTime.setText("ระยะเวลาที่เหลือ: "+multiplier.getRemainingTime());
+                currentMultiplier.setText("อภินิหารปัจจุบัน: "+multiplier.getDescription());
+                currentMultiplierValue.setText("อัตราคูณปัจจุบัน: "+multiplier.getMultiply() + " เท่า");
             }else{
-                remainingTime.setText("Remaining Time: "+0);
-                currentMultiplier.setText("Current Multiplier: "+0);
+                remainingTime.setText("ระยะเวลาที่เหลือ: "+"ไม่มีอภินิหาร");
+                currentMultiplier.setText("อภินิหารปัจจุบัน: "+"ไม่มีอภินิหาร");
+                currentMultiplierValue.setText("อัตราคูณปัจจุบัน: "+"ไม่มีอภินิหาร");
             }
         }
     }

@@ -9,11 +9,8 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
 
@@ -59,7 +56,7 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         this.initialize();
-        this.loadSave();
+        //this.loadSave();
         Thread t = new Thread() {
             @Override
             public void run() {
@@ -84,8 +81,8 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
     private void updateUI(){
         topUpFragment.update();
         game.update();
-        boonLabel.setText(BoonUnitTranformer.getReadableValue(Game.getInstance().getMoney()));
-        followerLabel.setText(""+Game.getInstance().getFollower());
+        boonLabel.setText(BoonUnitTranformer.getReadableValue(game.getMoney())+" "+game.getMoneyUnit());
+        followerLabel.setText(BoonUnitTranformer.getReadableValue(game.getFollower())+" "+game.getPeopleUnit());
     }
 
     private void loadSave(){
@@ -171,29 +168,13 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
     public void onStart() {
         super.onStart();
 
-//        client.connect();
-//        Action viewAction = Action.newAction(
-//                Action.TYPE_VIEW, // TODO: choose an action type.
-//                "Home Page", // TODO: Define a title for the content shown.
-//                // TODO: If you have web page content that matches this app activity's content,
-//                // make sure this auto-generated web page URL is correct.
-//                // Otherwise, set the URL to null.
-//                Uri.parse("http://host/path"),
-//                // TODO: Make sure this auto-generated app URL is correct.
-//                Uri.parse("android-app://xyz.wit543.wit.tumboon.activity/http/host/path")
-//        );
-////        AppIndex.AppIndexApi.start(client, viewAction);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-//        String save = ""+Game.getInstance().getMoney();
-//        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPref.edit();
-//        editor.putString(saveGameKey,save);
-//        editor.commit();
 
+        //save game to shared preferences
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         Gson gson = new Gson();
@@ -210,5 +191,16 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
     @Override
     public void update(Observable observable, Object data) {
         this.updateUI();
+        System.out.print("F\nF\nF\nf\nF\nF\nF\n");
+        if(data!=null && ((String)data).equals("rebirth")){
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .detach(layerFragment)
+                    .attach(layerFragment)
+                    .commit();
+
+            rebirthFragment.setDisciple();
+            System.out.print("F\nF\nF\nf\nF\nF\nF\n");
+        }
     }
 }

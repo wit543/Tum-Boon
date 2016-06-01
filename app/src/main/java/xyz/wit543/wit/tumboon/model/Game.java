@@ -15,8 +15,6 @@ import xyz.wit543.wit.tumboon.model.util.MultiplierRandomizer;
 
 public class Game extends Observable{
     private static Game game;
-    private MapConstant map = MapConstant.WAT;
-
     private List<LayerManager> layerManagers;
     private List<Map> maps;
     private List<Upgrade> upgrades;
@@ -36,9 +34,17 @@ public class Game extends Observable{
 
     private BoonCalculator mc;
     private MultiplierRandomizer mr;
+    private Clicker clicker;
     private LayerAbstractFactory layerFactory;
 
-    private final double startMoney = 1000;
+    public static final double startMoney = 1000;
+    public static final int multiplierPrice = 1000;
+    public static final int disciplePerTimes = 100;
+    public static final int upgradeTimes = 100;
+
+    private MapConstant map = MapConstant.WAT;
+    private String moneyUnit = "บุญ";
+    private String peopleUnit = "คน";
 
     private Game(){
         this.resetGame();
@@ -47,20 +53,36 @@ public class Game extends Observable{
     public void defineEnvironment(){
         layerFactory = FactoryProducer.getFactory(map);
 
-        multipliers = new ArrayList<Multiplier>();
-        upgrades = new ArrayList<Upgrade>();
+        multipliers = layerFactory.getAllMultiplier();
         layerManagers = layerFactory.getAllLayer();
-
-        multipliers.add(new Multiplier("แสดงอภินิหาร",0,100000,4));
-        multipliers.add(new Multiplier("ใบ้หวย",0,100000,2));
-
-        upgrades.add(new Upgrade("money","BMW",1000));
-        upgrades.add(new Upgrade("water","klong",2000));
-        upgrades.add(new Upgrade("house","dogdog",4000));
+        upgrades = layerFactory.getAllUpgrade();
 
         mc = new BoonCalculator();
         mr = new MultiplierRandomizer(multipliers);
+        clicker = new Clicker();
+    }
 
+    public int getUpgradeTimes() {
+        return upgradeTimes;
+    }
+
+    public boolean canBuyMultiplier(){
+        if(this.follower>=multiplierPrice)
+            return true;
+        return false;
+    }
+
+    public void buyMultiplier(){
+        this.sacrificeFollower(multiplierPrice);
+        this.setNewMultiplier();
+    }
+
+    public String getMoneyUnit() {
+        return moneyUnit;
+    }
+
+    public String getPeopleUnit() {
+        return peopleUnit;
     }
 
     public double getFollower() {
@@ -85,6 +107,14 @@ public class Game extends Observable{
         return game;
     }
 
+    public Clicker getClicker() {
+        return clicker;
+    }
+
+    public void setClicker(Clicker clicker) {
+        this.clicker = clicker;
+    }
+
     public List<Upgrade> getUpgrades(){return upgrades;}
 
     public void setNewMultiplier(){
@@ -93,12 +123,6 @@ public class Game extends Observable{
 
     public void spend(double price){
         this.money-=price;
-    }
-
-    public void earnBoonFromClick(double amount){
-        this.money+=amount;
-        this.totalMoney+=amount;
-        this.notifyObservers();
     }
 
     public void earnBoon(double amount){
@@ -113,8 +137,8 @@ public class Game extends Observable{
     }
 
     public void earnFollower(int amount){
-        this.follower+=amount;
-        this.totalFollower+=amount;
+        this.follower+=amount*getMultiplierValue();
+        this.totalFollower+=amount*getMultiplierValue();
         this.notifyObservers();
         this.setChanged();
     }
@@ -165,8 +189,9 @@ public class Game extends Observable{
         for(Upgrade upgrade : this.getUpgrades()){
             upgrade.setMultiplier(0);
         }
-        this.notifyObservers();
         this.setChanged();
+        this.notifyObservers("rebirth");
+
     }
 
     public boolean hasMultiplier(){
@@ -177,8 +202,12 @@ public class Game extends Observable{
 
     public double calculateNetBoon(){
         double netBoon = mc.calculateBoon(System.currentTimeMillis(),layerManagers) * getMultiplierValue();
-        netBoon += netBoon*(this.disciple/10000);
+        netBoon += netBoon*(this.calculateDiscipleMultiply());
         return netBoon;
+    }
+
+    public double calculateDiscipleMultiply(){
+        return 1+this.disciple/disciplePerTimes;
     }
 
     public double getMultiplierValue(){
@@ -193,6 +222,10 @@ public class Game extends Observable{
             return;
         if(currentMultiplier.startTime+ currentMultiplier.duration < System.currentTimeMillis())
             currentMultiplier = null;
+    }
+
+    public double getNetBoonForLayer(LayerManager layerManager){
+        return layerManager.getProductOutcome()*this.getMultiplierValue()*this.calculateDiscipleMultiply();
     }
 
     public List<LayerManager> getLayerManagers(){

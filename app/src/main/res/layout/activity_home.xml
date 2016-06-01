@@ -6,14 +6,16 @@
     android:layout_height="match_parent"
 
 
-    android:background="@drawable/bh"
+    android:background="#fffadb"
     tools:context=".activity.HomeActivity">
 
 
     <LinearLayout
         android:id="@+id/status_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
+        android:background="@drawable/normal_label"
+        android:paddingTop="15dp"
 
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal">
@@ -23,7 +25,6 @@
             android:layout_height="60dp"
             android:textSize="30dp"
             android:textAlignment="center"
-            android:background="#ffff0000"
             android:layout_weight="1"/>
         <TextView
             android:id="@+id/follower"
@@ -32,7 +33,6 @@
             android:textSize="30dp"
             android:text="0"
             android:textAlignment="center"
-            android:background="#6e6e6e"
             android:layout_weight="1"
             />
     </LinearLayout>
@@ -51,44 +51,44 @@
 
 
     <LinearLayout
+        android:scaleType="centerCrop"
+        android:paddingTop="5dp"
+        android:adjustViewBounds="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:gravity="center_horizontal"
-        android:background="#d8ff7e4f"
+        android:background="@drawable/frame"
         android:id="@+id/linearLayout">
         <ImageButton
             android:id="@+id/layer_menu_button"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/home_btt"
+            android:src="@drawable/home_bt"
             android:background="@null"/>
         <ImageButton
             android:id="@+id/upgrade_menu_button"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/upgrade_btt"
+            android:src="@drawable/upgrade_bt"
             android:background="@null"/>
         <ImageButton
             android:id="@+id/tranform_menu_button"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/multi_btt"
+            android:src="@drawable/multi_bt"
             android:background="@null"/>
         <ImageButton
             android:id="@+id/top_up_menu_button"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/multi_btt"
+            android:src="@drawable/stat_bt"
             android:background="@null"/>
     </LinearLayout>
 </RelativeLayout>

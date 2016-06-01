@@ -7,20 +7,31 @@
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/multiplier_subject"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="MULTIPLIER"
-        android:textAlignment="center"
-        android:textSize="20dp"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
         android:textStyle="bold"
-        />
+        android:padding="10dp"
+        android:background="@drawable/normal_label2"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textSize="40dp"
+        android:text="แสดงอภินิหาร" />
 
     <TextView
         android:id="@+id/current_multiplier"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/multiplier_subject"
-        android:text="Current Multiplier: "
+        android:text="อภินิหารปัจจุบัน: "
+        android:textSize="20dp"
+        />
+
+    <TextView
+        android:id="@+id/current_multiplier_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/current_multiplier"
+        android:text="อัตราคูณปัจจุบัน: "
         android:textSize="20dp"
         />
 
@@ -28,8 +39,8 @@
         android:id="@+id/remaining_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/current_multiplier"
-        android:text="Remaining Time: "
+        android:layout_below="@+id/current_multiplier_value"
+        android:text="ระยะเวลาที่เหลือ: "
         android:textSize="20dp"
         />
 
@@ -57,7 +68,7 @@
             android:id="@+id/random_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ใบ้หวย"
+            android:text="แสดงอภินิหาร"
             android:layout_below="@+id/randomHeader"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
