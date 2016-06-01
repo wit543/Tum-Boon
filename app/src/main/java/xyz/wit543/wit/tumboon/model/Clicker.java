@@ -14,7 +14,7 @@ public class Clicker {
     private List<Integer> people;
 
     public Clicker(){
-        this.attack = 1000;
+        this.attack = 4;
         currentPeople = 0;
         people = new ArrayList<Integer>();
         people.add(R.drawable.ufo_scoobydoo);
