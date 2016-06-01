@@ -44,23 +44,30 @@
         android:textSize="20dp"
         />
 
-    <RelativeLayout
+    <ImageView
+        android:id="@+id/miracle_pic"
         android:layout_below="@id/remaining_time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:gravity="center_horizontal"
-        android:background="#000000"
-        android:id="@+id/linearLayout"
-        android:layout_marginTop="50dp">
+        android:layout_width="200dp"
+        android:layout_height="200dp" />
 
-        <Button
+    <TextView
+        android:id="@+id/miracle_detail"
+        android:layout_below="@id/miracle_pic"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:text="DETAIL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
             android:id="@+id/random_button"
+            android:layout_below="@id/miracle_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="แสดงอภินิหาร"
-            android:layout_centerHorizontal="true" />
-    </RelativeLayout>
+            android:layout_centerHorizontal="true"
+        />
 
 
 </RelativeLayout>

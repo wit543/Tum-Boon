@@ -4,24 +4,44 @@ package xyz.wit543.wit.tumboon.model;
  * Created by Asus on 5/26/2016.
  */
 public class Multiplier {
-    private String description;
+    private String name;
     public long startTime;
     public long duration;
     public double multiply;
+    private String multiplierDetail;
+    private int multiplierPic;
 
-    public Multiplier(String description , long startTime , long duration , double multiply){
-        this.description = description;
+    public Multiplier(String name, long startTime , long duration , double multiply, String multiplierDetail, int multiplierPic){
+        this.name = name;
         this.startTime = startTime;
         this.duration = duration;
         this.multiply = multiply;
+        this.multiplierDetail = multiplierDetail;
+        this.multiplierPic = multiplierPic;
     }
 
-    public String getDescription() {
-        return description;
+    public String getMultiplierDetail() {
+        return multiplierDetail;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setMultiplierDetail(String multiplierDetail) {
+        this.multiplierDetail = multiplierDetail;
+    }
+
+    public int getMultiplierPic() {
+        return multiplierPic;
+    }
+
+    public void setMultiplierPic(int multiplierPic) {
+        this.multiplierPic = multiplierPic;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public long getStartTime() {

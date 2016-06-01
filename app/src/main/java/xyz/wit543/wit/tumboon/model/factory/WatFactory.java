@@ -81,9 +81,9 @@ public class WatFactory extends LayerAbstractFactory {
 
     public List<Multiplier> getAllMultiplier() {
         List<Multiplier> multipliers = new ArrayList<Multiplier>();
-        multipliers.add(new Multiplier("เดินพาเรด",0,100000,4));
-        multipliers.add(new Multiplier("ใบ้หวย",0,100000,2));
-        multipliers.add(new Multiplier("โดนหมายจับ",0,100000,0.5));
+        multipliers.add(new Multiplier("เดินพาเรด",0,100000,4,"เดินพาเรดทำรถติดทั่วประเทศ",R.drawable.multi2));
+        multipliers.add(new Multiplier("ใบ้หวย",0,150000,2,"มั่วเลขให้ผู้งมงายดันถูกรางวัลเฉย",R.drawable.multi3));
+        multipliers.add(new Multiplier("โดนหมายจับ",0,100000,0.5 , "โดนประยุ*ไล่ล่าแล้ว แกล้งป่วยเร็ว" , R.drawable.multi5));
 
         return  multipliers;
     }
