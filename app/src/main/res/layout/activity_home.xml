@@ -14,8 +14,11 @@
         android:id="@+id/status_bar"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@drawable/normal_label"
+        android:background="@drawable/boon_label"
         android:paddingTop="15dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+
 
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal">

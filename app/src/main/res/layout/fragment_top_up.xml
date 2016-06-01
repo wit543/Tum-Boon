@@ -11,7 +11,7 @@
         android:layout_height="70dp"
         android:textStyle="bold"
         android:padding="10dp"
-        android:background="@drawable/normal_label2"
+        android:background="@drawable/bt_long"
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
         android:textSize="40dp"
@@ -54,22 +54,11 @@
         android:id="@+id/linearLayout"
         android:layout_marginTop="50dp">
 
-        <TextView
-            android:id="@+id/randomHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="RANDOM NEW"
-            android:textSize="40dp"
-            android:textColor="#FFFFFF"
-            android:textAlignment="center"
-            />
-
         <Button
             android:id="@+id/random_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="แสดงอภินิหาร"
-            android:layout_below="@+id/randomHeader"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
 

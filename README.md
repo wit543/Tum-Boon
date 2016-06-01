@@ -75,7 +75,8 @@ Project: TumBoon - Idle Clicker Game
 			7) Mememto Pattern
 			WHERE - Game.java
 			FOR - We use mememto pattern to save the game. When player quit the game, we will save the state of the game and then
-			      save the mememto object into the sharepreference. When we comeback to the game, the mememto will be load from the sharepreference and then game will restore from that mememto to load the game.
+			      save the mememto object into the sharepreference. When we comeback to the game,
+			      the mememto will be load from the sharepreference and then game will restore from that mememto to load the game.
 
 
 #3) Design Principles

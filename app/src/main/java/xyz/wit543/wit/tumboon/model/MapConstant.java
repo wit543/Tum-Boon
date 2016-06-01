@@ -16,7 +16,7 @@ public enum MapConstant {
         WAT_DONATE_MONEY_LAYER("บริจาคเงิน",40,10, 1000 , R.drawable.money_layer ),
         WAT_DONATE_LAND_LAYER("บริจาคที่ดิน",200,150,5000 , R.drawable.land_layer),
         WAT_DONATE_CAR_LAYER("บริจาครถ",1300,500,10000, R.drawable.car_layer),
-        WAT_DONATE_AIRPLANE_LAYER("บริจาคเครื่องบิน",8500,5000,20000 , R.drawable.plane_layer2),
+        WAT_DONATE_AIRPLANE_LAYER("บริจาคเครื่องบิน",8500,5000,20000 , R.drawable.plane_layer),
 
         WAT_BLACK_HOLE_LAYER("วางรถแบล็คโฮล์",32000,10000,100000, R.drawable.backhole_layer),
         WAT_PARADE_LAYER("จัดพาเรด",150000,100000,250000 , R.drawable.parade_layer),

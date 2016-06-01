@@ -175,6 +175,10 @@ public class HomeActivity extends AppCompatActivity implements  LayerFragment.On
         super.onStop();
 
         //save game to shared preferences
+        this.writeSave();
+    }
+
+    public void writeSave(){
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         Gson gson = new Gson();
