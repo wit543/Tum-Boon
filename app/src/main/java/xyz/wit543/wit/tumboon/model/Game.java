@@ -39,7 +39,7 @@ public class Game extends Observable{
 
     public static final double startMoney = 100;
     public static final int multiplierPrice = 1000;
-    public static final int disciplePerTimes = 1000;
+    public static final double disciplePerTimes = 1000.0;
     public static final int upgradeTimes = 100;
 
     private MapConstant map = MapConstant.WAT;
