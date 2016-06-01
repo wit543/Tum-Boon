@@ -6,7 +6,7 @@ Project: TumBoon - Idle Clicker Game
 <dt>Members :</dt>
       <dd>1) Parisa Supitayakul    5710546313</dd>
       <dd>2) Pongsakorn Somsri  5710546321</dd>
-      <dd>3) Norawit  5710546437</dd>
+      <dd>3) Norawit Urailertprasert 5710546275</dd>
 
 
 #1) Project Detail
