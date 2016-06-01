@@ -4,41 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.wit543.wit.tumboon.R;
+import xyz.wit543.wit.tumboon.model.Game;
 import xyz.wit543.wit.tumboon.model.Layer;
+import xyz.wit543.wit.tumboon.model.LayerConstant;
 import xyz.wit543.wit.tumboon.model.LayerManager;
 import xyz.wit543.wit.tumboon.model.MapConstant;
+import xyz.wit543.wit.tumboon.model.Multiplier;
+import xyz.wit543.wit.tumboon.model.Upgrade;
 
 /**
  * Created by WIT on 26-May-16.
  */
 public class WatFactory extends LayerAbstractFactory {
-//    static final double WAT_DONATE_MONEY_LAYER_BASE_OUTCOME = 10;
-//    static final int WAT_DONATE_MONEY_LAYER_PRODUCTION_TIME= 10;
-//    static final String WAT_DONATE_MONEY_LAYER_NAME = "Donate Money";
-//
-//    static final double WAT_DONATE_LAND_LAYER_BASE_OUTCOME=10;
-//    static final int WAT_DONATE_LAND_LAYER_PRODUCTION_TIME=10;
-//    static final String WAT_DONATE_LAND_LAYER_NAME = "Donate Land";
-//
-//    static final double WAT_DONATE_CAR_LAYER_BASE_OUTCOME=10;
-//    static final int WAT_DONATE_CAR_LAYER_PRODUCTION_TIME=10;
-//    static final String WAT_DONATE_CAR_LAYER_NAME = "Donate Car";
-//
-//    static final double WAT_DONATE_AIRPLANE_LAYER_BASE_OUTCOME=10;
-//    static final int WAT_DONATE_AIRPLANE_LAYER_PRODUCTION_TIME=10;
-//    static final String WAT_DONATE_AIRPLANE_LAYER_NAME = "Donate Airplane";
-//
-//    static final double WAT_PARADE_LAYER_BASE_OUTCOME=10;
-//    static final int WAT_PARADE_LAYER_PRODUCTION_TIME=10;
-//    static final String WAT_OARADE_LAYER_LAYER_NAME = "Parade";
-//
-//    static final double WAT_SOUVENIR_SHOP_LAYER_BASE_OUTCOME=10;
-//    static final int WAT_SOUVENIR_SHOP_LAYER_PRODUCTION_TIME=10;
-//    static final String WAT_SOUVENIR_SHOP_LAYER_NAME = "Souvenir";
-//
-//    static final double WAT_PR_LAYER_BASE_OUTCOME=10;
-//    static final int WAT_PR_LAYER_PRODUCTION_TIME=10;
-//    static final String WAT_PR_LAYER_NAME = "PR";
 
     private MapConstant wat = MapConstant.WAT;
 
@@ -57,18 +34,20 @@ public class WatFactory extends LayerAbstractFactory {
 
     @Override
     public Layer getLayer(String type) {
-        if ("donateMoney".equalsIgnoreCase(type)) {
+        if (LayerConstant.DONATE_MONEY_LAYER.layerName.equalsIgnoreCase(type)) {
             return standardLayerCreator(wat.DONATE_MONEY_LAYER);
-        } else if ("donateLand".equalsIgnoreCase(type)) {
+        } else if (LayerConstant.DONATE_LAND_LAYER.layerName.equalsIgnoreCase(type)) {
             return standardLayerCreator(wat.DONATE_LAND_LAYER);
-        } else if ("donateCar".equalsIgnoreCase(type)) {
+        } else if (LayerConstant.DONATE_CAR_LAYER.layerName.equalsIgnoreCase(type)) {
             return standardLayerCreator(wat.DONATE_CAR_LAYER);
-        } else if ("donateAirplane".equalsIgnoreCase(type)) {
+        } else if (LayerConstant.DONATE_AIRPLANE_LAYER.layerName.equalsIgnoreCase(type)) {
             return standardLayerCreator(wat.DONATE_AIRPLANE_LAYER);
-        } else if ("parade".equalsIgnoreCase(type)) {
+        } else if (LayerConstant.BLACK_HOLE_LAYER.layerName.equalsIgnoreCase(type)) {
             return standardLayerCreator(wat.PARADE_LAYER);
-        } else if ("souvenirShop".equalsIgnoreCase(type)) {
+        } else if (LayerConstant.PARADE_LAYER.layerName.equalsIgnoreCase(type)) {
             return standardLayerCreator(wat.SOUVENIR_SHOP_LAYER);
+        } else if (LayerConstant.HUMAN_WALL_LAYER.layerName.equalsIgnoreCase(type)) {
+            return standardLayerCreator(wat.PR_LAYER);
         }
         return null;
     }
@@ -82,48 +61,31 @@ public class WatFactory extends LayerAbstractFactory {
         layerManagers.add(standardLayerManagerCreator(wat.DONATE_AIRPLANE_LAYER));
         layerManagers.add(standardLayerManagerCreator(wat.PARADE_LAYER));
         layerManagers.add(standardLayerManagerCreator(wat.SOUVENIR_SHOP_LAYER));
+        layerManagers.add(standardLayerManagerCreator(wat.PR_LAYER));
         return layerManagers;
     }
 
+    public List<Upgrade> getAllUpgrade(){
+        List<Upgrade> upgrades = new ArrayList<Upgrade>();
+        List<LayerManager> layerManagers = getAllLayer();
+//        for(LayerConstant layerConstant : LayerConstant.values()){
+//            upgrades.add(new Upgrade(layerConstant.layerName , layerConstant.layerName+" Upgrade" , 10000));
+//        }
+
+        for(LayerManager layerManager : layerManagers){
+            Layer layer = layerManager.getLayer();
+            upgrades.add(new Upgrade(layer.getName() , layer.getName()+" อัพเกรด" , layer.getBasePrice()*Game.upgradeTimes));
+        }
+        return upgrades;
+    }
+
+    public List<Multiplier> getAllMultiplier() {
+        List<Multiplier> multipliers = new ArrayList<Multiplier>();
+        multipliers.add(new Multiplier("เดินพาเรด",0,100000,4));
+        multipliers.add(new Multiplier("ใบ้หวย",0,100000,2));
+        multipliers.add(new Multiplier("โดนหมายจับ",0,100000,0.5));
+
+        return  multipliers;
+    }
+
 }
-//    @Override
-//    public Layer createDonateMoneyLayer() {
-//        return standardLayerCreator(wat.DONATE_MONEY_LAYER);
-//    }
-//
-//    @Override
-//    public Layer createDonateLandLayer() {
-//        return standardLayerCreator(wat.DONATE_LAND_LAYER);
-//
-//    }
-//    @Override
-//    public Layer createDonateCarLayer() {
-//        return standardLayerCreator(wat.DONATE_CAR_LAYER);
-//    }
-//
-//    @Override
-//    public Layer createDonateAirplaneLayer() {
-//        return standardLayerCreator(wat.DONATE_AIRPLANE_LAYER);
-//
-//    }
-//
-//    @Override
-//    public Layer createParadeLayer() {
-//        return standardLayerCreator(wat.PARADE_LAYER);
-//    }
-//
-//    @Override
-//    public Layer createSouvenirShopLayer() {
-//        return standardLayerCreator(wat.SOUVENIR_SHOP_LAYER);
-//    }
-//
-//    @Override
-//    public Layer createPRLayer() {
-//        return standardLayerCreator(wat.PR_LAYER);
-//<<<<<<< HEAD:app/src/main/java/xyz/wit543/wit/tumboon/model/factory/WatFactory.java
-////    }
-//}
-//=======
-//    }
-//
-//>>>>>>> origin/Momo:app/src/main/java/xyz/wit543/wit/tumboon/model/WatFactory.java

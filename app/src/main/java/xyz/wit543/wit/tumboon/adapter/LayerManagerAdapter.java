@@ -36,7 +36,6 @@ public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapte
             rate=(TextView)itemView.findViewById(R.id.layer_rate);
             progressBar=(ProgressBar)itemView.findViewById(R.id.production_progress_bar);
             buyButton=(Button)itemView.findViewById(R.id.upgrade_button);
-            //animationView=(SurfaceView)itemView.findViewById(R.id.layer_animation);
             animationView=(ImageView)itemView.findViewById(R.id.layer_animation);
 
         }
@@ -62,7 +61,7 @@ public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapte
 
         holder.name.setText(""+layer.getLayer().getName());
         holder.level.setText(""+layer.getLevel());
-        holder.rate.setText(String.valueOf(layer.getProductOutcome()));
+        holder.rate.setText(BoonUnitTranformer.getReadableValue(game.getNetBoonForLayer(layer)));
         holder.buyButton.setText(BoonUnitTranformer.getReadableValue(layer.getPrice()));
         holder.buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +78,7 @@ public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapte
         if(image!=0)
             holder.animationView.setImageResource(layer.getLayer().getLayerPic());
         else
-            holder.animationView.setImageResource(R.drawable.car_layer);
+            holder.animationView.setImageResource(R.drawable.frame22);
 
         if(layer.getLevel()>0) {
             final ProgressBar progressBar = holder.progressBar;
@@ -90,17 +89,7 @@ public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapte
                     while (layer.getProductionTime() > 100) {
                         try {
                             Thread.sleep(10);
-
-
-
                             progressBar.setProgress(calculateProcess(layer));
-
-//                            if(!(game.getMoney()>=layer.getPrice())){
-//                                buyButton.setText("CAN'T BUY");
-//                            }else{
-//                                buyButton.setText("UPGRADE: "+layer.getPrice());
-//                            }
-
                         } catch (Exception e) {
 
                         }
@@ -109,6 +98,9 @@ public class LayerManagerAdapter extends RecyclerView.Adapter<LayerManagerAdapte
                 }
             });
             t.start();
+        }
+        else{
+            holder.progressBar.setProgress(0);
         }
     }
 

@@ -10,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import xyz.wit543.wit.tumboon.R;
 import xyz.wit543.wit.tumboon.model.Game;
+import xyz.wit543.wit.tumboon.model.util.BoonUnitTranformer;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,7 +30,10 @@ public class RebirthFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+
     private Button rebirthButton;
+    private TextView discipleView;
+    private TextView discipleMultiply;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -42,6 +47,7 @@ public class RebirthFragment extends Fragment {
 
     // TODO: Rename and change types and number of parameters
     public static RebirthFragment newInstance(String param1, String param2) {
+
         RebirthFragment fragment = new RebirthFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -65,19 +71,21 @@ public class RebirthFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tranfrom, container, false);
 
+        discipleView = (TextView)view.findViewById(R.id.current_disciple);
         rebirthButton = (Button)view.findViewById(R.id.rebirth_button);
+        discipleMultiply = (TextView)view.findViewById(R.id.current_disciple_multiply);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Confirm");
-        builder.setMessage("Are you sure?");
-        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        builder.setMessage("เมื่อเจ้าจุติเจ้าจะสูญเสียของบริจาคและการอัพเกรททั้งหมด\nคุณแน่ใจแล้วใช่หรือไม่");
+        builder.setPositiveButton("ข้าต้องการเกิดใหม่", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 Game.getInstance().rebirth();
                 dialog.dismiss();
             }
         });
 
-        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("อย่านะ!!!", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -91,9 +99,7 @@ public class RebirthFragment extends Fragment {
                 alert.show();
             }
         });
-
-
-
+        this.setDisciple();
         return view;
     }
 
@@ -134,5 +140,10 @@ public class RebirthFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void setDisciple(){
+        this.discipleView.setText("สาวกปัจจุบัน: "+Game.getInstance().getDisciple());
+        this.discipleMultiply.setText("อัตราคูณจากสาวก: "+ BoonUnitTranformer.getReadableValue(Game.getInstance().calculateDiscipleMultiply()) + " เท่า");
     }
 }

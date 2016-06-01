@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#FFFFFF"
+    android:layout_height="90dp"
+    android:padding="20dp"
+    android:background="@drawable/frame22"
     >
-
-    <!--<ImageView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--/>-->
 
     <TextView
         android:id="@+id/upgrade_name"
@@ -28,9 +23,10 @@
 
     <Button
         android:id="@+id/upgrade_bt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:layout_alignParentRight="true"
+        android:background="@drawable/bt_template"
         android:text="Upgrade"
         />
 </RelativeLayout>

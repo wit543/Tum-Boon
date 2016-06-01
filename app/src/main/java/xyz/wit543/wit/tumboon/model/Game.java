@@ -15,8 +15,6 @@ import xyz.wit543.wit.tumboon.model.util.MultiplierRandomizer;
 
 public class Game extends Observable{
     private static Game game;
-    private MapConstant map = MapConstant.WAT;
-
     private List<LayerManager> layerManagers;
     private List<Map> maps;
     private List<Upgrade> upgrades;
@@ -36,10 +34,17 @@ public class Game extends Observable{
 
     private BoonCalculator mc;
     private MultiplierRandomizer mr;
+    private Clicker clicker;
     private LayerAbstractFactory layerFactory;
 
-    private final int DELAY = 100;
-    private final double startMoney = 1000;
+    public static final double startMoney = 100;
+    public static final int multiplierPrice = 1000;
+    public static final int disciplePerTimes = 1000;
+    public static final int upgradeTimes = 100;
+
+    private MapConstant map = MapConstant.WAT;
+    private String moneyUnit = "บุญ";
+    private String peopleUnit = "คน";
 
     private Game(){
         this.resetGame();
@@ -48,26 +53,36 @@ public class Game extends Observable{
     public void defineEnvironment(){
         layerFactory = FactoryProducer.getFactory(map);
 
-        multipliers = new ArrayList<Multiplier>();
-        upgrades = new ArrayList<Upgrade>();
+        multipliers = layerFactory.getAllMultiplier();
         layerManagers = layerFactory.getAllLayer();
-        //layerManagers = new ArrayList<LayerManager>();
+        upgrades = layerFactory.getAllUpgrade();
 
-        multipliers.add(new Multiplier("แสดงอภินิหาร",0,100000,4));
-        multipliers.add(new Multiplier("ใบ้หวย",0,100000,2));
-
-
-//        layerManagers.add(new LayerManager(new Layer("Car"  ,1000,100 , 1000) , 0));
-//        layerManagers.add(new LayerManager(new Layer("Helicopter" ,3000, 200 , 3000),0));
-
-        upgrades.add(new Upgrade("money","BMW",0,false,1000));
-        upgrades.add(new Upgrade("water","klong",0,false,2000));
-        upgrades.add(new Upgrade("house","dogdog",0,false,4000));
-
-        mc = new BoonCalculator(this.layerManagers);
+        mc = new BoonCalculator();
         mr = new MultiplierRandomizer(multipliers);
+        clicker = new Clicker();
+    }
 
+    public int getUpgradeTimes() {
+        return upgradeTimes;
+    }
 
+    public boolean canBuyMultiplier(){
+        if(this.follower>=multiplierPrice)
+            return true;
+        return false;
+    }
+
+    public void buyMultiplier(){
+        this.sacrificeFollower(multiplierPrice);
+        this.setNewMultiplier();
+    }
+
+    public String getMoneyUnit() {
+        return moneyUnit;
+    }
+
+    public String getPeopleUnit() {
+        return peopleUnit;
     }
 
     public double getFollower() {
@@ -92,6 +107,14 @@ public class Game extends Observable{
         return game;
     }
 
+    public Clicker getClicker() {
+        return clicker;
+    }
+
+    public void setClicker(Clicker clicker) {
+        this.clicker = clicker;
+    }
+
     public List<Upgrade> getUpgrades(){return upgrades;}
 
     public void setNewMultiplier(){
@@ -102,17 +125,9 @@ public class Game extends Observable{
         this.money-=price;
     }
 
-    public void earnBoonFromClick(double amount){
-        this.money+=amount;
-        this.totalMoney+=amount;
-        this.notifyObservers();
-    }
-
     public void earnBoon(double amount){
         this.money+=amount;
         this.totalMoney+=amount;
-//        notifyObservers();
-//        setChanged();
     }
 
     public void sacrificeFollower(int amount){
@@ -122,8 +137,8 @@ public class Game extends Observable{
     }
 
     public void earnFollower(int amount){
-        this.follower+=amount;
-        this.totalFollower+=amount;
+        this.follower+=amount*getMultiplierValue();
+        this.totalFollower+=amount*getMultiplierValue();
         this.notifyObservers();
         this.setChanged();
     }
@@ -147,10 +162,6 @@ public class Game extends Observable{
         return currentMultiplier;
     }
 
-    public void setCurrentMultiplier(Multiplier currentMultiplier) {
-        this.currentMultiplier = currentMultiplier;
-    }
-
     public void update(){
         this.earnBoon(calculateNetBoon());
     }
@@ -171,15 +182,16 @@ public class Game extends Observable{
         money=startMoney;
         follower=0;
         rebirthCount+=1;
-//        this.defineEnvironment();
+
         for(LayerManager layerManager : this.getLayerManagers()){
             layerManager.setLevel(0);
         }
         for(Upgrade upgrade : this.getUpgrades()){
             upgrade.setMultiplier(0);
         }
-        this.notifyObservers();
         this.setChanged();
+        this.notifyObservers("rebirth");
+
     }
 
     public boolean hasMultiplier(){
@@ -190,8 +202,12 @@ public class Game extends Observable{
 
     public double calculateNetBoon(){
         double netBoon = mc.calculateBoon(System.currentTimeMillis(),layerManagers) * getMultiplierValue();
-        netBoon += netBoon*(this.disciple/10000);
+        netBoon += netBoon*(this.calculateDiscipleMultiply());
         return netBoon;
+    }
+
+    public double calculateDiscipleMultiply(){
+        return 1+this.disciple/disciplePerTimes;
     }
 
     public double getMultiplierValue(){
@@ -208,8 +224,8 @@ public class Game extends Observable{
             currentMultiplier = null;
     }
 
-    public int getGameTime(){
-        return (int) (System.currentTimeMillis() - startTime);
+    public double getNetBoonForLayer(LayerManager layerManager){
+        return layerManager.getProductOutcome()*this.getMultiplierValue()*this.calculateDiscipleMultiply()*(1+layerManager.getUpgrade());
     }
 
     public List<LayerManager> getLayerManagers(){
@@ -250,12 +266,64 @@ public class Game extends Observable{
         this.mc = mc;
     }
 
-    public void delay(){
-        try {
-            Thread.sleep(DELAY);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    public Mememto saveState(){
+        int[] layerLevel = new int[layerManagers.size()];
+        int[] upgradesCount = new int[upgrades.size()];
+        for(int i=0; i<layerManagers.size();i++){
+            layerLevel[i] = layerManagers.get(i).getLevel();
+        }
+        for(int i=0; i<upgrades.size();i++){
+            upgradesCount[i] = upgrades.get(i).getUpgradeCount();
+        }
+        return new Mememto(totalMoney,money,totalFollower,follower,totalDisciple,disciple , layerLevel,upgradesCount);
+    }
+
+    public void restore(Mememto m){
+        this.totalMoney = m.totalMoney;
+        this.money = m.money;
+        this.totalFollower = m.totalFollower;
+        this.follower = m.follower;
+        this.totalDisciple = m.disciple;
+        this.disciple = m.disciple;
+        int[] layerLevel = m.layerLevel;
+        int[] upgradeCount = m.upgradeLevel;
+
+        if(layerLevel!=null){
+            for(int i=0 ; i<layerManagers.size();i++){
+                layerManagers.get(i).setLevel(layerLevel[i]);
+            }
+        }
+        if(upgradeCount!=null){
+            for(int i=0; i<upgrades.size();i++){
+                for(int j=0; j<upgradeCount[i];j++){
+                    upgrades.get(i).upPrice();
+                }
+            }
         }
     }
 
+
+    public static class Mememto {
+        private double totalMoney;
+        private double money;
+        private int totalFollower;
+        private int follower;
+        private int totalDisciple;
+        private int disciple;
+        private int[] layerLevel;
+        private int[] upgradeLevel;
+
+        private Mememto(double totalMoney ,double money ,int totalFollower ,int follower ,int totalDisciple ,int disciple ,int[] layerLevel , int[] upgradeLevel ){
+
+            this.totalMoney = totalMoney;
+            this.money = money;
+            this.totalFollower =  totalFollower;
+            this.follower = follower;
+            this.totalDisciple = totalDisciple;
+            this.disciple = disciple;
+            this.layerLevel = layerLevel;
+            this.upgradeLevel = upgradeLevel;
+        }
+
+    }
 }

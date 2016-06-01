@@ -36,7 +36,7 @@ public class LayerManager {
     }
 
     public double getPrice(){
-        return Math.floor(layer.getBasePrice()*Math.pow(1.15f,level-1));
+        return Math.floor(layer.getBasePrice()*Math.pow(1.15f,level));
     }
 
     public boolean canProduce(){

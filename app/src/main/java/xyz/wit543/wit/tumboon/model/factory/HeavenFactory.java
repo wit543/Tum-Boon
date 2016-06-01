@@ -5,6 +5,8 @@ import java.util.List;
 import xyz.wit543.wit.tumboon.model.Layer;
 import xyz.wit543.wit.tumboon.model.LayerManager;
 import xyz.wit543.wit.tumboon.model.MapConstant;
+import xyz.wit543.wit.tumboon.model.Multiplier;
+import xyz.wit543.wit.tumboon.model.Upgrade;
 
 /**
  * Created by WIT on 26-May-16.
@@ -20,6 +22,11 @@ public class HeavenFactory extends LayerAbstractFactory {
                 name(layer.NAME).basePrice(layer.BASE_PRICE);
         return layerBuilder.build();
     }
+
+    public List<Upgrade> getAllUpgrade(){return null;}
+
+    public List<Multiplier> getAllMultiplier() { return null;}
+
     @Override
     public Layer getLayer(String type) {
         if("donateMoney".equalsIgnoreCase(type)){

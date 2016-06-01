@@ -6,18 +6,19 @@ package xyz.wit543.wit.tumboon.model;
 public class Upgrade {
 
     private String layerName;
-    private double multiplier;
-    private boolean bought;
     private double price;
     private String upName;
 
+    private double multiplier;
+    private int upgradeCount;
 
-    public Upgrade(String name ,String upName, double multiplier , boolean bought,double price){
+
+    public Upgrade(String name ,String upName,double price){
         this.layerName = name;
-        this.multiplier = multiplier;
-        this.bought = bought;
         this.price = price;
         this.upName = upName;
+        this.multiplier = 0;
+        this.upgradeCount = 0;
     }
 
     public String getUpName() {
@@ -44,22 +45,39 @@ public class Upgrade {
         this.multiplier = multiplier;
     }
 
-    public boolean isBought() {
-        return bought;
-    }
-
-    public void setBought(boolean bought) {
-        this.bought = bought;
-    }
-
     public double getprice() {return price;}
+
+    public String getLayerName() {
+        return layerName;
+    }
+
+    public void setLayerName(String layerName) {
+        this.layerName = layerName;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getUpgradeCount() {
+        return upgradeCount;
+    }
+
+    public void setUpgradeCount(int upgradeCount) {
+        this.upgradeCount = upgradeCount;
+    }
 
     public void upPrice(){
         for (LayerManager layerManager :Game.getInstance().getLayerManagers() ){
             if(layerManager.getLayer().getName().equalsIgnoreCase(this.getName())) {
                 this.multiplier += 10;
-                layerManager.setUpgrade(this.getMultiplier());
                 this.price *= 2;
+                layerManager.setUpgrade(this.getMultiplier());
+                upgradeCount++;
             }
         }
     }

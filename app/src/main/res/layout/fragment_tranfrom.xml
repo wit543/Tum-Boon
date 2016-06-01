@@ -7,17 +7,39 @@
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/rebirth_subject"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:background="@drawable/normal_label2"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textSize="40dp"
+        android:text="จุติชีวิตใหม่" />
+
+    <TextView
+        android:id="@+id/current_disciple"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="50dp"
-        android:text="REBIRTH" />
+        android:layout_below="@+id/rebirth_subject"
+        android:text="สาวกปัจจุบัน: "
+        android:textSize="20dp"
+        />
+
+    <TextView
+        android:id="@+id/current_disciple_multiply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/current_disciple"
+        android:text="อัตราคูณจากสาวก: "
+        android:textSize="20dp"
+        />
 
     <Button
         android:id="@+id/rebirth_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rebirth_subject"
+        android:layout_below="@+id/current_disciple_multiply"
         android:text="REBIRTH"/>
 
 </RelativeLayout>

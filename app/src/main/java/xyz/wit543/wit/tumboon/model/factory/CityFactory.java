@@ -5,6 +5,8 @@ import java.util.List;
 import xyz.wit543.wit.tumboon.model.Layer;
 import xyz.wit543.wit.tumboon.model.LayerManager;
 import xyz.wit543.wit.tumboon.model.MapConstant;
+import xyz.wit543.wit.tumboon.model.Multiplier;
+import xyz.wit543.wit.tumboon.model.Upgrade;
 
 /**
  * Created by WIT on 26-May-16.
@@ -48,6 +50,10 @@ public class CityFactory extends LayerAbstractFactory {
     public List<LayerManager> getAllLayer() {
         return null;
     }
+
+    public List<Upgrade> getAllUpgrade(){return null;}
+
+    public List<Multiplier> getAllMultiplier() { return null;}
 
 //    @Override
 //    public Layer createDonateMoneyLayer() {
