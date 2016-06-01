@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,8 @@ public class TopUpFragment extends Fragment {
     private TextView currentMultiplierValue;
     private TextView remainingTime;
     private Button randomButton;
+    private ImageView miraclePic;
+    private TextView miracleDetail;
 
     private OnFragmentInteractionListener mListener;
 
@@ -82,6 +85,8 @@ public class TopUpFragment extends Fragment {
         currentMultiplier = (TextView) view.findViewById(R.id.current_multiplier);
         currentMultiplierValue = (TextView) view.findViewById(R.id.current_multiplier_value);
         remainingTime = (TextView) view.findViewById(R.id.remaining_time);
+        miraclePic = (ImageView) view.findViewById(R.id.miracle_pic);
+        miracleDetail = (TextView) view.findViewById(R.id.miracle_detail);
 
         randomButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,12 +108,16 @@ public class TopUpFragment extends Fragment {
         if(remainingTime!=null && currentMultiplier!=null){
             if(multiplier!=null){
                 remainingTime.setText("ระยะเวลาที่เหลือ: "+multiplier.getRemainingTime());
-                currentMultiplier.setText("อภินิหารปัจจุบัน: "+multiplier.getDescription());
+                currentMultiplier.setText("อภินิหารปัจจุบัน: "+multiplier.getName());
                 currentMultiplierValue.setText("อัตราคูณปัจจุบัน: "+multiplier.getMultiply() + " เท่า");
+                miraclePic.setImageResource(multiplier.getMultiplierPic());
+                miracleDetail.setText(multiplier.getMultiplierDetail());
             }else{
                 remainingTime.setText("ระยะเวลาที่เหลือ: "+"ไม่มีอภินิหาร");
                 currentMultiplier.setText("อภินิหารปัจจุบัน: "+"ไม่มีอภินิหาร");
                 currentMultiplierValue.setText("อัตราคูณปัจจุบัน: "+"ไม่มีอภินิหาร");
+                miraclePic.setImageResource(R.drawable.multi4);
+                miracleDetail.setText("ไม่มีอภินิหาร");
             }
         }
     }
