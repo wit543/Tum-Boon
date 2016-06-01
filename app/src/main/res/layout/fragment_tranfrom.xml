@@ -11,7 +11,7 @@
         android:layout_height="70dp"
         android:textStyle="bold"
         android:padding="10dp"
-        android:background="@drawable/normal_label2"
+        android:background="@drawable/bt_long"
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
         android:textSize="40dp"
@@ -35,11 +35,28 @@
         android:textSize="20dp"
         />
 
+    <ImageView
+        android:id="@+id/rebirth_pic"
+        android:layout_below="@id/current_disciple_multiply"
+        android:src="@drawable/rebirth"
+        android:layout_centerHorizontal="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+    <TextView
+        android:id="@+id/rebirth_detail"
+        android:layout_below="@id/rebirth_pic"
+        android:text="เกิดใหม่ในภพหน้ารีเซ็ทการบริจาคทุกอย่าง\nผู้งมงายจากภพนี้จะถูกเปลี่ยนเป็นสาวกในภพหน้า\nสาวก 1000 คนจะเพิ่มกำลังผลิตขึ้น 1 เท่า"
+        android:textSize="15dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/rebirth_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/current_disciple_multiply"
+        android:layout_below="@+id/rebirth_detail"
         android:text="REBIRTH"/>
 
 </RelativeLayout>
