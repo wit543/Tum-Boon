@@ -69,7 +69,7 @@ public class RebirthFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_tranfrom, container, false);
+        View view = inflater.inflate(R.layout.fragment_rebirth, container, false);
 
         discipleView = (TextView)view.findViewById(R.id.current_disciple);
         rebirthButton = (Button)view.findViewById(R.id.rebirth_button);
